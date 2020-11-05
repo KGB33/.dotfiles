@@ -1,6 +1,5 @@
 # Git Dotfiles
 alias .git='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-complete -F _complete_alias .git
 
 # Activate python venvs and auto-update pip
 alias venv='. .venv/bin/activate && python -m pip install --upgrade pip'
