@@ -101,6 +101,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Disable ranger from loading global config stuff
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
 
 # Set addtional PATH stuff
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
