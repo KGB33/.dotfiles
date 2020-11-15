@@ -53,17 +53,24 @@ command TdNew CocCommand todolist.create
 " Fix Spelling Errors
 nmap <leader>s <Plug>(coc-codeaction-selected)
 
-" Python Highlighting
-let python_highlight_all=1
-syntax on
-
 " Python Path
 let g:python3_host_prog = '~/.config/nvim/.venv/bin/python'
+
+
+" ---------- Theme ----------
+let g:gruvbox_italic=1
+set termguicolors
+colorscheme gruvbox
 
 
 " Status Bar
 let g:airline_theme='gruvbox'
 let laststatus=2 " Always on
+
+" Python Highlighting
+let python_highlight_all=1
+syntax on
+
 
 " Line numbering
 set number
