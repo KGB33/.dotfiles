@@ -109,7 +109,6 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
 export PATH="$HOME/.local/bin:$PATH" # Black
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH" # Ruby
-export PATH="/home/kgb33/.ebcli-virtual-env/executables:$PATH"
 
 # Loads pyenv
 
