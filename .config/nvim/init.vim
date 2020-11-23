@@ -18,6 +18,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " Release
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " From Source
 
+" vim in Firefox
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 call plug#end()
 
 " ---------- Basic Remaps -----------
