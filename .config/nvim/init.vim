@@ -82,3 +82,6 @@ set relativenumber
 " Indents
 set tabstop=4
 set shiftwidth=4
+
+" --------- FireNvim ----------
+let g:firenvim_config = {'globalSettings': {},'localSettings': {'.*': {'takeover': 'never'},},}
