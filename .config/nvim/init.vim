@@ -26,6 +26,10 @@ call plug#end()
 " ---------- Basic Remaps -----------
 let mapleader = ","
 
+
+" ---------- CoC Plugins -----------
+let g:coc_global_extensions = ['coc-go', 'coc-python', 'coc-sh', 'coc-spell-checker', 'coc-json']
+
 " ---------- CoC Settings -----------
 
 " Remap for do codeAction of selected region for coc-actions
