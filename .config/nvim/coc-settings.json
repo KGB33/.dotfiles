@@ -11,12 +11,27 @@
     }
   },
   "cSpell.userWords": [
+    "Burpsuite",
+    "Fuzzer",
     "GRUVBOX",
+    "Gobuster",
+    "Println",
+    "Structs",
     "Wakatime",
+    "Wfuzz",
+    "acheave",
+    "bufio",
+    "curr",
+    "danielmiessler",
     "gopls",
+    "ints",
     "morhetz",
     "neoclide",
+    "pipx",
     "pypandoc",
-    "venv"
+    "sqlmap",
+    "struct",
+    "venv",
+    "wordlist"
   ]
 }
