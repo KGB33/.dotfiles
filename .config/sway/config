@@ -50,7 +50,7 @@ output HDMI-A-1 resolution 1920x1080 position 0,0
     bindsym $mod+Return exec $term
 
 	# Launch Firefox
-	bindsym $mod+q exec firefox
+	bindsym $mod+q exec MOZ_ENABLE_WAYLAND=1 firefox
 
     # Kill focused window
     bindsym $mod+Shift+q kill
