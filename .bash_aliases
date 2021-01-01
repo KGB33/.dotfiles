@@ -14,4 +14,4 @@ alias ll="exa -Flbha --git --group-directories-first"
 alias lt="exa -TF --git-ignore --group-directories-first"
 
 # Build, run, then delete Go program
-alias grr="go build -o ucPqPQ9duvgj6ZwM && ./ucPqPQ9duvgj6ZwM && rm ucPqPQ9duvgj6ZwM"
+alias grr="go build -o ucPqPQ9duvgj6ZwM && ./ucPqPQ9duvgj6ZwM ; rm ucPqPQ9duvgj6ZwM"
