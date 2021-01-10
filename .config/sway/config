@@ -50,7 +50,7 @@ output * bg ~/Photos/shaxx-St.jpg fit
     bindsym $mod+Return exec $term
 
 	# Launch Firefox
-	bindsym $mod+q exec MOZ_ENABLE_WAYLAND=1 firefox
+	bindsym $mod+q exec firefox
 
     # Kill focused window
     bindsym $mod+Shift+q kill

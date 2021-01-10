@@ -104,11 +104,15 @@ fi
 # Disable ranger from loading global config stuff
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
+# Make firefox launch in wayland mode
+export MOZ_ENABLE_WAYLAND=1
+
 
 # Set addtional PATH stuff
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
 export PATH="$HOME/.local/bin:$PATH" # Black
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH" # Ruby
+export PATH="$HOME/go/bin:$PATH" # Go packages
 
 # Loads pyenv
 
