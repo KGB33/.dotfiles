@@ -107,6 +107,8 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # Make firefox launch in wayland mode
 export MOZ_ENABLE_WAYLAND=1
 
+# pipx autocomplete
+eval "$(register-python-argcomplete pipx)"
 
 # Set addtional PATH stuff
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
