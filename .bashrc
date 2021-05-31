@@ -117,9 +117,6 @@ export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH" # Ruby
 export PATH="$HOME/go/bin:$PATH" # Go packages
 
 # Loads pyenv
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Starts the starship prompt
