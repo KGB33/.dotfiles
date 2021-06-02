@@ -11,6 +11,7 @@
     }
   },
   "cSpell.userWords": [
+    "API's",
     "Bassingthwaite",
     "Bogo",
     "Burpsuite",
@@ -28,6 +29,7 @@
     "Println",
     "Smishing",
     "Structs",
+    "TODOs",
     "Ullr",
     "Vishing",
     "Wakatime",
@@ -56,6 +58,7 @@
     "itertools",
     "ldflags",
     "magnizar",
+    "matryer",
     "morhetz",
     "mttools",
     "neoclide",
