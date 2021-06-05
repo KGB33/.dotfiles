@@ -44,6 +44,7 @@
     "danielmiessler",
     "exts",
     "getenv",
+    "golangci",
     "golint",
     "gopls",
     "goroutines",
