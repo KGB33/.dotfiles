@@ -7,6 +7,10 @@ Plug 'lervag/vimtex'
 " Python Formatter
 Plug 'psf/black'
 
+" Treesitter
+" Docs recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " GRUVBOX
 Plug 'morhetz/gruvbox'
 
