@@ -1,9 +1,6 @@
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
 
-" Latex Support
-Plug 'lervag/vimtex'
-
 " Python Formatter
 Plug 'psf/black'
 
@@ -22,9 +19,6 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " Release
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " From Source
 
-" vim in Firefox
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
 call plug#end()
 
 " ---------- Basic Remaps -----------
@@ -33,7 +27,7 @@ let maplocalleader = ","
 
 
 " ---------- CoC Plugins -----------
-let g:coc_global_extensions = ['coc-go', 'coc-python', 'coc-sh', 'coc-spell-checker', 'coc-json', 'coc-texlab']
+let g:coc_global_extensions = ['coc-go', 'coc-python', 'coc-sh', 'coc-spell-checker', 'coc-json']
 
 " ---------- CoC Settings -----------
 
@@ -65,11 +59,6 @@ command TdNew CocCommand todolist.create
 " Fix Spelling Errors
 nmap <leader>s <Plug>(coc-codeaction-selected)
 
-" Latex configurations
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-
 " Python Path
 let g:python3_host_prog = '~/.config/nvim/.venv/bin/python'
 
@@ -96,6 +85,3 @@ set relativenumber
 " Indents
 set tabstop=4
 set shiftwidth=4
-
-" --------- FireNvim ----------
-let g:firenvim_config = {'globalSettings': {},'localSettings': {'.*': {'takeover': 'never'},},}
