@@ -19,6 +19,11 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " Release
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " From Source
 
+" Telescope and deps
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 " ---------- Basic Remaps -----------
@@ -58,6 +63,12 @@ command TdNew CocCommand todolist.create
 
 " Fix Spelling Errors
 nmap <leader>s <Plug>(coc-codeaction-selected)
+
+" ---------- Telescope Commands ------------
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Python Path
 let g:python3_host_prog = '~/.config/nvim/.venv/bin/python'
