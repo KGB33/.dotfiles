@@ -8,10 +8,10 @@ alias venv='. .venv/bin/activate && python -m pip install --upgrade pip'
 alias pytree='tree -a -I ".venv|*.pyc|.git|.mypy*|.pytest*|*.egg-info" --prune --dirsfirst --matchdirs '
 
 # Exa
-alias ls="exa -F --group-directories-first"
-alias la="exa -Fa --group-directories-first"
-alias ll="exa -Flbha --git --group-directories-first"
-alias lt="exa -TF --git-ignore --group-directories-first"
+alias ls="exa -F --group-directories-first --icons"
+alias la="exa -Fa --group-directories-first --icons"
+alias ll="exa -Flbha --git --group-directories-first --icons"
+alias lt="exa -TF --git-ignore --group-directories-first --icons"
 
 # Build, run, then delete Go program
 alias grr="go build -o ucPqPQ9duvgj6ZwM && ./ucPqPQ9duvgj6ZwM ; rm ucPqPQ9duvgj6ZwM"
