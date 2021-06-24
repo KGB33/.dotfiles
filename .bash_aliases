@@ -13,9 +13,6 @@ alias la="exa -Fa --group-directories-first --icons"
 alias ll="exa -Flbha --git --group-directories-first --icons"
 alias lt="exa -TF --git-ignore --group-directories-first --icons"
 
-# Build, run, then delete Go program
-alias grr="go build -o ucPqPQ9duvgj6ZwM && ./ucPqPQ9duvgj6ZwM ; rm ucPqPQ9duvgj6ZwM"
-
 # When SSH breaks, use ssk to copy kitty terminfo over
 # https://sw.kovidgoyal.net/kitty/faq.html
 #i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
