@@ -13,3 +13,7 @@ autocmd DocStart ^http(s?)://www.amazon.com js tri.excmds.urlmodify("-t", "www",
 
 "" For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 vim: set filetype=tridactyl
+
+
+"" Set Color
+colorscheme base16-atelier-dune
