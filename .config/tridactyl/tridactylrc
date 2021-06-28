@@ -1,10 +1,7 @@
 "" Config file for Tridactyl Firefox plug in.
 "" Example found at: https://raw.githubusercontent.com/tridactyl/tridactyl/master/.tridactylrc 
 
-
 "" ======== URL redirects ========
-"" New reddit is bad
-autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
 "" Amazon Smile
 autocmd DocStart ^http(s?)://www.amazon.com js tri.excmds.urlmodify("-t", "www", "smile")
 
@@ -16,4 +13,3 @@ autocmd DocStart ^http(s?)://www.amazon.com js tri.excmds.urlmodify("-t", "www",
 
 "" For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 vim: set filetype=tridactyl
-
