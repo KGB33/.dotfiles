@@ -1,0 +1,3 @@
+[submodule ".config/tridactyl/themes"]
+	path = .config/tridactyl/themes
+	url = git@github.com:bezmi/base16-tridactyl.git
