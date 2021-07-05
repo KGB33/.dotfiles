@@ -81,6 +81,7 @@
     "startupnotify",
     "struct",
     "unqualify",
+    "vals",
     "venv",
     "wordlist"
   ]
