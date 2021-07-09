@@ -16,4 +16,4 @@ vim: set filetype=tridactyl
 
 
 "" Set Color
-colorscheme base16-atelier-dune
+colorscheme --url https://raw.githubusercontent.com/bezmi/base16-tridactyl/dba672286376c75de34e2203af93449e4038a47b/base16-atelier-dune.css base16-atelier-dune
