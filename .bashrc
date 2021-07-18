@@ -4,6 +4,10 @@
 
 export EDITOR="nvim"
 
+# Set Nvim to the man page reader
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
