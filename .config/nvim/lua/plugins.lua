@@ -42,5 +42,8 @@ return require('packer').startup(function()
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
 }
 
+  -- Builtin LSP
+  use 'neovim/nvim-lspconfig'
+
 
 end)
