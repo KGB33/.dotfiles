@@ -23,3 +23,8 @@ tjdevries
 packadd
 github
 https
+gopls
+pyright
+npm
+dockerfile
+nodejs
