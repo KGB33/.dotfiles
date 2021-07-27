@@ -45,5 +45,8 @@ return require('packer').startup(function()
   -- Builtin LSP
   use 'neovim/nvim-lspconfig'
 
+  -- Auto-complete
+  use {'hrsh7th/nvim-compe', config = function() require'compe_config' end}
+
 
 end)
