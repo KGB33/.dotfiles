@@ -14,3 +14,6 @@ alias lt="exa -TF --git-ignore --group-directories-first --icons"
 # https://sw.kovidgoyal.net/kitty/faq.html
 #i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
 alias ssk="kitty +kitten ssh"
+
+# Reboot to windows
+alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
