@@ -47,6 +47,7 @@ return require('packer').startup(function()
 
   -- Auto-complete
   use {'hrsh7th/nvim-compe', config = function() require'compe_config' end}
+  use 'andersevenrud/compe-tmux'
 
 
 end)
