@@ -1,25 +1,26 @@
-# Lines configured by zsh-newuser-install
+# Note: The $ZDOTDIR environment variable is managed by systemd-homed
+# this is required to load the variable before the shell.
+# It must be set to the folder that this file resides in.
+
+
+# histfile settings
 HISTFILE=~/.config/zhs/histfile
 HISTSIZE=1000
 SAVEHIST=1000
+
+
 setopt autocd extendedglob
 unsetopt beep notify
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '$ZDOTDIR/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
-# Note: The $ZDOTDIR environment variable is set by the file `/etc/zsh/zshenv`
-# See this SO post for more Info
-# https://stackoverflow.com/questions/21162988/how-to-make-zsh-search-configuration-in-xdg-config-home
-# TODO: swap this to a systemd-homed variable when I move over to it
+# Vi Mode
+bindkey -v
+export KEYTIMEOUT=1
 
 
-# Source addtional files
+# Source alias
 if [ -f $ZDOTDIR/.zsh_aliases ]; then
     . $ZDOTDIR/.zsh_aliases
 fi
@@ -42,8 +43,19 @@ fi
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
+# ======== Load & Configure 'plugins' ======== 
+
+# z.sh -- https://github.com/rupa/z
+export _Z_DATA="$ZDOTDIR/plugins/z/z.data"
+. $ZDOTDIR/plugins/z/z.sh
+
+
+
 # Shell Add-ins
 eval "$(pyenv init -)"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
+# Adds Syntax highlighting -- Installed via community/zsh-syntax-highlighting
+# Needs to be the last thing sourced to highlight properly
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
