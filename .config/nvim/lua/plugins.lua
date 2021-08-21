@@ -37,7 +37,7 @@ return require('packer').startup(function()
   'glepnir/galaxyline.nvim',
     branch = 'main',
     -- your statusline
-    config = function() require'galaxyline_config' end,
+    config = function() require'plugin_config/galaxyline' end,
     -- some optional icons
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
 }
@@ -46,7 +46,7 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
 
   -- Auto-complete
-  use {'hrsh7th/nvim-compe', config = function() require'compe_config' end}
+  use {'hrsh7th/nvim-compe', config = function() require'plugin_config/compe' end}
   use 'andersevenrud/compe-tmux'
 
 

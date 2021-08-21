@@ -21,13 +21,13 @@ require'compe'.setup {
   };
 
   source = {
-    path = true;
-    buffer = true;
-    calc = true;
-	spell = true;
-	tmux = true;
     nvim_lsp = true;
     nvim_lua = true;
+    path = true;
+    buffer = true;
+	tmux = true;
+	spell = true;
+    calc = true;
   };
 }
 
