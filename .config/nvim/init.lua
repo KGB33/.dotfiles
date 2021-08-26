@@ -33,6 +33,7 @@ require'lspconfig'.bashls.setup{}   -- community/bash-language-server
 require'lspconfig'.dockerls.setup{} -- npm install -g dockerfile-language-server-nodejs
 require'lspconfig'.gopls.setup{}    -- community/gopls 
 require'plugin_config/gopls'
+require'lspconfig'.tsserver.setup{}
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2
