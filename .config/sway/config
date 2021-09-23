@@ -158,6 +158,17 @@ output * bg ~/Photos/shaxx-St.jpg fit
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+#
+# Brightness
+#
+# From https://www.reddit.com/r/swaywm/comments/fk08lu/nicer_brightness_control/
+# set brightness logarithmically by factor 1.4
+# .72 is just slightly bigger than 1 / 1.4
+bindsym --locked XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
+bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
+
+
 #
 # Resizing containers:
 #
