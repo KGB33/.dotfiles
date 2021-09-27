@@ -5,7 +5,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.termguicolors=true
 vim.o.laststatus=2 -- Status line is Always on
-vim.o.completeopt = "menuone,noselect" -- Required for hrsh7th/nvim-compe
+vim.o.completeopt = "menu,menuone,noselect" -- Required for hrsh7th/nvim-cmp
 --vim.o.python_highlight_all=1
 vim.cmd "syntax on"
 
@@ -28,12 +28,15 @@ vim.o.spell = true
 vim.o.spelllang = "en_us"
 
 -- LSP
-require'lspconfig'.pyright.setup{}  -- community/pyright
-require'lspconfig'.bashls.setup{}   -- community/bash-language-server
-require'lspconfig'.dockerls.setup{} -- npm install -g dockerfile-language-server-nodejs
-require'lspconfig'.gopls.setup{}    -- community/gopls 
+local nvim_lsp = require('lspconfig')
+local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', 'texlab' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+end
+
 require'plugin_config/gopls'
-require'lspconfig'.tsserver.setup{}
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2

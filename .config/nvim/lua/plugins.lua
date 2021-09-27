@@ -46,8 +46,15 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
 
   -- Auto-complete
-  use {'hrsh7th/nvim-compe', config = function() require'plugin_config/compe' end}
-  use 'andersevenrud/compe-tmux'
+  use {'hrsh7th/nvim-cmp',
+  		requires={
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'octaltree/cmp-look',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-calc',
+            'f3fora/cmp-spell',},
+  		config = function() require'plugin_config/cmp' end}
 
 
 end)
