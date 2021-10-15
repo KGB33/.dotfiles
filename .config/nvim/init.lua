@@ -42,3 +42,6 @@ require'plugin_config/gopls'
 vim.g.loaded_python_provider = 0 -- Python 2
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- Build latex documents on save.
+vim.api.nvim_exec([[ autocmd BufWritePost *.tex !tectonic % ]], false)
