@@ -18,8 +18,9 @@ set $term kitty
 # ----- Launcher -----
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu bemenu-run -fn --tb="#282828" --tf="#ebdbb2" --fb="#3c3836" --ff="#ebdbb2" --nb="#1d2021" --nf="#ebdbb2" --hb="#3c3836" --hf="#b8bb26" | xargs swaymsg exec --
-for_window [app_id="bemenu"] floating enable
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
+set $menu exec $term --class=launcher -e sway-launcher-desktop
+bindsym $mod+d exec $menu
 
 # ----- Theme -----
 include ~/.config/sway/themes/gruvbox
@@ -201,9 +202,9 @@ bar {
 # Turn borders off
 for_window [class="^.*"] border pixel 0
 
-# Change gap size
-gaps outer 4
-gaps inner 20
-gaps top 32
+# Keyboard re-maps
+input "type:keyboard" {
+	xkb_options caps:swapescape
+}
 
 include /etc/sway/config.d/*
