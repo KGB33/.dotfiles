@@ -29,19 +29,20 @@ vim.o.spelllang = "en_us"
 
 -- LSP
 local nvim_lsp = require('lspconfig')
-local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', 'texlab' }
+local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
 
-require'plugin_config/gopls'
+-- Source configuration files
+require'config/texlab'
+require'config/cmp'
+require'config/gopls'
+require'config/galaxyline'
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
--- Build latex documents on save.
-vim.api.nvim_exec([[ autocmd BufWritePost *.tex !tectonic % ]], false)

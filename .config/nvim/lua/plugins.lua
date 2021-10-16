@@ -37,13 +37,14 @@ return require('packer').startup(function()
   'glepnir/galaxyline.nvim',
     branch = 'main',
     -- your statusline
-    config = function() require'plugin_config/galaxyline' end,
+    config = function() require'config/galaxyline' end,
     -- some optional icons
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
 }
 
   -- Builtin LSP
   use 'neovim/nvim-lspconfig'
+  use 'neovim/nvim-lsp'
 
   -- Auto-complete
   use {'hrsh7th/nvim-cmp',
@@ -54,7 +55,7 @@ return require('packer').startup(function()
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-calc',
             'f3fora/cmp-spell',},
-  		config = function() require'plugin_config/cmp' end}
+  		config = function() require'config/cmp' end}
 
 
 end)
