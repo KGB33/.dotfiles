@@ -10,11 +10,11 @@
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = {
-		{name = 'buffer'},
 		{name = 'nvim_lsp'},
         {name = "nvim_lua"},
 		{name = "look"},
 		{name = "path"},
+		{name = 'buffer'},
 		{name = "calc"}, 
 		{name = "spell"},
     }
