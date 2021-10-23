@@ -29,7 +29,7 @@ include ~/.config/sway/themes/gruvbox
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Photos/Mountan_Background.jpg fit
+output * bg ~/Photos/Mountan_Background.jpg fill
 #
 # Example configuration:
 #
