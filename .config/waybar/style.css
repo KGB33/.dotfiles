@@ -1,20 +1,24 @@
 * {
     border: none;
     border-radius: 0px;
-    font-family: "Inconsolata";
-    font-size: 16px;
+    font-family: "fira";
+    font-size: 12px;
     min-height: 0;
     color: #ebdbb2;
 }
 
 window#waybar {
     border-bottom-style: inset;
-    border-bottom: 4px solid #689d6a;
+    border-bottom: 2px solid #689d6a;
     background: #1d2021;
 }
 
-#workspaces, #clock, #custom-music, #window { 
-    font-weight: 800;
+#workspaces {
+	margin: 0 5px;
+}
+
+#workspaces button {
+	padding: 0 3px;
 }
 
 /* Workspace Buttons */
@@ -35,17 +39,30 @@ window#waybar {
 
 #clock, #battery, #cpu, #memory, #network, #mode {
     padding: 0 5px;
-    margin: 0 10px;
+    margin: 0px;
 }
 
 #clock {
     margin: 0;
     color: #fabd2f;
-    border-bottom: 4px solid #fabd2f;
+    border-bottom: 2px solid #fabd2f;
 }
 
 
 #network.disconnected {
     color: #cc241d;
     border-bottom: 4px solid #cc241d;
+}
+
+
+#battery.warning {
+   color:       rgba(255, 210, 4, 1);
+}
+
+#battery.critical {
+    color:      rgba(238, 46, 36, 1);
+}
+
+#battery.charging {
+    color:      rgba(217, 216, 216, 1);
 }
