@@ -56,6 +56,8 @@ return require('packer').startup(function()
 			'hrsh7th/cmp-calc',
             'f3fora/cmp-spell',},
   		config = function() require'config/cmp' end}
+  
+  use 'svermeulen/vimpeccable'
 
 
 end)

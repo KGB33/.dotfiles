@@ -10,8 +10,10 @@ vim.o.completeopt = "menu,menuone,noselect" -- Required for hrsh7th/nvim-cmp
 vim.cmd "syntax on"
 
 -- leader
-vim.g.leader = ','
-vim.g.localleader = ','
+local leader = ','
+vim.g.leader = leader
+vim.g.localleader = leader
+vim.g.mapleader = leader
 
 -- Plugins 
 require('plugins')
