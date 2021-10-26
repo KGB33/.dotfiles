@@ -51,7 +51,7 @@ output * bg ~/Photos/Mountan_Background.jpg fill
     bindsym $mod+Return exec $term
 
 	# Launch Firefox
-	bindsym $mod+q exec firefox
+	bindsym $mod+q exec MOZ_ENABLE_WAYLAND=1 firefox
 
     # Kill focused window
     bindsym $mod+Shift+q kill
