@@ -4,9 +4,10 @@
 
 
 # histfile settings
-HISTFILE=~/.config/zhs/histfile
+HISTFILE=~/.config/zsh/histfile
 HISTSIZE=1000
 SAVEHIST=1000
+setopt INC_APPEND_HISTORY_TIME
 
 
 setopt autocd extendedglob
