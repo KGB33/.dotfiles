@@ -71,3 +71,10 @@ websockets
 Reconnection
 kwargs
 Idempotence
+Arduino
+Circuit/!
+Circuit
+flickering
+UNO
+GND
+multimeter
