@@ -14,3 +14,6 @@ eval "$(pyenv init --path)"
 
 # Set TERMINAL for app launcher
 export TERMINAL="kitty"
+
+# Opt out of Microsoft .NET telemetry
+DOTNET_CLI_TELEMETRY_OPTOUT=1
