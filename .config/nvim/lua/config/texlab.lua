@@ -1,4 +1,3 @@
-vim.lsp.set_log_level("debug")
 require'lspconfig'.texlab.setup({
   log_level = vim.lsp.protocol.MessageType.Log;
   settings = {
