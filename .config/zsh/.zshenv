@@ -7,13 +7,9 @@
 export TASKRC=~/.config/taskwarrior/.taskrc
 export TASKDATA=~/.config/taskwarrior/.task_data
 
-# Pyenv variables
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
 # Set TERMINAL for app launcher
 export TERMINAL="kitty"
 
 # Opt out of Microsoft .NET telemetry
-DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_HTTPREPL_TELEMETRY_OPTOUT=1

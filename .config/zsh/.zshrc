@@ -44,6 +44,17 @@ fi
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
+# zsh parameter completion for the dotnet CLI
+
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  reply=( "${(ps:\n:)completions}" )
+}
+
+compctl -K _dotnet_zsh_complete dotnet
+
 # ======== Load & Configure 'plugins' ======== 
 
 # z.sh -- https://github.com/rupa/z
@@ -53,7 +64,6 @@ export _Z_DATA="$ZDOTDIR/plugins/z/z.data"
 
 
 # Shell Add-ins
-eval "$(pyenv init -)"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
