@@ -54,7 +54,9 @@ return require('packer').startup(function()
 			'octaltree/cmp-look',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-calc',
-            'f3fora/cmp-spell',},
+            'f3fora/cmp-spell',
+			'hrsh7th/cmp-vsnip',
+			'hrsh7th/vim-vsnip'},
   		config = function() require'config/cmp' end}
   
   use 'svermeulen/vimpeccable'
