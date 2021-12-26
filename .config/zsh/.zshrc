@@ -30,7 +30,7 @@ fi
 # Set additional PATH stuff
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
 export PATH="$HOME/.local/bin:$PATH" # Black
-export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH" # Ruby
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH" # Ruby
 export PATH="$HOME/go/bin:$PATH" # Go packages
 
 # Preferred editor for local and remote sessions

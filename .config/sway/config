@@ -59,6 +59,9 @@ output * bg ~/Photos/Mountan_Background.jpg fill
     # Start your launcher
     bindsym $mod+r exec $menu
 
+	# Screenshot
+	bindsym $mod+Shift+s exec grim -g "$(slurp)"
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.

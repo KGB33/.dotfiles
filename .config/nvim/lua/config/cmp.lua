@@ -16,7 +16,6 @@
 		{name = "path"},
 		{name = 'buffer'},
 		{name = "calc"}, 
-		{name = "spell"},
     },
 	snippet = {
       -- REQUIRED - you must specify a snippet engine
