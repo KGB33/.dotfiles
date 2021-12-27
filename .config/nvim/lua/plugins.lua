@@ -60,5 +60,9 @@ return require('packer').startup(function()
   
   use 'svermeulen/vimpeccable'
 
+  -- Java (yuck)
+  -- Also install `aur/jdtls`
+  use 'mfussenegger/nvim-jdtls'
+
 
 end)
