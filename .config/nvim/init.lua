@@ -43,6 +43,7 @@ require'config/texlab'
 require'config/cmp'
 require'config/gopls'
 require'config/galaxyline'
+require'config/telescope'
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2
