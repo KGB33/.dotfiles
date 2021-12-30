@@ -1,3 +1,15 @@
+-- Compile & add errors to quick fix list
+vim.cmd[[compiler javac]]
+
+function compile()
+	vim.cmd("make %")
+	require"telescope.builtin".quickfix()
+end
+
+local vimp = require('vimp')
+
+vimp.nnoremap('<leader>m', compile)
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local jdtls_path = '/home/kgb33/.config/nvim/.jdtls/'
 local config = {
