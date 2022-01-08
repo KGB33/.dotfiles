@@ -29,18 +29,11 @@ return require('packer').startup(function()
   -- Gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
-  -- Airline
-  use {'vim-airline/vim-airline', requires='vim-airline/vim-airline-themes'}
-
   -- Statusline
   use {
-  'glepnir/galaxyline.nvim',
-    branch = 'main',
-    -- your statusline
-    config = function() require'config/galaxyline' end,
-    -- some optional icons
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
-}
+	  'nvim-lualine/lualine.nvim',
+	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   -- Builtin LSP
   use 'neovim/nvim-lspconfig'
@@ -55,7 +48,8 @@ return require('packer').startup(function()
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-calc',
 			'hrsh7th/cmp-vsnip',
-			'hrsh7th/vim-vsnip'},
+			'hrsh7th/vim-vsnip'
+			},
   		config = function() require'config/cmp' end}
   
   use 'svermeulen/vimpeccable'

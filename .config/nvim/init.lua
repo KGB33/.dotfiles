@@ -30,6 +30,7 @@ vim.o.spell = true
 vim.o.spelllang = "en_us"
 
 -- LSP
+-- vim.lsp.set_log_level('debug')
 local nvim_lsp = require('lspconfig')
 local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', }
 for _, lsp in ipairs(servers) do
@@ -42,10 +43,15 @@ end
 require'config/texlab'
 require'config/cmp'
 require'config/gopls'
-require'config/galaxyline'
 require'config/telescope'
+require'config/lualine'
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- Test new lua ftp 
+-- https://github.com/neovim/neovim/pull/16600
+vim.g.do_filetype_lua = 1 
+vim.g.did_load_filetypes = 0
