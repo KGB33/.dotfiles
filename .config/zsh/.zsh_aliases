@@ -18,6 +18,9 @@ alias ssk="kitty +kitten ssh"
 # Reboot to windows
 alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
 
+# alias cwd to pwd - Current working dir makes more sense to me than print working dir
+alias cwd="pwd"
+
 # Display the IP addrs of runnging docker containers 
 function dockerip () {
 for ID in $(docker ps -q | awk '{print $1}'); do
