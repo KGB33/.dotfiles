@@ -59,4 +59,7 @@ return require('packer').startup(function()
   -- https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
   use 'mfussenegger/nvim-jdtls'
 
+  -- Better movement
+  use 'ggandor/lightspeed.nvim'
+
 end)
