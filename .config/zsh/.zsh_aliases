@@ -6,8 +6,8 @@ alias venv='. .venv/bin/activate && python -m pip install --upgrade pip'
 
 # Exa
 alias ls="exa -F --group-directories-first --icons"
-alias la="exa -Fa --group-directories-first --icons"
-alias ll="exa -Flbha --git --group-directories-first --icons"
+alias la="exa -Flbha --group-directories-first --icons"
+alias ll="exa -Flbh --git --group-directories-first --icons"
 alias lt="exa -TF --git-ignore --group-directories-first --icons"
 
 # When SSH breaks, use ssk to copy kitty terminfo over
