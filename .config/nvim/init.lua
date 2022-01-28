@@ -33,7 +33,7 @@ vim.opt.spelloptions = "camel"
 -- LSP
 -- vim.lsp.set_log_level('debug')
 local nvim_lsp = require('lspconfig')
-local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', }
+local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', 'ccls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
