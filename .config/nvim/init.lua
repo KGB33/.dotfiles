@@ -28,6 +28,7 @@ vim.g.python3_host_prog = '~/.config/nvim/.venv/bin/python'
 -- Spelling
 vim.o.spell = true
 vim.o.spelllang = "en_us"
+vim.opt.spelloptions = "camel"
 
 -- LSP
 -- vim.lsp.set_log_level('debug')
