@@ -21,6 +21,9 @@ alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
 # alias cwd to pwd - Current working dir makes more sense to me than print working dir
 alias cwd="pwd"
 
+# Alias for gradle run to prevent gradle output from polluting the console.
+alias gradleRun="gradle run -q --console=plain"
+
 # Display the IP addrs of runnging docker containers 
 function dockerip () {
 for ID in $(docker ps -q | awk '{print $1}'); do
