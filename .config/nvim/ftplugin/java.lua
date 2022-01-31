@@ -10,6 +10,9 @@ local vimp = require('vimp')
 
 vimp.nnoremap('<leader>m', compile)
 
+-- Override default telescope code action mapping
+vim.api.nvim_set_keymap("n", "<Leader>a", ':lua vim.lsp.buf.code_action()<Enter>', {noremap=false})
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local jdtls_path = '/home/kgb33/.config/nvim/.jdtls/'
 local config = {
@@ -64,15 +67,66 @@ local config = {
   --
   -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
   init_options = {
-    bundles = {}
+	  bundles = {
+	  };
   },
+  on_attach = function(client, buffer)
+	  require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+	  require('jdtls.dap').setup_dap_main_class_configs() 
+	  require('jdtls.setup').add_commands() -- call after dap
+  end,
 }
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+
+
+-- This bundles definition is the same as in the previous section (java-debug installation)
+local bundles = {
+  vim.fn.glob("path/to/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+};
+
+vim.list_extend(bundles, vim.split(vim.fn.glob("/home/kgb33/.config/nvim/vscode-java-test/server/*.jar"), "\n"))
+config['init_options'] = {
+  bundles = bundles;
+}
 
 
 -- Standard java formatting seems to want two spaces
 -- Probably due to the long names.
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+
+-- UI
+local finders = require'telescope.finders'
+local sorters = require'telescope.sorters'
+local actions = require'telescope.actions'
+local pickers = require'telescope.pickers'
+require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
+  local opts = {}
+  pickers.new(opts, {
+    prompt_title = prompt,
+    finder    = finders.new_table {
+      results = items,
+      entry_maker = function(entry)
+        return {
+          value = entry,
+          display = label_fn(entry),
+          ordinal = label_fn(entry),
+        }
+      end,
+    },
+    sorter = sorters.get_generic_fuzzy_sorter(),
+    attach_mappings = function(prompt_bufnr)
+      actions.goto_file_selection_edit:replace(function()
+        local selection = actions.get_selected_entry(prompt_bufnr)
+        actions.close(prompt_bufnr)
+
+        cb(selection.value)
+      end)
+
+      return true
+    end,
+  }):find()
+end
+
+-- This starts a new client & server,
+-- or attaches to an existing client & server depending on the `root_dir`.
+require('jdtls').start_or_attach(config)

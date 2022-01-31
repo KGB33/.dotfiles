@@ -25,6 +25,7 @@ return require('packer').startup(function()
   use { 'nvim-telescope/telescope.nvim',
   	requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
   }
+  use {'nvim-telescope/telescope-ui-select.nvim' }
 
   -- Gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
@@ -38,6 +39,8 @@ return require('packer').startup(function()
   -- Builtin LSP
   use 'neovim/nvim-lspconfig'
   use 'neovim/nvim-lsp'
+  -- Debuggers
+  use 'mfussenegger/nvim-dap'
 
   -- Auto-complete
   use {'hrsh7th/nvim-cmp',

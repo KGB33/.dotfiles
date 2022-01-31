@@ -1,9 +1,18 @@
 -- *^*^*^*^* Setup *^*^*^*^* -- 
 require("telescope").setup{
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {}
+		}
+	},
 	defaults = {
 	 	path_display={"smart"},
 	},
 }
+
+
+-- *^*^*^*^* Extensions *^*^*^*^* -- 
+require("telescope").load_extension("ui-select")
 
 -- *^*^*^*^* Keybinds *^*^*^*^* -- 
 
