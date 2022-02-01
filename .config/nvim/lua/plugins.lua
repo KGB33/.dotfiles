@@ -40,7 +40,9 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'neovim/nvim-lsp'
   -- Debuggers
-  use 'mfussenegger/nvim-dap'
+  use {'mfussenegger/nvim-dap',
+  	requires = {'nvim-telescope/telescope-dap.nvim', "rcarriga/nvim-dap-ui"}
+  }
 
   -- Auto-complete
   use {'hrsh7th/nvim-cmp',

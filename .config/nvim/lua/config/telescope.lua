@@ -13,8 +13,13 @@ require("telescope").setup{
 
 -- *^*^*^*^* Extensions *^*^*^*^* -- 
 require("telescope").load_extension("ui-select")
+require('telescope').load_extension('dap')
 
 -- *^*^*^*^* Keybinds *^*^*^*^* -- 
+
+-- Dap Keybinds
+vim.api.nvim_set_keymap("n", "<Leader>td", ':Telescope dap commands<Enter>', {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>tb", ':Telescope dap list_breakpoints<Enter>', {noremap=true})
 
 -- Open Telescope
 vim.api.nvim_set_keymap("n", "<Leader>t", ':Telescope<Enter>', {noremap=true})

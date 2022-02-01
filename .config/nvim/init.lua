@@ -45,6 +45,7 @@ require'config/texlab'
 require'config/cmp'
 require'config/gopls'
 require'config/telescope'
+require'config/dap'
 require'config/lualine'
 
 -- Explicitly disable the providers in the health#providers#check
