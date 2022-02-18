@@ -88,6 +88,8 @@ config['init_options'] = {
   bundles = bundles;
 }
 
+config["capabilities"] = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 
 -- Standard java formatting seems to want two spaces
 -- Probably due to the long names.

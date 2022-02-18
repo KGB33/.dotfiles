@@ -49,11 +49,12 @@ return require('packer').startup(function()
   		requires={
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-buffer',
-			'octaltree/cmp-look',
 			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-calc',
 			'hrsh7th/cmp-vsnip',
-			'hrsh7th/vim-vsnip'
+			'hrsh7th/vim-vsnip',
+			'hrsh7th/cmp-cmdline',
+			"lukas-reineke/cmp-rg",
+			"petertriho/cmp-git",
 			},
   		config = function() require'config/cmp' end}
   

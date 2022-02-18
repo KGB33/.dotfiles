@@ -1,3 +1,32 @@
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode', -- adjust as needed
+  name = "lldb"
+}
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+
+    runInTerminal = true,
+  },
+}
+
+
+-- Rust and C++ debuggers for free w/ C
+-- dap.configurations.cpp = dap.configurations.c
+-- dap.configurations.rust = dap.configurations.c
+
+
+-- ^*^*^*^*^*^*^*^* UI ^*^*^*^*^*^*^*^* 
 require("dapui").setup()
 
 -- Auto-open dapUI on dap events.
