@@ -15,6 +15,9 @@ alias lt="exa -TF --git-ignore --group-directories-first --icons"
 #i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
 alias ssk="kitty +kitten ssh"
 
+# set ip to always use color
+alias ip="ip -color=always"
+
 # Reboot to windows
 alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
 
