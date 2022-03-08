@@ -14,6 +14,7 @@ require("telescope").setup{
 -- *^*^*^*^* Extensions *^*^*^*^* -- 
 require("telescope").load_extension("ui-select")
 require('telescope').load_extension('dap')
+require("telescope").load_extension('gradle')
 
 -- *^*^*^*^* Keybinds *^*^*^*^* -- 
 

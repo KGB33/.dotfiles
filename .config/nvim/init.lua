@@ -15,6 +15,9 @@ vim.g.leader = leader
 vim.g.localleader = leader
 vim.g.mapleader = leader
 
+-- Keybinds
+vim.api.nvim_set_keymap("n", "<Leader>f", ":lua vim.lsp.buf.formatting()<Enter>", {noremap=true})
+
 -- Plugins 
 require('plugins')
 
@@ -33,10 +36,15 @@ vim.opt.spelloptions = "camel"
 -- LSP
 -- vim.lsp.set_log_level('debug')
 local nvim_lsp = require('lspconfig')
-local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', 'ccls'}
-for _, lsp in ipairs(servers) do
+local servers = { 'pyright', 'bashls', 'dockerls', 'gopls', 'tsserver', 'ccls', 'rust_analyzer'}
+for _, lsp in ipairs(servers) do 
   nvim_lsp[lsp].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	  -- TODO: Turn off formatting for only some servers
+	  on_attach = function(client, buffer)
+		  client.resolved_capabilities.document_formatting = false 
+		  client.resolved_capabilities.document_range_formatting = false 
+	  end,
+	  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
 
@@ -47,6 +55,7 @@ require'config/gopls'
 require'config/telescope'
 require'config/dap'
 require'config/lualine'
+require'config/null_ls'
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2

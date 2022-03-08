@@ -27,6 +27,11 @@ return require('packer').startup(function()
   }
   use {'nvim-telescope/telescope-ui-select.nvim' }
 
+  -- null-ls
+  use { 'jose-elias-alvarez/null-ls.nvim',
+  	requires = {'nvim-lua/plenary.nvim'}
+  }
+
   -- Gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
@@ -64,6 +69,7 @@ return require('packer').startup(function()
   -- Also download & extract the latest jndi lsp to `~/.config/nvim/.jdtls/`
   -- https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
   use 'mfussenegger/nvim-jdtls'
+  use 'aloussase/telescope-gradle.nvim'
 
   -- Better movement
   use 'ggandor/lightspeed.nvim'

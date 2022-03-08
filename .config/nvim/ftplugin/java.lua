@@ -71,6 +71,8 @@ local config = {
 	  };
   },
   on_attach = function(client, buffer)
+	  client.resolved_capabilities.document_formatting = false 
+	  client.resolved_capabilities.document_range_formatting = false
 	  require('jdtls').setup_dap({ hotcodereplace = 'auto' })
 	  require('jdtls.dap').setup_dap_main_class_configs() 
 	  require('jdtls.setup').add_commands() -- call after dap
