@@ -20,7 +20,10 @@
                 "default": ""
             }
         },
+		"sway/window": {
+			"icon": true
 
+		},
         "sway/mode": {
             "format": "<span style=\"italic\">{}</span>"
         },
