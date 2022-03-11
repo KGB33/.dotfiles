@@ -240,3 +240,5 @@ resize
 Wireguard
 VMs
 Kubernetes
+networkd
+OPNsense
