@@ -18,6 +18,9 @@ alias ssk="kitty +kitten ssh"
 # set ip to always use color
 alias ip="ip -color=always"
 
+# Change alias top to bpytop
+alias top="bpytop"
+
 # Reboot to windows
 alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
 
