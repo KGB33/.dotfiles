@@ -29,7 +29,8 @@ include ~/.config/sway/themes/gruvbox
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Photos/VowWorm.png fill
+# output * bg ~/Photos/VowWorm.png fill
+output * bg ~/Photos/Mountan_Background.jpg fill
 #
 # Example configuration:
 #
