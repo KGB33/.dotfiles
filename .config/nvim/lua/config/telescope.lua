@@ -25,6 +25,9 @@ vim.api.nvim_set_keymap("n", "<Leader>tb", ':Telescope dap list_breakpoints<Ente
 -- Open Telescope
 vim.api.nvim_set_keymap("n", "<Leader>t", ':Telescope<Enter>', {noremap=true})
 
+-- Open find-files picker
+vim.api.nvim_set_keymap("n", "<Leader>fz", ':lua require("telescope.builtin").find_files()<Enter>', {noremap=true})
+
 -- change default (?) spell_suggest to use Telescope window
 vim.api.nvim_set_keymap("n", "z=", ":Telescope spell_suggest<Enter>", {noremap=true})
 
