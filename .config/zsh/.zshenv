@@ -13,3 +13,7 @@ export TERMINAL="kitty"
 # Opt out of Microsoft .NET telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_HTTPREPL_TELEMETRY_OPTOUT=1
+
+# Fzf 
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"

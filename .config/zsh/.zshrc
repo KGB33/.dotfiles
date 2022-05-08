@@ -26,6 +26,10 @@ if [ -f $ZDOTDIR/.zsh_aliases ]; then
     . $ZDOTDIR/.zsh_aliases
 fi
 
+# Source fzf keybindings
+source /usr/share/fzf/key-bindings.zsh 
+source /usr/share/fzf/completion.zsh
+
 
 # Set additional PATH stuff
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
