@@ -9,6 +9,7 @@ alias ls="exa -F --group-directories-first --icons"
 alias la="exa -Flbha --group-directories-first --icons"
 alias ll="exa -Flbh --git --group-directories-first --icons"
 alias lt="exa -TF --git-ignore --group-directories-first --icons"
+alias lta="exa -TF --group-directories-first --icons"
 
 # When SSH breaks, use ssk to copy kitty terminfo over
 # https://sw.kovidgoyal.net/kitty/faq.html
