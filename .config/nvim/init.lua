@@ -6,8 +6,6 @@ vim.o.shiftwidth = 4
 vim.o.termguicolors = true
 vim.o.laststatus = 3 -- One status line for multiple windows
 vim.o.completeopt = "menu,menuone,noselect" -- Required for hrsh7th/nvim-cmp
---vim.o.python_highlight_all=1
-vim.cmd("syntax on")
 
 -- leader
 local leader = ","
@@ -56,13 +54,9 @@ require("config/telescope")
 require("config/dap")
 require("config/lualine")
 require("config/null_ls")
+require("config/treesitter")
 
 -- Explicitly disable the providers in the health#providers#check
 vim.g.loaded_python_provider = 0 -- Python 2
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
--- Test new lua ftp
--- https://github.com/neovim/neovim/pull/16600
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
