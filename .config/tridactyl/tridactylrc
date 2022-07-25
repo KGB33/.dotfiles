@@ -6,6 +6,9 @@
 autocmd DocStart ^http(s?)://www.amazon.com js tri.excmds.urlmodify("-t", "www", "smile")
 
 
+"" Disable for wordle
+blacklistadd https://www.nytimes.com/games/wordle/
+
 "" ======== Isolate Websites in their own container ========
 "" Facebook example below
 "" set auconcreatecontainer true
