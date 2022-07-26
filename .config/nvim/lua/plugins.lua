@@ -61,12 +61,6 @@ return require("packer").startup(function()
 
 	use("svermeulen/vimpeccable")
 
-	-- Java (yuck)
-	-- Also download & extract the latest jndi lsp to `~/.config/nvim/.jdtls/`
-	-- https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
-	use("mfussenegger/nvim-jdtls")
-	use("aloussase/telescope-gradle.nvim")
-
 	-- Better movement
 	use("ggandor/lightspeed.nvim")
 end)

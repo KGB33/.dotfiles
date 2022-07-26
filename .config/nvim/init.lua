@@ -13,11 +13,10 @@ vim.g.leader = leader
 vim.g.localleader = leader
 vim.g.mapleader = leader
 
--- Keybinds
-vim.api.nvim_set_keymap("n", "<Leader>f", ":lua vim.lsp.buf.formatting()<Enter>", { noremap = true })
-
 -- Plugins
 require("plugins")
+
+require("keybinds")
 
 -- Theme
 vim.o.background = "dark"
@@ -34,7 +33,7 @@ vim.opt.spelloptions = "camel"
 -- LSP
 -- vim.lsp.set_log_level('debug')
 local nvim_lsp = require("lspconfig")
-local servers = { "pyright", "bashls", "dockerls", "gopls", "tsserver", "ccls", "rust_analyzer" }
+local servers = { "pyright", "gopls", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		-- TODO: Turn off formatting for only some servers
