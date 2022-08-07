@@ -3,6 +3,12 @@
 # or assume the shell is attached to a TTY.
 # When this file exists it will always be read.
 
+# XDG Variables
+export XDG_DATA_HOME=~/.local/share 
+export XDG_CONFIG_HOME=~/.config 
+export XDG_STATE_HOME=~/.local/state 
+export XDG_CACHE_HOME=~/.cache
+
 # Task Warrior config location
 export TASKRC=~/.config/taskwarrior/.taskrc
 export TASKDATA=~/.config/taskwarrior/.task_data
