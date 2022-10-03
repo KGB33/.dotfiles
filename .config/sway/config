@@ -24,6 +24,7 @@ bindsym $mod+d exec $menu
 
 # ----- Theme -----
 include ~/.config/sway/themes/gruvbox
+font pango:FiraCode 10
 
 
 ### Output configuration
