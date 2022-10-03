@@ -36,11 +36,11 @@ local nvim_lsp = require("lspconfig")
 local servers = { "pyright", "gopls", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
-		-- TODO: Turn off formatting for only some servers
-		on_attach = function(client, buffer)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
-		end,
+--		-- TODO: Turn off formatting for only some servers
+--		on_attach = function(client, buffer)
+--			client.resolved_capabilities.document_formatting = false
+--			client.resolved_capabilities.document_range_formatting = false
+--		end,
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	})
 end
