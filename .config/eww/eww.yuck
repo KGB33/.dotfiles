@@ -1,0 +1,125 @@
+; Add the includes
+
+;(include "revealer.yuck")
+;(defvar revealNotify false)
+
+
+(defwindow top_bar
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "0px"
+                               :width "100%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+           :focusable true
+           :exclusive true
+  (bar)
+)
+
+(defwidget bar []
+  (centerbox 
+    (workspaces) 
+    (activewindow-label)
+    (sidestuff)
+  )
+)
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
+    (box :orientation "h" :spacing 2 :space-evenly false :halign "end"
+      (network)
+      (time)
+      (weather)
+    )
+  )  
+)
+
+
+(defwidget icon-module [icon ?class ?visible]
+  (box :class "${class} icon-module"
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    :visible {visible ?: true} ; because the argument is optional
+    (label :class "icon-module__icon" :text "${icon}")
+    (children)
+  )
+)
+   
+; === Widgets ===
+(defpoll time_var 
+  :interval "1s"
+  `date +"%a %b %d, %l:%M"`
+)
+
+(defwidget time []
+  (box :orientation "horizontal"
+       :halign "center"
+	   time_var
+  )
+)
+
+(defpoll workspaces_list
+  :interval "1s"
+  :initial "[]"
+  `hyprctl workspaces -j`
+)
+
+(defpoll activewindow
+  :interval "1s"
+  :initial ""
+  `hyprctl activewindow -j`
+)
+
+(defwidget workspace [id active]
+  (button
+    :width 30
+    :class {active ? "workspace": "workspace-active"}
+    :onclick "hyprctl dispatch workspace ${id}"
+    id
+  )
+)
+
+(defwidget workspaces []
+  (box
+    :space-evenly false
+    (for ws in workspaces_list
+      (workspace
+        :id {ws.id}
+        :active {ws.id == activewindow.workspace.id}
+      )
+	)
+  )
+)
+
+(defwidget activewindow-label []
+  (label 
+    :text "${activewindow.class} - ${activewindow.title}"
+    :show_truncated true
+    :limit-width 25
+  )
+)
+
+(defpoll interfaceId :interval "60s" "ip route | grep default | head -n1 | awk '{print $5}'")
+(defpoll ipAddr :interval "60s" "ip route | grep default | head -n1 | awk '{print $3}'")
+
+
+(defwidget network []
+    (box :orientation "h" :space-evenly false 
+      (label :text "${ipAddr} ${interfaceId}: ${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)}")
+      (label :class {round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 0.1 ?
+        round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 5 ?
+        "veryuplink" : "uplink" : "noactive"} :text "  "
+      )
+      (label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}")
+      (label :class {round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2) > 0.1 ?
+        round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2) > 10 ?
+        "verydownlink" : "downlink" : "noactive"} :text "  "
+      )
+    )
+  )
+
+(defwidget weather []
+  (icon-module :icon "\\ue30d")
+)

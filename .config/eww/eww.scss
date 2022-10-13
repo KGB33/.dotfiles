@@ -1,0 +1,39 @@
+@import "gruvbox.scss";
+
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+}
+
+//Global Styles
+.top_bar {
+  background-color: $background;
+  color: $foreground;
+  padding: 5px;
+  font-size: 1em;
+  font-family: Hack Regular;
+}
+
+.workspace-active {
+	background-color: $background-alt;
+}
+ 
+.notifications {
+  font-size: 1em;
+  // border-radius: 20px;
+  background-color: red;
+  color: $background;
+}
+
+.notifications-text {
+  font-size: 1em;
+  background-color: red;
+  color: $green;
+}
+
+.icon-module {
+  margin: 0 5px;
+  & > &__icon {
+    margin-right: 10px;
+    font-family: "Iosevka Nerd Font";
+  }
+}
