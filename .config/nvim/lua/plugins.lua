@@ -63,4 +63,6 @@ return require("packer").startup(function()
 
 	-- Better movement
 	use("ggandor/lightspeed.nvim")
+	 
+	use("elkowar/yuck.vim")
 end)

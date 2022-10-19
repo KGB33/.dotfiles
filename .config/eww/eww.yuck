@@ -1,5 +1,6 @@
 ; Add the includes
 
+(include "workspaces.yuck")
 ;(include "revealer.yuck")
 ;(defvar revealNotify false)
 
@@ -60,46 +61,7 @@
   )
 )
 
-(defpoll workspaces_list
-  :interval "1s"
-  :initial "[]"
-  `hyprctl workspaces -j`
-)
 
-(defpoll activewindow
-  :interval "1s"
-  :initial ""
-  `hyprctl activewindow -j`
-)
-
-(defwidget workspace [id active]
-  (button
-    :width 30
-    :class {active ? "workspace": "workspace-active"}
-    :onclick "hyprctl dispatch workspace ${id}"
-    id
-  )
-)
-
-(defwidget workspaces []
-  (box
-    :space-evenly false
-    (for ws in workspaces_list
-      (workspace
-        :id {ws.id}
-        :active {ws.id == activewindow.workspace.id}
-      )
-	)
-  )
-)
-
-(defwidget activewindow-label []
-  (label 
-    :text "${activewindow.class} - ${activewindow.title}"
-    :show_truncated true
-    :limit-width 25
-  )
-)
 
 (defpoll interfaceId :interval "60s" "ip route | grep default | head -n1 | awk '{print $5}'")
 (defpoll ipAddr :interval "60s" "ip route | grep default | head -n1 | awk '{print $3}'")

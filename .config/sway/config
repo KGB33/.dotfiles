@@ -216,9 +216,4 @@ bar {
 # Turn borders off
 for_window [class="^.*"] border pixel 0
 
-# Keyboard re-maps
-input "type:keyboard" {
-	xkb_options caps:swapescape
-}
-
 include /etc/sway/config.d/*
