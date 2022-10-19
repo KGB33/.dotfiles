@@ -1,0 +1,30 @@
+(deflisten nasty_ws `nasty workspaces`)
+
+(defwidget workspace [id active]
+  (button
+    :width 30
+    :class {active ? "workspace": "workspace-active"}
+    :onclick "hyprctl dispatch workspace ${id}"
+    id
+  )
+)
+
+(defwidget workspaces []
+  (box
+    :space-evenly false
+    (for ws in {nasty_ws.ws_names}
+      (workspace
+        :id {ws}
+        :active {ws == nasty_ws.active_workspace}
+      )
+	)
+  )
+)
+
+(defwidget activewindow-label []
+  (label 
+    :text "${nasty_ws.wss[nasty_ws.active_workspace]}"
+    :show_truncated true
+    :limit-width 25
+  )
+)
