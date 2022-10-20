@@ -4,8 +4,8 @@ Description=kmonad keyboard config
 [Service]
 Restart=always
 RestartSec=3
-ExecStart=/usr/bin/kmonad %E/kmonad/conf.kbd
+ExecStart=sudo -u kgb33 kmonad -l error %E/kmonad/conf.kbd
 Nice=-20
 
 [Install]
-WantedBy=default.target
+After=default.target
