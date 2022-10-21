@@ -17,17 +17,19 @@
 	background-color: $background-alt;
 }
  
-.notifications {
-  font-size: 1em;
-  // border-radius: 20px;
-  background-color: red;
-  color: $background;
+.notification {
+	background-color: $background;
+	border: 3px solid;
+	border-radius: 20px;
 }
-
-.notifications-text {
-  font-size: 1em;
-  background-color: red;
-  color: $green;
+.notification-0 {
+	border-color: $lightblue;
+}
+.notification-1 {
+	border-color: $lightgreen;
+}
+.notification-2 {
+	border-color: $lightred;
 }
 
 .icon-module {

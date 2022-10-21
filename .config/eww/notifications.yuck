@@ -1,0 +1,68 @@
+(deflisten nasty_ns `nasty notifications -s`)
+(defwidget notification-icon []
+  (button
+    :visible {arraylength(nasty_ns.priority) != 0}
+    :onclick "eww open --toggle notification-menu"
+    (icon-module :icon "")
+  )
+)
+(defwindow notification-menu
+  :monitor 0
+  :stacking "fg"
+  :focusable true
+  :geometry (geometry :x "5px"
+                      :y "5px"
+                      :width "15%"
+                      ;:height "35%"
+                      :anchor "top right")
+ (notification-menu) 
+)
+(defwidget notification-menu []
+  (box
+    :orientation "v"
+    :space-evenly false
+    :vexpand true
+  (notifications)
+  )
+)
+
+(defwidget notification [id urgency data]
+  (button 
+  :class "notification-${urgency} notification"
+  :onclick "nasty notifications -c ${id} ${arraylength(nasty_ns.priority) == 1 ?
+    "&& eww open --toggle notification-menu": ""}"
+  (box  
+  :space-evenly false
+  (app_icon :icon {data["app_icon"]})
+  (box
+    :space-evenly false
+    :orientation "v"
+    (label :text {data["summary"]} :halign "start")
+    (label :text {data["body"]}
+      :wrap true
+    )
+  )
+  )
+  )
+)
+
+(defwidget notifications []
+  (box
+    :orientation "v"
+    (for id in {nasty_ns.priority}
+      (notification 
+        :id {id}
+        :urgency {nasty_ns.notifications[id]["hints"]["urgency"]["zvariant::Value::Value"]}
+        :data {nasty_ns.notifications[id]}
+      )
+    )
+  )
+)
+
+
+(defwidget app_icon [icon]
+  (icon-module :icon {
+    icon == "" ? "":
+    icon == "dialog-information" ? "ﳴ": " - `${icon}`"
+    })
+)

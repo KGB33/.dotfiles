@@ -1,16 +1,17 @@
 ; Add the includes
 
 (include "workspaces.yuck")
+(include "notifications.yuck")
 ;(include "revealer.yuck")
 ;(defvar revealNotify false)
 
 
 (defwindow top_bar
            :monitor 0
-           :geometry (geometry :x "0%"
+           :geometry (geometry :x "0px"
                                :y "0px"
                                :width "100%"
-                               :height "30px"
+                               :height "25px"
                                :anchor "top center")
            :stacking "fg"
            :focusable true
@@ -29,6 +30,7 @@
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 2 :space-evenly false :halign "end"
+      (notification-icon)
       (network)
       (time)
       (weather)

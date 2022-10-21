@@ -2,7 +2,7 @@
 
 (defwidget workspace [id active]
   (button
-    :width 30
+    :width 20
     :class {active ? "workspace": "workspace-active"}
     :onclick "hyprctl dispatch workspace ${id}"
     id
