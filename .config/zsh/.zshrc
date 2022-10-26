@@ -49,6 +49,9 @@ fi
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
+# Start gpg agent 
+export GPG_TTY=$(tty)
+
 # zsh parameter completion for the dotnet CLI
 
 _dotnet_zsh_complete()

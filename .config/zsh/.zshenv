@@ -24,3 +24,6 @@ export DOTNET_HTTPREPL_TELEMETRY_OPTOUT=1
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+
+# GnuPG
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
