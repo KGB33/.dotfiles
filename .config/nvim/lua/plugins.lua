@@ -13,7 +13,7 @@ return require("packer").startup(function()
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
-	-- Python Auto-formatting
+	-- Python Autoformatting
 	use("psf/black")
 
 	-- Treesitter
