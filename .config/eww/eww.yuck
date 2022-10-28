@@ -29,8 +29,9 @@
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
-    (box :orientation "h" :spacing 2 :space-evenly false :halign "end"
+    (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
+      (battery)
       (network)
       (time)
       (weather)
@@ -43,6 +44,7 @@
   (box :class "${class} icon-module"
     :orientation "h"
     :halign "start"
+    :spacing 0
     :space-evenly false
     :visible {visible ?: true} ; because the argument is optional
     (label :class "icon-module__icon" :text "${icon}")
@@ -51,6 +53,26 @@
 )
    
 ; === Widgets ===
+(defwidget battery []
+  (box
+    :halign "end"
+    :spacing "0"
+	"${EWW_BATTERY['total_avg']}%"
+    (icon-module :icon {
+      EWW_BATTERY['BAT1']['status'] == 'chariging' ? '' : 
+      EWW_BATTERY['total_avg'] <= 10 ? "" :
+      EWW_BATTERY['total_avg'] <= 20 ? "" :
+      EWW_BATTERY['total_avg'] <= 30 ? "" :
+      EWW_BATTERY['total_avg'] <= 40 ? "" :
+      EWW_BATTERY['total_avg'] <= 50 ? "" :
+      EWW_BATTERY['total_avg'] <= 60 ? "" :
+      EWW_BATTERY['total_avg'] <= 70 ? "" :
+      EWW_BATTERY['total_avg'] <= 80 ? "" :
+      EWW_BATTERY['total_avg'] <= 90 ? "" : ""
+      })
+  )  
+)
+
 (defpoll time_var 
   :interval "1s"
   `date +"%a %b %d, %l:%M"`
@@ -70,7 +92,7 @@
 
 
 (defwidget network []
-    (box :orientation "h" :space-evenly false 
+    (box :orientation "h" :space-evenly false :halign "center"
       (label :text "${ipAddr} ${interfaceId}: ${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)}")
       (label :class {round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 0.1 ?
         round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 5 ?
