@@ -59,7 +59,7 @@
     :spacing "0"
 	"${EWW_BATTERY['total_avg']}%"
     (icon-module :icon {
-      EWW_BATTERY['BAT1']['status'] == 'chariging' ? '' : 
+      EWW_BATTERY['BAT1']['status'] == 'Charging' ? '' : 
       EWW_BATTERY['total_avg'] <= 10 ? "" :
       EWW_BATTERY['total_avg'] <= 20 ? "" :
       EWW_BATTERY['total_avg'] <= 30 ? "" :
@@ -88,7 +88,7 @@
 
 
 (defpoll interfaceId :interval "60s" "ip route | grep default | head -n1 | awk '{print $5}'")
-(defpoll ipAddr :interval "60s" "ip route | grep default | head -n1 | awk '{print $3}'")
+(defpoll ipAddr :interval "60s" "ip route | grep default | head -n1 | awk '{print $9}'")
 
 
 (defwidget network []
