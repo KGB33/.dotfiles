@@ -18,7 +18,7 @@ compinit
 
 # Vi Mode
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=500
 
 
 # Source alias
@@ -29,6 +29,7 @@ fi
 # Source fzf keybindings
 source /usr/share/fzf/key-bindings.zsh 
 source /usr/share/fzf/completion.zsh
+source $ZDOTDIR/plugins/fzf-git.sh
 
 
 # Set additional PATH stuff
@@ -52,23 +53,11 @@ export MANWIDTH=999
 # Start gpg agent 
 export GPG_TTY=$(tty)
 
-# zsh parameter completion for the dotnet CLI
-
-_dotnet_zsh_complete()
-{
-  local completions=("$(dotnet complete "$words")")
-
-  reply=( "${(ps:\n:)completions}" )
-}
-
-compctl -K _dotnet_zsh_complete dotnet
-
 # ======== Load & Configure 'plugins' ======== 
 
 # z.sh -- https://github.com/rupa/z
 export _Z_DATA="$ZDOTDIR/plugins/z/z.data"
 . $ZDOTDIR/plugins/z/z.sh
-
 
 
 # Shell Add-ins
