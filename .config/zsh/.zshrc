@@ -30,6 +30,7 @@ fi
 source /usr/share/fzf/key-bindings.zsh 
 source /usr/share/fzf/completion.zsh
 source $ZDOTDIR/plugins/fzf-git.sh
+source $ZDOTDIR/plugins/fzf-cheat.zsh
 
 
 # Set additional PATH stuff

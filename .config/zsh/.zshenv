@@ -22,11 +22,11 @@ export DOTNET_HTTPREPL_TELEMETRY_OPTOUT=1
 
 # Fzf 
 export FZF_TMUX=1
-export FZF_TMUX_OPTS='-p'
+export FZF_TMUX_OPTS='-p 80%,40%'
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 
-FZF_GRUVBOX='--color=bg+:#3c3836,bg:#32302f,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934'
+FZF_GRUVBOX='--color=spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934'
 
 export FZF_DEFAULT_OPTS="$FZF_GRUVBOX"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
