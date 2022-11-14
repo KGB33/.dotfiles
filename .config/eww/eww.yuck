@@ -69,7 +69,14 @@
       EWW_BATTERY['total_avg'] <= 70 ? "" :
       EWW_BATTERY['total_avg'] <= 80 ? "" :
       EWW_BATTERY['total_avg'] <= 90 ? "" : ""
-      })
+      }
+    :class {
+      EWW_BATTERY['BAT1']['status'] == 'Charging' ? 'battery-charging' : 
+      EWW_BATTERY['total_avg'] <= 10 ? "battery-critical" :
+      EWW_BATTERY['total_avg'] <= 30 ? "battery-low" :
+      EWW_BATTERY['total_avg'] <= 80 ? "battery-high" : "battery-full"
+      }
+    )
   )  
 )
 
