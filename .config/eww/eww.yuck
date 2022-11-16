@@ -1,12 +1,9 @@
 ; Add the includes
 
-(include "workspaces.yuck")
-(include "notifications.yuck")
+(include "widgets/workspaces.yuck")
+(include "widgets/notifications.yuck")
 (include "widgets/docker.yuck")
 (include "utils.yuck")
-;(include "revealer.yuck")
-;(defvar revealNotify false)
-
 
 (defwindow top_bar
            :monitor 0
