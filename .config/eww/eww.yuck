@@ -2,6 +2,8 @@
 
 (include "workspaces.yuck")
 (include "notifications.yuck")
+(include "widgets/docker.yuck")
+(include "utils.yuck")
 ;(include "revealer.yuck")
 ;(defvar revealNotify false)
 
@@ -31,6 +33,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
+      (docker-icon)
       (battery)
       (network)
       (time)
@@ -40,23 +43,13 @@
 )
 
 
-(defwidget icon-module [icon ?class ?visible]
-  (box :class "${class} icon-module"
-    :orientation "h"
-    :halign "start"
-    :spacing 0
-    :space-evenly false
-    :visible {visible ?: true} ; because the argument is optional
-    (label :class "icon-module__icon" :text "${icon}")
-    (children)
-  )
-)
-   
+  
 ; === Widgets ===
 (defwidget battery []
   (box
     :halign "end"
     :spacing "0"
+    :visible "${EWW_BATTERY != ''}"
 	"${EWW_BATTERY['total_avg']}%"
     (icon-module :icon {
       EWW_BATTERY['BAT1']['status'] == 'Charging' ? '' : 

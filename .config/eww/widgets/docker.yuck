@@ -1,0 +1,15 @@
+(include "utils.yuck")
+
+(defpoll dockerActive :interval "60s" "docker ps |& rg Cannot")
+(defwidget docker-icon []
+  (box
+  :halign "end"
+  :spacing 0
+  :visible "${"" == dockerActive}"
+  (icon-module 
+    :icon ""
+    :class "docker-icon"
+  )
+  )
+
+)
