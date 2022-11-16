@@ -39,3 +39,17 @@ for ID in $(docker ps -q | awk '{print $1}'); do
     printf "%s %s\n" "$IP" "$NAME"
 done
 }
+
+# Open current git repo in Github 
+function git_remote_open() {
+	remote=$(git remote get-url origin)
+	if [[ $remote =~ ^git@ ]]; then 
+		url=${remote%.git}
+		url=${url#git@}
+		url=https://${url/://}
+	elif [[ $remote =~ ^http ]]; then 
+		url=${remote%.git}
+	fi
+	xdg-open "$url"
+}
+
