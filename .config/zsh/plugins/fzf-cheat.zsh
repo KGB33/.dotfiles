@@ -4,7 +4,7 @@ if [[ $- =~ i ]]; then # Only define when shell is interacitve
 # ------------------
 STYLE='rrt'
 
-__inner() { 
+__fzf_cheat_selector() { 
 		curl --silent "cheat.sh/:list" \
 		| fzf-tmux \
 			-p 70%,60% \
@@ -15,17 +15,13 @@ __inner() {
 			--preview-window hidden,60% \
 }
 
-__base() {
-	curl --silent "cheat.sh/$(__inner)?style=$STYLE"
-}
-
-_fzf_cheat_sh() {
-		__base | bat --style=plain
+fzf_cheat_sh() {
+	curl --silent "cheat.sh/${1:=$(__fzf_cheat_selector)}?style=$STYLE" | bat --style=plain
 }
 
 _fzf_cheat_sh_widget() {
 	zle push-input;
-    BUFFER="_fzf_cheat_sh";
+	BUFFER="fzf_cheat_sh $(__fzf_cheat_selector)";
     zle accept-line;
 }
 
