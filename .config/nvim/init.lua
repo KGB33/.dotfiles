@@ -5,7 +5,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.termguicolors = true
 vim.o.laststatus = 3 -- One status line for multiple windows
-vim.o.completeopt = "menu,menuone,noselect" -- Required for hrsh7th/nvim-cmp
+vim.o.completeopt = "menuone,noselect,preview," -- Required for hrsh7th/nvim-cmp
 
 -- leader
 local leader = ","
