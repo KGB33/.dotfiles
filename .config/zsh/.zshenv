@@ -35,3 +35,7 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind 
 
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
+
+# Poetry is super dumb 
+# https://github.com/python-poetry/poetry/issues/1917
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
