@@ -23,3 +23,7 @@ hooks.location=~/.config/task/hooks
 include dark-yellow-green.theme
 
 news.version=2.6.0
+context.dagger.read=+dagger
+context.dagger.write=+dagger
+context.school.read=+ewu
+context.school.write=+ewu
