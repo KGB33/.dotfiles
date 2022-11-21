@@ -1,0 +1,6 @@
+aur_packages:
+  - gp-saml-gui-git
+  - libvterm01
+  - pandoc-bin
+  - paru
+  - sway-launcher-desktop
