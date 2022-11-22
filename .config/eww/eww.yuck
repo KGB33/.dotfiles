@@ -30,7 +30,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
-      (docker-icon)
+      (docker-icon :active {dockerActive == ""})
       (battery)
       (network)
       (time)
