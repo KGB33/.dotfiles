@@ -4,6 +4,7 @@
 (include "widgets/notifications.yuck")
 (include "widgets/docker.yuck")
 (include "widgets/systemd.yuck")
+(include "widgets/network.yuck")
 (include "utils.yuck")
 
 (defwindow top_bar
@@ -82,27 +83,6 @@
 	   time_var
   )
 )
-
-
-
-(defpoll interfaceId :interval "60s" "ip route | grep default | head -n1 | awk '{print $5}'")
-(defpoll ipAddr :interval "60s" "ip route | grep default | head -n1 | awk '{print $9}'")
-
-
-(defwidget network []
-    (box :orientation "h" :space-evenly false :halign "center"
-      (label :text "${ipAddr} ${interfaceId}: ${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)}")
-      (label :class {round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 0.1 ?
-        round(EWW_NET[interfaceId].NET_UP / 1000000, 2) > 5 ?
-        "veryuplink" : "uplink" : "noactive"} :text "  "
-      )
-      (label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}")
-      (label :class {round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2) > 0.1 ?
-        round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2) > 10 ?
-        "verydownlink" : "downlink" : "noactive"} :text "  "
-      )
-    )
-  )
 
 (defwidget weather []
   (icon-module :icon "\\ue30d")
