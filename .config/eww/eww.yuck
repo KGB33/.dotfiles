@@ -3,6 +3,7 @@
 (include "widgets/workspaces.yuck")
 (include "widgets/notifications.yuck")
 (include "widgets/docker.yuck")
+(include "widgets/systemd.yuck")
 (include "utils.yuck")
 
 (defwindow top_bar
@@ -30,7 +31,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
-      (docker-icon :active {dockerActive == ""})
+      (docker-icon :active "${matches(running-services, "docker")}") 
       (battery)
       (network)
       (time)

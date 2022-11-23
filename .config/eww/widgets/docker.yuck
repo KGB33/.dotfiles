@@ -1,10 +1,7 @@
 (include "utils.yuck")
-(defpoll dockerActive :interval "1s" "docker ps |& rg Cannot")
 
 (defwidget docker-icon [active]
   (icon-module 
-    ; TODO: make it so dockerActive isn't optimized away
-    ; and can be used for :visible
     :icon ""
     :class "docker-icon"
     :halign "end"
