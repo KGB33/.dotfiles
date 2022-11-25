@@ -36,6 +36,8 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind 
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
 
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Poetry is super dumb 
 # https://github.com/python-poetry/poetry/issues/1917
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
