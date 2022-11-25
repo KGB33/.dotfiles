@@ -18,6 +18,7 @@ local sources = {
 	null_ls.builtins.diagnostics.codespell,
     null_ls.builtins.diagnostics.eslint,
 	null_ls.builtins.diagnostics.luacheck,
+	null_ls.builtins.diagnostics.ruff,
 
 }
 
