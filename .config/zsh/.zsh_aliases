@@ -31,6 +31,10 @@ alias cwd="pwd"
 # Alias for gradle run to prevent gradle output from polluting the console.
 alias gradleRun="gradle run -q --console=plain"
 
+# Aliases for a clean home dir (xdg-ninja)
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
+
 # Display the IP addrs of runnging docker containers 
 function dockerip () {
 for ID in $(docker ps -q | awk '{print $1}'); do

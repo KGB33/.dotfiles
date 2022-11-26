@@ -9,6 +9,14 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state 
 export XDG_CACHE_HOME=~/.cache
 
+export ANSIBLE_HOME="$XDG_CACHE_HOME/ansible"
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export GOPATH="$XDG_DATA_HOME"/go
+export HISTFILE="$XDG_STATE_HOME"/bash/history
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+
 # Task Warrior config location
 #export TASKRC=~/.config/taskwarrior/.taskrc
 #export TASKDATA=~/.config/taskwarrior/.task_data
@@ -36,8 +44,10 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind 
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
 
+# SSH-agent (managed by systemd)
 unset SSH_AGENT_PID
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 # Poetry is super dumb 
 # https://github.com/python-poetry/poetry/issues/1917
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
