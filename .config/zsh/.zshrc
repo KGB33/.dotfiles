@@ -37,8 +37,11 @@ source $ZDOTDIR/plugins/fzf-cheat.zsh
 export PATH="$HOME/.poetry/bin:$PATH" # Poetry
 export PATH="$HOME/.local/bin:$PATH" # Black
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH" # Ruby
-export PATH="$HOME/go/bin:$PATH" # Go packages
-export PATH="$HOME/.cargo/bin:$PATH" # Rust packages
+#export PATH="$HOME/.local/share/go/bin:$PATH" # Go packages
+#export PATH="$HOME/.local/share/cargo/bin:$PATH" # Rust packages
+export PATH="$GOPATH/bin:$PATH" # Go packages
+export PATH="$CARGO_HOME/bin:$PATH" # Rust packages
+
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
