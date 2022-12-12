@@ -13,6 +13,7 @@ require("keybinds")
 
 -- Themes
 vim.cmd([[ colorscheme gruvbox]])
+vim.o.laststatus = 3
 
 -- LSP
 local lsp = require('lsp-zero')
@@ -30,6 +31,14 @@ vim.g.loaded_node_provider = 0;
 
 
 -- Spelling
-vim.o.spell = true
+vim.o.spell = false -- an lsp seems to provide this
 vim.o.spelllang = "en_us"
 vim.o.spelloptions = "camel"
+
+-- Other Options
+vim.o.number = true
+vim.o.relativenumber = true
+
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
