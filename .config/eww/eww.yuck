@@ -15,7 +15,7 @@
                                :height "25px"
                                :anchor "top center")
            :stacking "fg"
-           :focusable true
+           :focusable false
            :exclusive true
   (bar)
 )
