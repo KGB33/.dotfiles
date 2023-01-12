@@ -6,13 +6,21 @@ vim.g.maplocalleader = ","
 require("plugins")
 require("config/treesitter")
 require("config/telescope")
+require("config/lualine")
 
 
 -- Keybinds
 require("keybinds")
 
 -- Themes
-vim.cmd([[ colorscheme gruvbox]])
+vim.o.termguicolors = true
+vim.o.background = "dark"
+vim.o.gruvbox_material_better_performance = 1
+vim.o.gruvbox_material_foreground = "mix"
+vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_transparent_background = 2
+vim.g.gruvbox_material_dim_inactive_windows = 1
+vim.cmd([[colorscheme gruvbox-material]])
 vim.o.laststatus = 3
 vim.o.signcolumn = "yes"
 
@@ -31,7 +39,7 @@ vim.g.loaded_node_provider = 0;
 
 
 -- Spelling
-vim.o.spell = false -- an lsp seems to provide this
+vim.o.spell = true
 vim.o.spelllang = "en_us"
 vim.o.spelloptions = "camel"
 
