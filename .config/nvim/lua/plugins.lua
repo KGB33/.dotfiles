@@ -1,23 +1,21 @@
--- Packer Bootstrap
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+-- Bootstrap Lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-
+require("lazy").setup({
     -- LSP & CMP
-    use { 'VonHeikemen/lsp-zero.nvim',
-        requires = {
+    { 'VonHeikemen/lsp-zero.nvim',
+        dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
@@ -35,46 +33,40 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
-    }
+    },
     -- Tree-Sitter
-    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
     -- Telescope
-    use {
+    {
         "nvim-telescope/telescope.nvim",
-        requires = {
+        dependencies = {
             "nvim-lua/popup.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
         }
-    }
+    },
 
     -- Visuals
-    use { "sainnhe/gruvbox-material" }
-    use { "nvim-lualine/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true },
-    }
-    use {
+    { "sainnhe/gruvbox-material" },
+    { "nvim-lualine/lualine.nvim",
+        dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+    },
+    {
         "narutoxy/silicon.lua",
-        requires = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require('silicon').setup({})
         end
-    }
+    },
 
 
-    use {
+    {
         'phaazon/mind.nvim',
         branch = 'v2',
-        requires = { 'nvim-lua/plenary.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             require 'mind'.setup()
         end
     }
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+})
