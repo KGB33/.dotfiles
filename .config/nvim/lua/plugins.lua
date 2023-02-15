@@ -47,10 +47,13 @@ require("lazy").setup({
         }
     },
 
+    -- Color schems
+    { "sainnhe/gruvbox-material",
+        lazy = false },
     -- Visuals
-    { "sainnhe/gruvbox-material" },
     { "nvim-lualine/lualine.nvim",
         dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+        options = { theme = "gruvbox-material" }
     },
     {
         "narutoxy/silicon.lua",
