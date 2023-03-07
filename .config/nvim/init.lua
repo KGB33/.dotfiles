@@ -11,12 +11,4 @@ require("config.treesitter")
 require("config.telescope")
 require("config.lualine")
 require("config.theme")
-
-
-
--- LSP
-local lsp = require('lsp-zero')
-
-lsp.preset('recommended')
-lsp.setup()
-
+require("config.lsp0")
