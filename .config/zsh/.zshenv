@@ -10,12 +10,15 @@ export XDG_STATE_HOME=~/.local/state
 export XDG_CACHE_HOME=~/.cache
 
 export ANSIBLE_HOME="$XDG_CACHE_HOME/ansible"
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export GOPATH="$XDG_DATA_HOME"/go
-export HISTFILE="$XDG_STATE_HOME"/bash/history
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export GOPATH="$XDG_DATA_HOME/go"
+export HISTFILE="$XDG_STATE_HOME/bash/history"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 
 # Task Warrior config location
 #export TASKRC=~/.config/taskwarrior/.taskrc
