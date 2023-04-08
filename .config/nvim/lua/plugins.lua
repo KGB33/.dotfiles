@@ -62,6 +62,7 @@ require("lazy").setup({
             require('silicon').setup({})
         end
     },
+    { "axieax/typo.nvim" },
 
 
     {
