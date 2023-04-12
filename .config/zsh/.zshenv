@@ -19,6 +19,7 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
 # Task Warrior config location
 #export TASKRC=~/.config/taskwarrior/.taskrc
