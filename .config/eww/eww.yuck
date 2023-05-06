@@ -51,16 +51,16 @@
     :visible "${EWW_BATTERY != ''}"
 	"${EWW_BATTERY['total_avg']}%"
     (icon-module :icon {
-      EWW_BATTERY['BAT1']['status'] == 'Charging' ? '' : 
-      EWW_BATTERY['total_avg'] <= 10 ? "" :
-      EWW_BATTERY['total_avg'] <= 20 ? "" :
-      EWW_BATTERY['total_avg'] <= 30 ? "" :
-      EWW_BATTERY['total_avg'] <= 40 ? "" :
-      EWW_BATTERY['total_avg'] <= 50 ? "" :
-      EWW_BATTERY['total_avg'] <= 60 ? "" :
-      EWW_BATTERY['total_avg'] <= 70 ? "" :
-      EWW_BATTERY['total_avg'] <= 80 ? "" :
-      EWW_BATTERY['total_avg'] <= 90 ? "" : ""
+      EWW_BATTERY['BAT1']['status'] == 'Charging' ? '󰂄' : 
+      EWW_BATTERY['total_avg'] <= 10 ? "󰁺" :
+      EWW_BATTERY['total_avg'] <= 20 ? "󰁻" :
+      EWW_BATTERY['total_avg'] <= 30 ? "󰁼" :
+      EWW_BATTERY['total_avg'] <= 40 ? "󰁽" :
+      EWW_BATTERY['total_avg'] <= 50 ? "󰁾" :
+      EWW_BATTERY['total_avg'] <= 60 ? "󰁿" :
+      EWW_BATTERY['total_avg'] <= 70 ? "󰂀" :
+      EWW_BATTERY['total_avg'] <= 80 ? "󰂁" :
+      EWW_BATTERY['total_avg'] <= 90 ? "󰂂" : "󰁹"
       }
     :class {
       EWW_BATTERY['BAT1']['status'] == 'Charging' ? 'battery-charging' : 
