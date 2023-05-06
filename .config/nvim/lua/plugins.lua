@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- LSP & CMP
-    { 'VonHeikemen/lsp-zero.nvim',
+    {
+        'VonHeikemen/lsp-zero.nvim',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
@@ -36,6 +37,7 @@ require("lazy").setup({
     },
     -- Tree-Sitter
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "IndianBoy42/tree-sitter-just",    build = ":lua require('tree-sitter-just').setup{}" },
 
     -- Telescope
     {
@@ -48,10 +50,13 @@ require("lazy").setup({
     },
 
     -- Color schems
-    { "sainnhe/gruvbox-material",
-        lazy = false },
+    {
+        "sainnhe/gruvbox-material",
+        lazy = false
+    },
     -- Visuals
-    { "nvim-lualine/lualine.nvim",
+    {
+        "nvim-lualine/lualine.nvim",
         dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
         options = { theme = "gruvbox-material" }
     },
