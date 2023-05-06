@@ -48,6 +48,9 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind 
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
 
+# Nix Stuff
+export NIX_BUILD_SHELL="zsh"
+
 # SSH-agent (managed by systemd)
 unset SSH_AGENT_PID
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

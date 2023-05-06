@@ -57,6 +57,12 @@ export GPG_TTY=$(tty)
 
 # ======== Load & Configure 'plugins' ======== 
 
+# Nix stuff
+source $ZDOTDIR/plugins/nix/zsh-nix-shell.zsh
+source $ZDOTDIR/plugins/nix/nix-zsh-completions/nix-zsh-completions.plugin.zsh
+fpath=($ZDOTDIR/plugins/nix/nix-zsh-completions $fpath)
+autoload -U compinit && compinit
+
 # z.sh -- https://github.com/rupa/z
 export _Z_DATA="$ZDOTDIR/plugins/z/z.data"
 . $ZDOTDIR/plugins/z/z.sh
@@ -69,3 +75,5 @@ eval "$(direnv hook zsh)"
 # Adds Syntax highlighting -- Installed via community/zsh-syntax-highlighting
 # Needs to be the last thing sourced to highlight properly
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /home/kgb33/.config/broot/launcher/bash/br
