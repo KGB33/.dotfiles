@@ -28,14 +28,15 @@ alias top="btop"
 # Reboot to windows
 alias gametime="systemctl reboot --boot-loader-entry=auto-windows"
 
-# alias cwd to pwd - Current working dir makes more sense to me than print working dir
-alias cwd="pwd"
-
 # Alias for gradle run to prevent gradle output from polluting the console.
 alias gradleRun="gradle run -q --console=plain"
 
 # Aliases for a clean home dir (xdg-ninja)
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
+# Convert a DOS line ending file to Unix, and vice versa
+alias dos2unix="sed -i 's/$//'" 
+alias unix2dos="sed -i 's/$///'" 
 
 
 # Display the IP addrs of runnging docker containers 
