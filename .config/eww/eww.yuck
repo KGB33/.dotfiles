@@ -5,6 +5,7 @@
 (include "widgets/docker.yuck")
 (include "widgets/systemd.yuck")
 (include "widgets/network.yuck")
+(include "widgets/nixos.yuck")
 (include "utils.yuck")
 
 (defwindow top_bar
@@ -32,6 +33,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
+      (nixosChannel)
       (docker-icon :active "${matches(running-services, "docker")}") 
       (battery)
       (network)
@@ -47,9 +49,9 @@
 (defwidget battery []
   (box
     :halign "end"
-    :spacing "0"
+    :spacing "-15"
     :visible "${EWW_BATTERY != ''}"
-	"${EWW_BATTERY['total_avg']}%"
+	"${round(EWW_BATTERY['total_avg'],1)}%"
     (icon-module :icon {
       EWW_BATTERY['BAT1']['status'] == 'Charging' ? '󰂄' : 
       EWW_BATTERY['total_avg'] <= 10 ? "󰁺" :
