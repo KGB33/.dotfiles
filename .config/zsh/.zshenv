@@ -51,9 +51,9 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/"
 # Nix Stuff
 export NIX_BUILD_SHELL="zsh"
 
-# SSH-agent (managed by systemd)
-unset SSH_AGENT_PID
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# SSH-agent 
+#unset SSH_AGENT_PID
+#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Poetry is super dumb 
 # https://github.com/python-poetry/poetry/issues/1917

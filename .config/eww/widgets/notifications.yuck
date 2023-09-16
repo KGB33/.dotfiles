@@ -9,7 +9,7 @@
 (defwindow notification-menu
   :monitor 0
   :stacking "fg"
-  :focusable true
+  :focusable false
   :geometry (geometry :x "5px"
                       :y "5px"
                       :width "15%"

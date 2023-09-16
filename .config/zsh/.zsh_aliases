@@ -1,15 +1,15 @@
 # Git Dotfiles
-alias .git='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias .git='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Activate python venvs and auto-update pip
 alias venv='. .venv/bin/activate && python -m pip install --upgrade pip'
 
-# Exa
-alias ls="exa -F --group-directories-first --icons"
-alias la="exa -Flbha --group-directories-first --icons"
-alias ll="exa -Flbh --git --group-directories-first --icons"
-alias lt="exa -TF --git-ignore --group-directories-first --icons"
-alias lta="exa -TF --group-directories-first --icons"
+# eza
+alias ls="eza -F --group-directories-first --icons"
+alias la="eza -Flbha --group-directories-first --icons"
+alias ll="eza -Flbh --git --group-directories-first --icons"
+alias lt="eza -TF --git-ignore --group-directories-first --icons"
+alias lta="eza -TF --group-directories-first --icons"
 
 # When SSH breaks, use ssk to copy kitty terminfo over
 # https://sw.kovidgoyal.net/kitty/faq.html
@@ -37,6 +37,9 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 # Convert a DOS line ending file to Unix, and vice versa
 alias dos2unix="sed -i 's/$//'" 
 alias unix2dos="sed -i 's/$///'" 
+
+# Open & fuzzy find obsidian notes
+alias obs='nvim $(fd . --extension md ~/notes/obsidianVault | fzf)'
 
 
 # Display the IP addrs of runnging docker containers 
@@ -69,3 +72,8 @@ function sealSecret() {
     fi
     echo -n $2 | kubectl create secret generic $1 --dry-run=client --from-file=$1=/dev/stdin -o yaml -n $3 | kubeseal -o yaml
 }
+
+# Nixos Stuff
+alias pkg="sudoedit /etc/nixos/packages/default.nix"
+alias update="cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch || cd -" 
+alias nrs="cd /etc/nixos && sudo nixos-rebuild switch || cd -" 

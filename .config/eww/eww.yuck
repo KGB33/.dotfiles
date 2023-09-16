@@ -33,7 +33,8 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
     (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
       (notification-icon)
-      (nixosChannel)
+      ;map(select(.[]) .ahead_by) | max
+      (updates-icon)
       (docker-icon :active "${matches(running-services, "docker")}") 
       (battery)
       (network)
