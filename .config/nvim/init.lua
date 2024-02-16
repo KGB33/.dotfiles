@@ -231,12 +231,18 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+      }
     },
   },
   ltex = {},
+  gopls = {},
+  elixirls = {
+    cmd = { "/run/current-system/sw/bin/elixir-ls" }
+  },
 }
 
 -- Setup neovim lua configuration
@@ -250,7 +256,8 @@ for server_name, _ in pairs(servers) do
   require('lspconfig')[server_name].setup {
     capabilities = capabilities,
     on_attach = on_attach,
-    settings = servers[server_name],
+    settings = servers[server_name]["settings"],
+    cmd = servers[server_name]["cmd"]
   }
 end
 
