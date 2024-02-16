@@ -1,4 +1,3 @@
-function ll --wraps='ls -l' --description 'alias ll ls -l'
-  ls -l $argv
-        
+function ll
+  eza -Flbh --git --group-directories-first --icons $argv
 end
