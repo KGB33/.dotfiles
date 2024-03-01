@@ -1,0 +1,92 @@
+; Add the includes
+
+(include "widgets/workspaces.yuck")
+(include "widgets/notifications.yuck")
+(include "widgets/docker.yuck")
+(include "widgets/systemd.yuck")
+(include "widgets/network.yuck")
+(include "widgets/nixos.yuck")
+(include "utils.yuck")
+
+(defwindow top_bar
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "0px"
+                               :width "100%"
+                               :height "25px"
+                               :anchor "top center")
+           :stacking "fg"
+           :focusable false
+           :exclusive true
+  (bar)
+)
+
+(defwidget bar []
+  (centerbox 
+    (workspaces) 
+    (activewindow-label)
+    (sidestuff)
+  )
+)
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
+    (box :orientation "h" :spacing 0 :space-evenly false :halign "end"
+      (notification-icon)
+      ;map(select(.[]) .ahead_by) | max
+      (updates-icon)
+      (docker-icon :active "${matches(running-services, "docker")}") 
+      (battery)
+      (network)
+      (time)
+      (weather)
+    )
+  )  
+)
+
+
+  
+; === Widgets ===
+(defwidget battery []
+  (box
+    :halign "end"
+    :spacing "-15"
+    :visible "${EWW_BATTERY != ''}"
+	"${round(EWW_BATTERY['total_avg'],1)}%"
+    (icon-module :icon {
+      EWW_BATTERY['BAT1']['status'] == 'Charging' ? '󰂄' : 
+      EWW_BATTERY['total_avg'] <= 10 ? "󰁺" :
+      EWW_BATTERY['total_avg'] <= 20 ? "󰁻" :
+      EWW_BATTERY['total_avg'] <= 30 ? "󰁼" :
+      EWW_BATTERY['total_avg'] <= 40 ? "󰁽" :
+      EWW_BATTERY['total_avg'] <= 50 ? "󰁾" :
+      EWW_BATTERY['total_avg'] <= 60 ? "󰁿" :
+      EWW_BATTERY['total_avg'] <= 70 ? "󰂀" :
+      EWW_BATTERY['total_avg'] <= 80 ? "󰂁" :
+      EWW_BATTERY['total_avg'] <= 90 ? "󰂂" : "󰁹"
+      }
+    :class {
+      EWW_BATTERY['BAT1']['status'] == 'Charging' ? 'battery-charging' : 
+      EWW_BATTERY['total_avg'] <= 10 ? "battery-critical" :
+      EWW_BATTERY['total_avg'] <= 30 ? "battery-low" :
+      EWW_BATTERY['total_avg'] <= 80 ? "battery-high" : "battery-full"
+      }
+    )
+  )  
+)
+
+(defpoll time_var 
+  :interval "1s"
+  `date +"%a %b %d, %l:%M"`
+)
+
+(defwidget time []
+  (box :orientation "horizontal"
+       :halign "center"
+	   time_var
+  )
+)
+
+(defwidget weather []
+  (icon-module :icon "\\ue30d")
+)

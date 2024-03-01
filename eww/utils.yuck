@@ -1,0 +1,12 @@
+(defwidget icon-module [icon ?class ?visible]
+  (box :class "${class} icon-module"
+    :orientation "l"
+    :halign "end"
+    :width 0
+    :spacing 0
+    :space-evenly false
+    :visible {visible ?: true} ; because the argument is optional
+    (label :class "icon-module__icon" :text "${icon}")
+    (children)
+  )
+)
