@@ -179,6 +179,14 @@
     };
   };
 
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "everforest-dark-hard";
+      truecolor = true;
+    };
+  };
+
   programs.eza = {
     enable = true;
     icons = true;
