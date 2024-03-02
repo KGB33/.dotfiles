@@ -19,11 +19,17 @@
   # environment.
   home.packages = with pkgs; [
     brightnessctl
+    hypridle
+    hyprlock
+    xdg-desktop-portal-hyprland
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/hypr/hypridle.conf".source = hypr/hypridle.conf;
+    ".config/hypr/hyprlock.conf".source = hypr/hyprlock.conf;
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -92,6 +98,7 @@
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
           "$mod, R, exec, rofi -show run"
+	  "$mod, L, exec, hyprlock"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           # ", XF86AudioPlay,"
           # ", XF86RFKill, " # Airplane mode
