@@ -56,6 +56,10 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  programs.rofi = {
+    enable = true;
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
