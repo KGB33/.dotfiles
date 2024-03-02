@@ -18,6 +18,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    brightnessctl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -82,8 +83,8 @@
         # ", XF86AudioNext,"
         # ", XF86AudioPrev,"
 
-        # ", XF86MonBrightnessUp, "
-        # ", XF86MonBrightnessUp, "
+        ", XF86MonBrightnessUp, exec, brightnessctl s +5%"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
       ];
       bind =
         [
