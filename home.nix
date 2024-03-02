@@ -75,11 +75,26 @@
         rounding = 5;
       };
       "$mod" = "SUPER";
+      binde = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+
+        # ", XF86AudioNext,"
+        # ", XF86AudioPrev,"
+
+        # ", XF86MonBrightnessUp, "
+        # ", XF86MonBrightnessUp, "
+      ];
       bind =
         [
           "$mod, M, exit"
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
+          "$mod, R, exec, rofi -show run"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          # ", XF86AudioPlay,"
+          # ", XF86RFKill, " # Airplane mode
+          # ", XF86Tools, " # Framework Icon
         ]
         ++ (
           # workspaces
