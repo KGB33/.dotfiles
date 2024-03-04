@@ -69,7 +69,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    xwayland.enable = false;
     settings = {
       exec-once = [
         "eww open top_bar"
