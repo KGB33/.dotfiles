@@ -338,6 +338,16 @@
     enableFishIntegration = true;
     settings = {
       modal = true;
+      verbs = [
+        {
+          invocation = "edit";
+          key = "enter";
+          shortcut = "e";
+          execution = "nvim +{line} {file}";
+          apply_to = "text_file";
+          leave_broot = true;
+        }
+      ];
     };
   };
 
