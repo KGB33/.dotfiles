@@ -98,7 +98,7 @@
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
           "$mod, R, exec, rofi -show run"
-	  "$mod, L, exec, hyprlock"
+          "$mod, L, exec, hyprlock"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           # ", XF86AudioPlay,"
           # ", XF86RFKill, " # Airplane mode
