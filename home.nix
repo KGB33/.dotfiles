@@ -333,6 +333,14 @@
 
   };
 
+  programs.broot = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      modal = true;
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
