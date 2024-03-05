@@ -229,6 +229,10 @@
     functions = {
       fish_command_not_found = ''echo "Command `$argv` not found."'';
       ll_ = ''eza -F -lbh $argv'';
+      obs = ''command nvim (fd . --extention md ~/notes/obsidianVault | fzf)'';
+      venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
+      update = ''${builtins.readFile ./fish/functions/update.fish}'';
+      dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
     };
     interactiveShellInit = ''
       fish_vi_key_bindings
