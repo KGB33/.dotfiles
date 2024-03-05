@@ -1,5 +1,4 @@
-;(defpoll channelUpdate :interval "15m" "rg -c $(curl -s https://api.github.com/repos/nixos/nixpkgs/branches/nixos-unstable | jq '.commit.sha') /etc/nixos/flake.lock")
-(defpoll channelUpdates :interval "15m" "nasty updates nix")
+(defpoll channelUpdates :interval "15m" "nasty updates nix -l ~/.config/home-manager/flake.lock")
 
 
 (defwidget updates-icon []
@@ -11,7 +10,7 @@
 )
 
 (defwindow updates-menu
-  :montior 0
+  ;:montior ["<primary>", 1, 0]
   :stacking "fg"
   :focusable false
   :geometry (geometry :x "5px"
