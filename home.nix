@@ -63,11 +63,9 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  programs.rofi = {
+  programs.fuzzel = {
     enable = true;
-    package = pkgs.rofi-wayland;
-    theme = "gruvbox-dark-soft";
-    font = "FiraCode Nerd Font";
+    # settings = {};
   };
 
   wayland.windowManager.hyprland = {
@@ -100,7 +98,7 @@
           "$mod, M, exit"
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
-          "$mod, R, exec, rofi -show run"
+          "$mod, R, exec, fuzzel"
           "$mod, L, exec, hyprlock"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           # ", XF86AudioPlay,"
