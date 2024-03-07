@@ -320,7 +320,7 @@
     enable = true;
     shellIntegration.enableFishIntegration = true;
     font = {
-      name = "FiraCode";
+      name = "FiraCode Nerd Font";
       size = 10;
     };
     theme = "Everforest Dark Medium";
