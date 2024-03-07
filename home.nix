@@ -65,6 +65,9 @@
 
   programs.rofi = {
     enable = true;
+    package = pkgs.rofi-wayland;
+    theme = "gruvbox-dark-soft";
+    font = "FiraCode Nerd Font";
   };
 
   wayland.windowManager.hyprland = {
