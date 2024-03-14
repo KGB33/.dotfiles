@@ -65,6 +65,7 @@ local servers = {
       }
     },
   },
+  gleam = {},
   gopls = {},
   elixirls = {
     cmd = { "/run/current-system/sw/bin/elixir-ls" }

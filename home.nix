@@ -295,12 +295,16 @@
           plugin = (nvim-treesitter.withPlugins (p: [
             p.tree-sitter-json
             p.tree-sitter-lua
+            p.tree-sitter-gleam
+            p.tree-sitter-markdown
+            p.tree-sitter-markdown-inline
             p.tree-sitter-nix
             p.tree-sitter-python
             p.tree-sitter-vim
             p.tree-sitter-yaml
             p.tree-sitter-yuck
           ]));
+	  config = toLuaFile ./nvim/plugins/treesitter.lua;
         }
         nvim-treesitter-parsers.yuck
         {
