@@ -70,7 +70,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = false;
+    xwayland.enable = true; # For steam
     settings = {
       exec-once = [
         "eww open top_bar"
