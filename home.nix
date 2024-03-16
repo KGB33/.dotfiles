@@ -170,7 +170,7 @@
   services.gpg-agent = {
     enable = true;
     enableFishIntegration = true;
-    pinentryFlavor = "curses";
+    pinentryPackage = pkgs.pinentry-tty;
   };
 
   programs.git = {
