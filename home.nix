@@ -293,6 +293,7 @@
         }
         {
           plugin = (nvim-treesitter.withPlugins (p: [
+            p.tree-sitter-dockerfile
             p.tree-sitter-json
             p.tree-sitter-lua
             p.tree-sitter-gleam
