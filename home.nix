@@ -21,6 +21,7 @@
     brightnessctl
     hypridle
     hyprlock
+    hyprpaper
     xdg-desktop-portal-hyprland
   ];
 
@@ -29,6 +30,7 @@
   home.file = {
     ".config/hypr/hypridle.conf".source = hypr/hypridle.conf;
     ".config/hypr/hyprlock.conf".source = hypr/hyprlock.conf;
+    ".config/hypr/hyprpaper.conf".source = hypr/hyprpaper.conf;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -178,6 +180,10 @@
     userEmail = "keltonbassingthwaite@gmail.com";
     userName = "Kelton Bassingthwaite";
 
+    lfs = {
+      enable = true;
+    };
+
     delta = {
       enable = true;
       options = {
@@ -305,7 +311,7 @@
             p.tree-sitter-yaml
             p.tree-sitter-yuck
           ]));
-	  config = toLuaFile ./nvim/plugins/treesitter.lua;
+          config = toLuaFile ./nvim/plugins/treesitter.lua;
         }
         nvim-treesitter-parsers.yuck
         {
