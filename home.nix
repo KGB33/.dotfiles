@@ -76,6 +76,7 @@
     settings = {
       exec-once = [
         "eww open top_bar"
+        "hyprpaper"
       ];
       monitor = [
         "eDP-2,preferred,auto,1"
