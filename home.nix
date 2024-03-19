@@ -342,7 +342,6 @@
 
   programs.tmux = {
     enable = true;
-    baseIndex = 1;
     escapeTime = 300;
     terminal = "screen-256color";
     extraConfig = ''
