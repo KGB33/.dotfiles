@@ -185,15 +185,20 @@
       enable = true;
     };
 
-    delta = {
+    difftastic = {
       enable = true;
-      options = {
-        navigate = true;
-        light = false;
-        syntax-theme = "gruvbox-dark";
-        line-numbers = true;
-      };
+      display = "inline";
     };
+
+    # delta = {
+    #   enable = true;
+    #   options = {
+    #     navigate = true;
+    #     light = false;
+    #     syntax-theme = "gruvbox-dark";
+    #     line-numbers = true;
+    #   };
+    # };
 
     signing = {
       key = "B9192CEACB44520B";
