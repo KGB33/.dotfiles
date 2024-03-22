@@ -23,6 +23,7 @@
     hyprlock
     hyprpaper
     xdg-desktop-portal-hyprland
+    uv
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -243,6 +244,7 @@
       fish_command_not_found = ''echo "Command `$argv` not found."'';
       ll_ = ''eza -F -lbh $argv'';
       obs = ''command nvim (fd . --extention md ~/notes/obsidianVault | fzf)'';
+      pip = ''uv pip $aruv'';
       venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
       update = ''${builtins.readFile ./fish/functions/update.fish}'';
       dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
