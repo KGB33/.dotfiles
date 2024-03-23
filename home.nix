@@ -248,7 +248,6 @@
       fish_command_not_found = ''echo "Command `$argv` not found."'';
       ll_ = ''eza -F -lbh $argv'';
       obs = ''command nvim (fd . --extention md ~/notes/obsidianVault | fzf)'';
-      pip = ''uv pip $aruv'';
       venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
       update = ''${builtins.readFile ./fish/functions/update.fish}'';
       dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
