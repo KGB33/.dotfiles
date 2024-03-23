@@ -24,6 +24,8 @@
     hyprpaper
     xdg-desktop-portal-hyprland
     uv
+    grim
+    slurp
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -105,6 +107,8 @@
           "$mod, R, exec, fuzzel"
           "$mod, L, exec, hyprlock"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
+          ''$mod, Print, exec, grim -g "$(slurp -d)"''
           # ", XF86AudioPlay,"
           # ", XF86RFKill, " # Airplane mode
           # ", XF86Tools, " # Framework Icon
