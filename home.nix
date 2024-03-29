@@ -251,6 +251,7 @@
       venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
       update = ''${builtins.readFile ./fish/functions/update.fish}'';
       dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
+      sealSecret = ''${builtins.readFile ./fish/functions/sealSecret.fish}'';
     };
     interactiveShellInit = ''
       fish_vi_key_bindings
