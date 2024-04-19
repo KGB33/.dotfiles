@@ -353,8 +353,11 @@
         gopls
         haskell-language-server
         lua-language-server
+        ltex-ls
+        markdown-oxide
         nixd
         nodePackages.pyright
+        ruff
         rust-analyzer
       ];
 

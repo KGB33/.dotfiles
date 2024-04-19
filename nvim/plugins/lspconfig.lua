@@ -65,12 +65,16 @@ local servers = {
       }
     },
   },
+  ltex = {},
   gleam = {},
   gopls = {},
+  hls = {}, -- Haskell
   elixirls = {
     cmd = { "/run/current-system/sw/bin/elixir-ls" }
   },
   nixd = {},
+  markdown_oxide = {},
+  ruff = {},
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
