@@ -19,6 +19,9 @@
   # environment.
   home.packages = with pkgs; [
     brightnessctl
+    cabal-install
+    ghc
+    grim
     hypridle
     hyprlock
     hyprpaper
@@ -387,6 +390,8 @@
             p.tree-sitter-markdown-inline
             p.tree-sitter-nix
             p.tree-sitter-python
+            p.tree-sitter-haskell
+            p.tree-sitter-rust
             p.tree-sitter-vim
             p.tree-sitter-yaml
             p.tree-sitter-yuck
