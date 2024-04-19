@@ -25,10 +25,10 @@
     hypridle
     hyprlock
     hyprpaper
-    xdg-desktop-portal-hyprland
-    uv
-    grim
+    nh
     slurp
+    uv
+    xdg-desktop-portal-hyprland
   ] ++ [ dagPkgs.dagger ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -316,7 +316,8 @@
       ll_ = ''eza -F -lbh $argv'';
       obs = ''command nvim (fd . --extention md ~/notes/obsidianVault | fzf)'';
       venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
-      update = ''${builtins.readFile ./fish/functions/update.fish}'';
+      #update = ''${builtins.readFile ./fish/functions/update.fish}'';
+      update = ''nh os switch /etc/nixos && nh home switch ~/.config/home-manager/'';
       dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
       sealSecret = ''${builtins.readFile ./fish/functions/sealSecret.fish}'';
     };
