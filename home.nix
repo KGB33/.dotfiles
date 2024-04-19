@@ -82,8 +82,17 @@
       declare-mode = [ "Display" ];
       map = {
         normal = {
+          "-repeat None XF86AudioRaiseVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+'";
+          "-repeat None XF86AudioLowerVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-'";
+          "-repeat None XF86MonBrightnessUp" = "spawn 'brightnessctl s +5%'";
+          "-repeat None XF86MonBrightnessDown" = "spawn 'brightnessctl s 5%-'";
+          "None XF86AudioMute" = "spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'";
+
           # Spawns
           "Super R" = "spawn fuzzel";
+          "Super C" = "close";
+          "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
+
           # Meta
           "Super M" = "exit";
           "Super D" = "enter-mode Display";
@@ -114,8 +123,10 @@
             str = builtins.toString;
           in
           builtins.listToAttrs (
-            builtins.genList (x: { name = "Super ${str x}"; value = "set-focused-tags ${str (pow x)}"; }) 9
-          )
+            builtins.concatLists [
+              (builtins.genList (x: { name = "Super ${str x}"; value = "set-focused-tags ${str (pow x)}"; }) 9)
+              (builtins.genList (x: { name = "Super+Shift ${str x}"; value = "set-view-tags ${str (pow x)}"; }) 9)
+            ])
         );
         Display = {
           "None Escape" = "enter-mode normal";
