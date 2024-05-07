@@ -1,4 +1,4 @@
-{ config, pkgs, dagPkgs, ... }:
+{ config, pkgs, lib, dagPkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -451,8 +451,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      skin = builtins.readFile ./broot/dark-gruvbox.json;
-      modal = true;
+      imports = lib.mkForce [ "skins/dark-gruvbox.hjson" ];
       verbs = [
         {
           invocation = "edit";
