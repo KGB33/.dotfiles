@@ -451,6 +451,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
+      skin = builtins.readFile ./broot/dark-gruvbox.json;
       modal = true;
       verbs = [
         {
