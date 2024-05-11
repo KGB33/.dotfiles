@@ -395,7 +395,6 @@
             p.tree-sitter-dockerfile
             p.tree-sitter-json
             p.tree-sitter-lua
-            p.tree-sitter-gleam
             p.tree-sitter-hcl
             p.tree-sitter-markdown
             p.tree-sitter-markdown-inline
