@@ -151,6 +151,7 @@
       default-layout = "rivertile";
     };
   };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true; # For steam
