@@ -1,4 +1,4 @@
-{ config, pkgs, lib, dagPkgs, ... }:
+{ config, pkgs, lib, dagPkgs, hmm', ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -29,7 +29,7 @@
     slurp
     uv
     xdg-desktop-portal-hyprland
-  ] ++ [ dagPkgs.dagger ];
+  ] ++ [ dagPkgs.dagger hmm' ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

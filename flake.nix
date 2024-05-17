@@ -12,13 +12,18 @@
       url = "github:dagger/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hmm = {
+      url = "github:KGB33/hmm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, dagger, ... }:
+  outputs = { nixpkgs, home-manager, dagger, hmm, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       dagPkgs = dagger.packages.${system};
+      hmm' = hmm.packages.${system}.hmm;
     in
     {
       homeConfigurations."kgb33" = home-manager.lib.homeManagerConfiguration {
@@ -32,7 +37,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit dagPkgs; };
+        extraSpecialArgs = { inherit dagPkgs hmm'; };
       };
     };
 }
