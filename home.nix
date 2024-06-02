@@ -26,6 +26,7 @@
     # hyprlock
     # hyprpaper
     nh
+    prusa-slicer
     slurp
     uv
     xdg-desktop-portal-hyprland
