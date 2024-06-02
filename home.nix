@@ -378,6 +378,7 @@
         fzf
 
         # Lsp
+        csharp-ls
         elixir-ls
         gopls
         haskell-language-server
@@ -407,6 +408,7 @@
         }
         {
           plugin = (nvim-treesitter.withPlugins (p: [
+            p.tree-sitter-c-sharp
             p.tree-sitter-dockerfile
             p.tree-sitter-json
             p.tree-sitter-lua
