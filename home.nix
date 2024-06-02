@@ -29,7 +29,8 @@
     prusa-slicer
     slurp
     uv
-    xdg-desktop-portal-hyprland
+    noto-fonts-color-emoji
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ] ++ [ dagPkgs.dagger hmm' ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -51,8 +52,19 @@
     # '';
   };
 
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
+
   xdg = {
     enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    };
   };
 
   home.sessionVariables = {
@@ -79,6 +91,7 @@
 
   wayland.windowManager.river = {
     enable = true;
+    systemd.enable = true;
     settings = {
       declare-mode = [ "Display" ];
       map = {
