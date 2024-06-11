@@ -386,7 +386,7 @@
         ltex-ls
         markdown-oxide
         nixd
-        nodePackages.pyright
+        basedpyright
         ruff
         rust-analyzer
 
@@ -444,6 +444,8 @@
           config = toLuaFile ./nvim/plugins/dap.lua;
         }
         telescope-dap-nvim
+        nvim-dap-ui
+        nvim-nio
       ];
 
       extraLuaConfig = ''
