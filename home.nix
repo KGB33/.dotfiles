@@ -389,6 +389,9 @@
         nodePackages.pyright
         ruff
         rust-analyzer
+
+        # DAP
+        netcoredbg # C#
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -434,6 +437,13 @@
           plugin = telescope-nvim;
           config = toLuaFile ./nvim/plugins/telescope.lua;
         }
+
+        # DAP
+        {
+          plugin = nvim-dap;
+          config = toLuaFile ./nvim/plugins/dap.lua;
+        }
+        telescope-dap-nvim
       ];
 
       extraLuaConfig = ''
