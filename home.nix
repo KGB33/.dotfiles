@@ -8,6 +8,7 @@
 
   imports = [
     ./wezterm/wezterm.nix
+    ./nushell/nushell.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -355,6 +356,7 @@
             p.tree-sitter-markdown
             p.tree-sitter-markdown-inline
             p.tree-sitter-nix
+            p.tree-sitter-nu
             p.tree-sitter-python
             p.tree-sitter-haskell
             p.tree-sitter-rust
