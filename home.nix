@@ -9,6 +9,7 @@
   imports = [
     ./wezterm/wezterm.nix
     ./nushell/nushell.nix
+    ./sway/sway.nix
   ];
 
   # This value determines the Home Manager release that your configuration is

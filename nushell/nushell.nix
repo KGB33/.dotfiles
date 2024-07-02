@@ -4,6 +4,7 @@
     enable = true;
     configFile.source = ./config.nu;
     loginFile.source = ./login.nu;
+    envFile.source = ./env.nu;
     environmentVariables = builtins.mapAttrs
       (
         name: value: "\"${builtins.toString value}\""
