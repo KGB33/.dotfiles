@@ -68,22 +68,30 @@
     };
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    GNUPGHOME = "${config.xdg.configHome}/gnupg";
+  home.sessionVariables =
+    let
+      cfg = config.xdg.configHome;
+      data = config.xdg.dataHome;
+    in
+    {
+      EDITOR = "nvim";
+      GNUPGHOME = "${cfg}/gnupg";
 
-    # Docker
-    DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+      # Docker
+      DOCKER_CONFIG = "${cfg}/docker";
 
-    # Go
-    GOPATH = "${config.xdg.dataHome}/go";
+      # Go
+      GOPATH = "${data}/go";
 
-    # Rust
-    CARGO_HOME = "${config.xdg.dataHome}/cargo";
-    RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+      # Rust
+      CARGO_HOME = "${data}/cargo";
+      RUSTUP_HOME = "${data}/rustup";
 
-    NIXOS_OZONE_WL = "1";
-  };
+      NIXOS_OZONE_WL = "1";
+
+      # Misc XDG nonsense
+      OPAMROOT = "${data}/opam"; # oCaml pkgs manager
+    };
 
   programs.fuzzel = {
     enable = true;
