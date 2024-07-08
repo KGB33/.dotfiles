@@ -22,11 +22,10 @@
 )
 
 (defwidget bar []
-  (centerbox 
-    (workspaces) 
-    (activewindow-label)
-    (sidestuff)
-  )
+    (box
+        (workspaces) 
+        (sidestuff)
+    )
 )
 
 (defwidget sidestuff []

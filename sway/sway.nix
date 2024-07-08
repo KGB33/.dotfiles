@@ -19,7 +19,7 @@
         };
       bars = [
         {
-          command = "eww open top_bar";
+          command = "eww daemon && eww open top_bar";
         }
       ];
     };
