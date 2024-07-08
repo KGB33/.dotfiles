@@ -1,4 +1,4 @@
-{ config, pkgs, lib, dagPkgs, hmm', ... }:
+{ config, pkgs, lib, dagPkgs, hmm', nasty', ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -43,7 +43,7 @@
     noto-fonts-color-emoji
     obsidian
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ] ++ [ dagPkgs.dagger hmm' ];
+  ] ++ [ dagPkgs.dagger hmm' nasty' ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
