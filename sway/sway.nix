@@ -17,11 +17,15 @@
         lib.mkOptionDefault {
           "${mod}+r" = "exec fuzzel";
         };
-      bars = [
+      startup = [
         {
-          command = "eww daemon && eww open top_bar";
+          command = "eww daemon";
+        }
+        {
+          command = "eww open top_bar";
         }
       ];
+      bars = [];
     };
   };
 }
