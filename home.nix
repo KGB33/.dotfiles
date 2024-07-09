@@ -42,6 +42,7 @@
     uv
     noto-fonts-color-emoji
     obsidian
+    xdg-utils
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ] ++ [ dagPkgs.dagger hmm' nasty' ];
 
