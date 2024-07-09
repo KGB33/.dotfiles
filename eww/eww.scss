@@ -31,7 +31,7 @@
 }
 
 // ##### NixOS Icon #####
-.channel-update {
+.nixos-icon {
 	color: $lightblue;
 }
  
@@ -50,6 +50,12 @@
 }
 .notification-2 {
 	border-color: $lightred;
+}
+
+// ##### Nixos updates #####
+.updates-menu {
+	background-color: $background;
+	border-radius: 2px;
 }
 
 // ##### Battery ######

@@ -5,7 +5,10 @@
   (button
       :visible {jq(channelUpdates, "map(select(.[]) .ahead_by) | max") != 0}
       :onclick "eww open --screen 0 --toggle updates-menu"
-    (icon-module :icon "")
+    (icon-module
+      :icon ""
+      :class "nixos-icon"
+    )
   )
 )
 
