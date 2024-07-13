@@ -34,7 +34,7 @@
     ghc
     grim
     # hypridle
-    # hyprlock
+    hyprlock
     # hyprpaper
     nh
     prusa-slicer
