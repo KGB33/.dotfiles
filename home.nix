@@ -333,7 +333,7 @@
         ltex-ls
         markdown-oxide
         nixd
-        basedpyright
+        pyright
         ruff
         rust-analyzer
 
