@@ -61,3 +61,7 @@ def "upgrade home" [] {
     nh home switch ~/.config/home-manager/
     dexit
 }
+
+def "obs" [] {
+    nvim (fd . --extension md ~/Notes/ | fzf)
+}

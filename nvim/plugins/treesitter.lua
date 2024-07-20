@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- Make sure only Nix installs parsers.
-  ensure_installed = {},
+  ensure_installed = { },
   sync_install = false,
   auto_install = false,
   ignore_install = { "all" },

@@ -374,13 +374,14 @@
             p.tree-sitter-yaml
             p.tree-sitter-yuck
           ]));
-          config = toLuaFile ./nvim/plugins/treesitter.lua;
+          config = (toLuaFile ./nvim/plugins/treesitter.lua);
         }
         nvim-treesitter-parsers.yuck
         {
           plugin = everforest;
           config = toLuaFile ./nvim/plugins/everforest.lua;
         }
+        nvim-treesitter-parsers.vimdoc
         {
           plugin = telescope-nvim;
           config = toLuaFile ./nvim/plugins/telescope.lua;
@@ -398,6 +399,9 @@
 
       extraLuaConfig = ''
         ${builtins.readFile ./nvim/options.lua}
+        vim.treesitter.language.add("nu", {
+            path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
+        })
       '';
     };
 
@@ -447,3 +451,5 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
+
+
