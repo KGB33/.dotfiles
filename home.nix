@@ -31,11 +31,11 @@
   home.packages = with pkgs; [
     brightnessctl
     cabal-install
+    fd
+    fzf
     ghc
     grim
-    # hypridle
     hyprlock
-    # hyprpaper
     nh
     prusa-slicer
     slurp
@@ -186,6 +186,10 @@
     enableFishIntegration = true;
   };
 
+  programs.bat = {
+    enable = true;
+  };
+
   programs.direnv = {
     enable = true;
   };
@@ -287,7 +291,7 @@
     functions = {
       fish_command_not_found = ''echo "Command `$argv` not found."'';
       ll_ = ''eza -F -lbh $argv'';
-      obs = ''command nvim (fd . --extention md ~/notes/obsidianVault | fzf)'';
+      obs = ''command nvim (${pkgs.fd} . --extention md ~/notes/obsidianVault | ${pkgs.fzf})'';
       venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
       update = ''${builtins.readFile ./fish/functions/update.fish}'';
       dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
