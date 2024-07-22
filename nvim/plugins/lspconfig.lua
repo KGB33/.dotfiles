@@ -73,7 +73,15 @@ local servers = {
     elixirls = {
         cmd = { "/run/current-system/sw/bin/elixir-ls" }
     },
-    nixd = {},
+    nixd = {
+        settings = {
+            nixd = {
+                formatting = {
+                    command = { "alejandra" },
+                }
+            }
+        }
+    },
     markdown_oxide = {},
     ruff = {},
 }

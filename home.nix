@@ -1,6 +1,12 @@
-{ config, pkgs, lib, dagPkgs, hmm', nasty', ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  dagPkgs,
+  hmm',
+  nasty',
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "kgb33";
@@ -28,23 +34,28 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    brightnessctl
-    cabal-install
-    fd
-    fzf
-    ghc
-    grim
-    hyprlock
-    nh
-    prusa-slicer
-    slurp
-    uv
-    noto-fonts-color-emoji
-    obsidian
-    xdg-utils
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ] ++ [ dagPkgs.dagger hmm' nasty' ];
+  home.packages = with pkgs;
+    [
+      alejandra # Nix formatter
+      brightnessctl
+      cabal-install
+      fd
+      fzf
+      ghc
+      grim
+      hyprlock
+      impala
+      nh
+      prusa-slicer
+      slurp
+      uv
+      noto-fonts-color-emoji
+      obsidian
+      ripgrep
+      xdg-utils
+      (nerdfonts.override {fonts = ["FiraCode"];})
+    ]
+    ++ [dagPkgs.dagger hmm' nasty'];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -57,7 +68,7 @@
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -65,34 +76,32 @@
     enable = true;
     portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+      extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
   };
 
-  home.sessionVariables =
-    let
-      cfg = config.xdg.configHome;
-      data = config.xdg.dataHome;
-    in
-    {
-      EDITOR = "nvim";
-      GNUPGHOME = "${cfg}/gnupg";
+  home.sessionVariables = let
+    cfg = config.xdg.configHome;
+    data = config.xdg.dataHome;
+  in {
+    EDITOR = "nvim";
+    GNUPGHOME = "${cfg}/gnupg";
 
-      # Docker
-      DOCKER_CONFIG = "${cfg}/docker";
+    # Docker
+    DOCKER_CONFIG = "${cfg}/docker";
 
-      # Go
-      GOPATH = "${data}/go";
+    # Go
+    GOPATH = "${data}/go";
 
-      # Rust
-      CARGO_HOME = "${data}/cargo";
-      RUSTUP_HOME = "${data}/rustup";
+    # Rust
+    CARGO_HOME = "${data}/cargo";
+    RUSTUP_HOME = "${data}/rustup";
 
-      NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
 
-      # Misc XDG nonsense
-      OPAMROOT = "${data}/opam"; # oCaml pkgs manager
-    };
+    # Misc XDG nonsense
+    OPAMROOT = "${data}/opam"; # oCaml pkgs manager
+  };
 
   programs.fuzzel = {
     enable = true;
@@ -103,55 +112,66 @@
     enable = true;
     systemd.enable = true;
     settings = {
-      declare-mode = [ "Display" ];
+      declare-mode = ["Display"];
       map = {
-        normal = {
-          "-repeat None XF86AudioRaiseVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+'";
-          "-repeat None XF86AudioLowerVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-'";
-          "-repeat None XF86MonBrightnessUp" = "spawn 'brightnessctl s +5%'";
-          "-repeat None XF86MonBrightnessDown" = "spawn 'brightnessctl s 5%-'";
-          "None XF86AudioMute" = "spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'";
+        normal =
+          {
+            "-repeat None XF86AudioRaiseVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+'";
+            "-repeat None XF86AudioLowerVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-'";
+            "-repeat None XF86MonBrightnessUp" = "spawn 'brightnessctl s +5%'";
+            "-repeat None XF86MonBrightnessDown" = "spawn 'brightnessctl s 5%-'";
+            "None XF86AudioMute" = "spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'";
 
-          # Spawns
-          "Super R" = "spawn fuzzel";
-          "Super C" = "close";
-          "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
+            # Spawns
+            "Super R" = "spawn fuzzel";
+            "Super C" = "close";
+            "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
 
-          # Meta
-          "Super M" = "exit";
-          "Super D" = "enter-mode Display";
+            # Meta
+            "Super M" = "exit";
+            "Super D" = "enter-mode Display";
 
-          # Window Focus
-          "Super H" = "focus-view left";
-          "Super J" = "focus-view down";
-          "Super K" = "focus-view up";
-          "Super L" = "focus-view right";
-          "Super N" = "focus-view next";
-          "Super P" = "focus-view previous";
+            # Window Focus
+            "Super H" = "focus-view left";
+            "Super J" = "focus-view down";
+            "Super K" = "focus-view up";
+            "Super L" = "focus-view right";
+            "Super N" = "focus-view next";
+            "Super P" = "focus-view previous";
 
-          # Window Movement
-          "Super+Shift H" = "swap left";
-          "Super+Shift J" = "swap down";
-          "Super+Shift K" = "swap up";
-          "Super+Shift L" = "swap right";
-          "Super+Shift N" = "swap next";
-          "Super+Shift P" = "swap previous";
-          "Super Z" = "zoom";
-
-        } // (
-          # Tags
-          let
-            pow = exp:
-              if exp == 0 then 1
-              else 2 * pow (exp - 1);
-            str = builtins.toString;
-          in
-          builtins.listToAttrs (
-            builtins.concatLists [
-              (builtins.genList (x: { name = "Super ${str x}"; value = "set-focused-tags ${str (pow x)}"; }) 9)
-              (builtins.genList (x: { name = "Super+Shift ${str x}"; value = "set-view-tags ${str (pow x)}"; }) 9)
-            ])
-        );
+            # Window Movement
+            "Super+Shift H" = "swap left";
+            "Super+Shift J" = "swap down";
+            "Super+Shift K" = "swap up";
+            "Super+Shift L" = "swap right";
+            "Super+Shift N" = "swap next";
+            "Super+Shift P" = "swap previous";
+            "Super Z" = "zoom";
+          }
+          // (
+            # Tags
+            let
+              pow = exp:
+                if exp == 0
+                then 1
+                else 2 * pow (exp - 1);
+              str = builtins.toString;
+            in
+              builtins.listToAttrs (
+                builtins.concatLists [
+                  (builtins.genList (x: {
+                      name = "Super ${str x}";
+                      value = "set-focused-tags ${str (pow x)}";
+                    })
+                    9)
+                  (builtins.genList (x: {
+                      name = "Super+Shift ${str x}";
+                      value = "set-view-tags ${str (pow x)}";
+                    })
+                    9)
+                ]
+              )
+          );
         Display = {
           "None Escape" = "enter-mode normal";
           # Move
@@ -171,7 +191,7 @@
           "Super+Shift  L" = "resize horizontal  100";
         };
       };
-      spawn = [ "rivertile" ];
+      spawn = ["rivertile"];
       default-layout = "rivertile";
     };
   };
@@ -310,104 +330,101 @@
         river
       end
     '';
-
   };
 
-  programs.neovim =
-    let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in
-    {
-      enable = true;
+  programs.neovim = let
+    toLua = str: "lua << EOF\n${str}\nEOF\n";
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  in {
+    enable = true;
 
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
 
-      extraPackages = with pkgs; [
-        fzf
+    extraPackages = with pkgs; [
+      fzf
 
-        # Lsp
-        csharp-ls
-        elixir-ls
-        gopls
-        haskell-language-server
-        lua-language-server
-        ltex-ls
-        markdown-oxide
-        nixd
-        pyright
-        ruff
-        rust-analyzer
+      # Lsp
+      csharp-ls
+      elixir-ls
+      gopls
+      haskell-language-server
+      lua-language-server
+      ltex-ls
+      markdown-oxide
+      nixd
+      pyright
+      ruff
+      rust-analyzer
 
-        # DAP
-        netcoredbg # C#
-      ];
+      # DAP
+      netcoredbg # C#
+    ];
 
-      plugins = with pkgs.vimPlugins; [
-        {
-          plugin = nvim-lspconfig;
-          config = toLuaFile ./nvim/plugins/lspconfig.lua;
-        }
+    plugins = with pkgs.vimPlugins; [
+      {
+        plugin = nvim-lspconfig;
+        config = toLuaFile ./nvim/plugins/lspconfig.lua;
+      }
 
-        # nvim-cmp sources
-        luasnip
-        cmp_luasnip
-        cmp-nvim-lsp
-        cmp-path
-        {
-          plugin = nvim-cmp;
-          config = toLuaFile ./nvim/plugins/cmp.lua;
-        }
-        {
-          plugin = (nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-c-sharp
-            p.tree-sitter-dockerfile
-            p.tree-sitter-json
-            p.tree-sitter-lua
-            p.tree-sitter-hcl
-            p.tree-sitter-markdown
-            p.tree-sitter-markdown-inline
-            p.tree-sitter-nix
-            p.tree-sitter-nu
-            p.tree-sitter-python
-            p.tree-sitter-haskell
-            p.tree-sitter-rust
-            p.tree-sitter-vim
-            p.tree-sitter-yaml
-            p.tree-sitter-yuck
-          ]));
-          config = (toLuaFile ./nvim/plugins/treesitter.lua);
-        }
-        nvim-treesitter-parsers.yuck
-        {
-          plugin = everforest;
-          config = toLuaFile ./nvim/plugins/everforest.lua;
-        }
-        nvim-treesitter-parsers.vimdoc
-        {
-          plugin = telescope-nvim;
-          config = toLuaFile ./nvim/plugins/telescope.lua;
-        }
+      # nvim-cmp sources
+      luasnip
+      cmp_luasnip
+      cmp-nvim-lsp
+      cmp-path
+      {
+        plugin = nvim-cmp;
+        config = toLuaFile ./nvim/plugins/cmp.lua;
+      }
+      {
+        plugin = nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-c-sharp
+          p.tree-sitter-dockerfile
+          p.tree-sitter-json
+          p.tree-sitter-lua
+          p.tree-sitter-hcl
+          p.tree-sitter-markdown
+          p.tree-sitter-markdown-inline
+          p.tree-sitter-nix
+          p.tree-sitter-nu
+          p.tree-sitter-python
+          p.tree-sitter-haskell
+          p.tree-sitter-rust
+          p.tree-sitter-vim
+          p.tree-sitter-yaml
+          p.tree-sitter-yuck
+        ]);
+        config = toLuaFile ./nvim/plugins/treesitter.lua;
+      }
+      nvim-treesitter-parsers.yuck
+      {
+        plugin = everforest;
+        config = toLuaFile ./nvim/plugins/everforest.lua;
+      }
+      nvim-treesitter-parsers.vimdoc
+      {
+        plugin = telescope-nvim;
+        config = toLuaFile ./nvim/plugins/telescope.lua;
+      }
 
-        # DAP
-        {
-          plugin = nvim-dap;
-          config = toLuaFile ./nvim/plugins/dap.lua;
-        }
-        telescope-dap-nvim
-        nvim-dap-ui
-        nvim-nio
-      ];
+      # DAP
+      {
+        plugin = nvim-dap;
+        config = toLuaFile ./nvim/plugins/dap.lua;
+      }
+      telescope-dap-nvim
+      nvim-dap-ui
+      nvim-nio
+    ];
 
-      extraLuaConfig = ''
-        ${builtins.readFile ./nvim/options.lua}
-        vim.treesitter.language.add("nu", {
-            path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
-        })
-      '';
-    };
+    extraLuaConfig = ''
+      ${builtins.readFile ./nvim/options.lua}
+      vim.treesitter.language.add("nu", {
+          path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
+      })
+    '';
+  };
 
   programs.kitty = {
     enable = true;
@@ -427,14 +444,13 @@
     extraConfig = ''
       set-option -sa terminal-features ',xterm-kitty:RGB'
     '';
-
   };
 
   programs.broot = {
     enable = true;
     enableFishIntegration = true;
     settings = {
-      imports = lib.mkForce [ "skins/dark-gruvbox.hjson" ];
+      imports = lib.mkForce ["skins/dark-gruvbox.hjson"];
       verbs = [
         {
           invocation = "edit";
@@ -455,5 +471,3 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
-
-
