@@ -468,6 +468,13 @@
     enable = true;
   };
 
+  programs.zellij = {
+    enable = true;
+    settings = {
+      theme = "Gruvbox Dark";
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
