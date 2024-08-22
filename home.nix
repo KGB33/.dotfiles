@@ -5,6 +5,7 @@
   dagPkgs,
   hmm',
   nasty',
+  wezterm',
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -37,10 +38,12 @@
   home.packages = with pkgs;
     [
       alejandra # Nix formatter
+      freecad
       brightnessctl
       cabal-install
       fd
       fzf
+      gh
       ghc
       grim
       hyprlock
@@ -52,6 +55,7 @@
       noto-fonts-color-emoji
       obsidian
       ripgrep
+      wl-clipboard
       xdg-utils
       (nerdfonts.override {fonts = ["FiraCode"];})
     ]
@@ -124,6 +128,7 @@
 
             # Spawns
             "Super R" = "spawn fuzzel";
+            "Alt L" = "spawn hyprlock";
             "Super C" = "close";
             "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
 
@@ -391,6 +396,7 @@
           p.tree-sitter-python
           p.tree-sitter-haskell
           p.tree-sitter-rust
+          p.tree-sitter-toml
           p.tree-sitter-vim
           p.tree-sitter-yaml
           p.tree-sitter-yuck
