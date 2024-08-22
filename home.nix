@@ -387,6 +387,7 @@
           p.tree-sitter-c-sharp
           p.tree-sitter-dockerfile
           p.tree-sitter-json
+          p.tree-sitter-gleam
           p.tree-sitter-lua
           p.tree-sitter-hcl
           p.tree-sitter-markdown
