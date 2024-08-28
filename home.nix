@@ -58,6 +58,7 @@
       ripgrep
       wl-clipboard
       xdg-utils
+      zig
       (nerdfonts.override {fonts = ["FiraCode"];})
     ]
     ++ [dagPkgs.dagger hmm' nasty'];

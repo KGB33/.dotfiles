@@ -25,6 +25,7 @@
       pyright
       ruff
       rust-analyzer
+      zls
 
       # DAP
       netcoredbg # C#
@@ -65,6 +66,7 @@
           p.tree-sitter-vim
           p.tree-sitter-yaml
           p.tree-sitter-yuck
+          p.tree-sitter-zig
         ]);
         config = toLuaFile ./plugins/treesitter.lua;
       }

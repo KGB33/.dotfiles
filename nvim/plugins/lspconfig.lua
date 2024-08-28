@@ -85,6 +85,7 @@ local servers = {
     markdown_oxide = {},
     phpactor = {},
     ruff = {},
+    zls = {}
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
