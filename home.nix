@@ -80,6 +80,7 @@
   xdg = {
     enable = true;
     portal = {
+      config.common.default = "*"; # Just use the first one found.
       enable = true;
       extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
