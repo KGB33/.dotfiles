@@ -359,6 +359,7 @@
       ltex-ls
       markdown-oxide
       nixd
+      phpactor
       pyright
       ruff
       rust-analyzer
@@ -396,6 +397,7 @@
           p.tree-sitter-nu
           p.tree-sitter-python
           p.tree-sitter-haskell
+          p.tree-sitter-php
           p.tree-sitter-rust
           p.tree-sitter-toml
           p.tree-sitter-vim
