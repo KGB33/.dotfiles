@@ -42,6 +42,7 @@
       freecad
       brightnessctl
       cabal-install
+      cargo
       fd
       fzf
       gh
