@@ -50,7 +50,6 @@
       grim
       hyprlock
       impala
-      nh
       prusa-slicer
       slurp
       uv
@@ -307,7 +306,7 @@
 
   programs.eza = {
     enable = true;
-    icons = true;
+    icons = "auto";
     git = true;
     extraOptions = [
       "--group-directories-first"
@@ -348,7 +347,7 @@
       name = "FiraCode Nerd Font";
       size = 10;
     };
-    theme = "Everforest Dark Medium";
+    themeFile = "everforest_dark_medium";
     # enable_audio_bell = "no";
   };
 
@@ -381,6 +380,7 @@
 
   programs.taskwarrior = {
     enable = true;
+    package = pkgs.taskwarrior3;
   };
 
   programs.zellij = {
@@ -388,6 +388,10 @@
     settings = {
       theme = "Gruvbox Dark";
     };
+  };
+
+  programs.nh = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.

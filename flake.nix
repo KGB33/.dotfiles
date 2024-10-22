@@ -16,7 +16,7 @@
     wezterm-flake = {
       # Unstable pkg is broken - https://github.com/NixOS/nixpkgs/issues/336069
       url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+            # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

@@ -15,7 +15,7 @@
       builtins.concatStringsSep "\n" (map readCmpFiles (builtins.attrNames cmpDir));
     environmentVariables = builtins.mapAttrs
       (
-        name: value: "\"${builtins.toString value}\""
+        name: value: "${builtins.toString value}"
       )
       config.home.sessionVariables;
   };
