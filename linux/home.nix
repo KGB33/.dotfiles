@@ -48,14 +48,16 @@
     configDir = ./eww;
   };
 
+  programs.git.signing = {
+    key = "B9192CEACB44520B";
+    signByDefault = true;
+  };
+
   services.ssh-agent.enable = true;
+
   services.gpg-agent = {
     enable = true;
     enableFishIntegration = true;
     pinentryPackage = pkgs.pinentry-tty;
-  };
-  programs.git.signing = {
-    key = "B9192CEACB44520B";
-    signByDefault = true;
   };
 }

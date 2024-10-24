@@ -111,12 +111,10 @@
     addKeysToAgent = "yes";
   };
 
-
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.configHome}/gnupg";
   };
-
 
   programs.git = {
     enable = true;
