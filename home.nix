@@ -8,15 +8,9 @@
   wezterm',
   ...
 }: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "kgb33";
-  home.homeDirectory = "/home/kgb33";
-
   imports = [
     ./wezterm/wezterm.nix
     ./nushell/nushell.nix
-    ./sway/sway.nix
     ./nvim/nvim.nix
   ];
 
@@ -39,51 +33,27 @@
   home.packages = with pkgs;
     [
       alejandra # Nix formatter
-      freecad
-      brightnessctl
       cabal-install
       cargo
       fd
       fzf
       gh
       ghc
-      grim
-      hyprlock
-      impala
-      prusa-slicer
-      slurp
       uv
+      python313
+      gnused
       noto-fonts-color-emoji
       obsidian
       ripgrep
-      wl-clipboard
-      xdg-utils
       zig
       (nerdfonts.override {fonts = ["FiraCode"];})
     ]
     ++ [dagPkgs.dagger hmm' nasty'];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    ".config/hypr/hypridle.conf".source = hypr/hypridle.conf;
-    ".config/hypr/hyprlock.conf".source = hypr/hyprlock.conf;
-    ".config/hypr/hyprpaper.conf".source = hypr/hyprpaper.conf;
-  };
-
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
       emoji = ["Noto Color Emoji"];
-    };
-  };
-
-  xdg = {
-    enable = true;
-    portal = {
-      config.common.default = "*"; # Just use the first one found.
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
   };
 
@@ -108,105 +78,6 @@
 
     # Misc XDG nonsense
     OPAMROOT = "${data}/opam"; # oCaml pkgs manager
-  };
-
-  programs.fuzzel = {
-    enable = true;
-    # settings = {};
-  };
-
-  wayland.windowManager.river = {
-    enable = true;
-    systemd.enable = true;
-    settings = {
-      declare-mode = ["Display"];
-      map = {
-        normal =
-          {
-            "-repeat None XF86AudioRaiseVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+'";
-            "-repeat None XF86AudioLowerVolume" = "spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-'";
-            "-repeat None XF86MonBrightnessUp" = "spawn 'brightnessctl s +5%'";
-            "-repeat None XF86MonBrightnessDown" = "spawn 'brightnessctl s 5%-'";
-            "None XF86AudioMute" = "spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'";
-
-            # Spawns
-            "Super R" = "spawn fuzzel";
-            "Alt L" = "spawn hyprlock";
-            "Super C" = "close";
-            "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
-
-            # Meta
-            "Super M" = "exit";
-            "Super D" = "enter-mode Display";
-
-            # Window Focus
-            "Super H" = "focus-view left";
-            "Super J" = "focus-view down";
-            "Super K" = "focus-view up";
-            "Super L" = "focus-view right";
-            "Super N" = "focus-view next";
-            "Super P" = "focus-view previous";
-
-            # Window Movement
-            "Super+Shift H" = "swap left";
-            "Super+Shift J" = "swap down";
-            "Super+Shift K" = "swap up";
-            "Super+Shift L" = "swap right";
-            "Super+Shift N" = "swap next";
-            "Super+Shift P" = "swap previous";
-            "Super Z" = "zoom";
-          }
-          // (
-            # Tags
-            let
-              pow = exp:
-                if exp == 0
-                then 1
-                else 2 * pow (exp - 1);
-              str = builtins.toString;
-            in
-              builtins.listToAttrs (
-                builtins.concatLists [
-                  (builtins.genList (x: {
-                      name = "Super ${str x}";
-                      value = "set-focused-tags ${str (pow x)}";
-                    })
-                    9)
-                  (builtins.genList (x: {
-                      name = "Super+Shift ${str x}";
-                      value = "set-view-tags ${str (pow x)}";
-                    })
-                    9)
-                ]
-              )
-          );
-        Display = {
-          "None Escape" = "enter-mode normal";
-          # Move
-          "Super H" = "move left  100";
-          "Super J" = "move down  100";
-          "Super K" = "move up    100";
-          "Super L" = "move right 100";
-          # Snap
-          "Shift H" = "snap left";
-          "Shift J" = "snap down";
-          "Shift K" = "snap up";
-          "Shift L" = "snap right";
-          # Resize
-          "Super+Shift  H" = "resize horizontal -100";
-          "Super+Shift  J" = "resize vertical    100";
-          "Super+Shift  K" = "resize vertical   -100";
-          "Super+Shift  L" = "resize horizontal  100";
-        };
-      };
-      spawn = ["rivertile"];
-      default-layout = "rivertile";
-    };
-  };
-
-  programs.eww = {
-    enable = true;
-    configDir = ./eww;
   };
 
   programs.atuin = {
@@ -240,18 +111,12 @@
     addKeysToAgent = "yes";
   };
 
-  services.ssh-agent.enable = true;
 
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.configHome}/gnupg";
   };
 
-  services.gpg-agent = {
-    enable = true;
-    enableFishIntegration = true;
-    pinentryPackage = pkgs.pinentry-tty;
-  };
 
   programs.git = {
     enable = true;
@@ -265,21 +130,6 @@
     difftastic = {
       enable = true;
       display = "inline";
-    };
-
-    # delta = {
-    #   enable = true;
-    #   options = {
-    #     navigate = true;
-    #     light = false;
-    #     syntax-theme = "gruvbox-dark";
-    #     line-numbers = true;
-    #   };
-    # };
-
-    signing = {
-      key = "B9192CEACB44520B";
-      signByDefault = true;
     };
 
     extraConfig = {

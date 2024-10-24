@@ -1,6 +1,8 @@
-{ pkgs, config, lib, ... }:
 {
-
+  config,
+  lib,
+  ...
+}: {
   wayland.windowManager.sway = {
     enable = true;
 
@@ -10,10 +12,9 @@
         smartGaps = true;
         smartBorders = "on";
       };
-      keybindings =
-        let
-          mod = config.wayland.windowManager.sway.config.modifier;
-        in
+      keybindings = let
+        mod = config.wayland.windowManager.sway.config.modifier;
+      in
         lib.mkOptionDefault {
           "${mod}+r" = "exec fuzzel";
           "${mod}+l" = "exec hyprlock";

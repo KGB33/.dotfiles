@@ -16,7 +16,7 @@
     wezterm-flake = {
       # Unstable pkg is broken - https://github.com/NixOS/nixpkgs/issues/336069
       url = "github:wez/wezterm/main?dir=nix";
-            # inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -28,26 +28,22 @@
     nasty,
     wezterm-flake,
     ...
-  }: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    dagPkgs = dagger.packages.${system};
-    hmm' = hmm.packages.${system}.hmm;
-    nasty' = nasty.packages.${system}.nasty;
-    wezterm' = wezterm-flake.packages.${system}.default;
-  in {
-    homeConfigurations."kgb33" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
-      modules = [
-        ./home.nix
-      ];
-
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
-      extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
-    };
+  }: {
+    homeConfigurations."kgb33" = let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      dagPkgs = dagger.packages.${system};
+      hmm' = hmm.packages.${system}.hmm;
+      nasty' = nasty.packages.${system}.nasty;
+      wezterm' = wezterm-flake.packages.${system}.default;
+    in
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./home.nix
+          ./linux/home.nix
+        ];
+        extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
+      };
   };
 }
