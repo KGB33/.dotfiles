@@ -4,8 +4,9 @@
   ...
 }: {
   imports = [
-    ./windowManagers/sway/sway.nix
-    ./windowManagers/river/river.nix
+    ./windowManagers/sway.nix
+    ./windowManagers/river.nix
+    ./windowManagers/hypr.nix
   ];
 
   home.username = "kgb33";
