@@ -89,6 +89,15 @@
     enable = true;
   };
 
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = false;
+      dates = "weekly";
+      extraArgs = "--keep 5";
+    };
+  };
+
   programs.direnv = {
     enable = true;
   };
@@ -191,6 +200,11 @@
     '';
   };
 
+  programs.fzf = {
+    enable = true;
+    tmux.enableShellIntegration = true;
+  };
+
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
@@ -229,6 +243,9 @@
     };
   };
 
+  programs.ranger = {
+    enable = true;
+  };
   programs.taskwarrior = {
     enable = true;
     package = pkgs.taskwarrior3;
@@ -239,10 +256,6 @@
     settings = {
       theme = "Gruvbox Dark";
     };
-  };
-
-  programs.nh = {
-    enable = true;
   };
 
   # Let Home Manager install and manage itself.

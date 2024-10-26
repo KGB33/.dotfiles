@@ -25,6 +25,7 @@
     ++ [nasty'];
 
   home.file = {
+    # TODO: Move these hypr* configs into their programs/services
     ".config/hypr/hypridle.conf".source = hypr/hypridle.conf;
     ".config/hypr/hyprlock.conf".source = hypr/hyprlock.conf;
     ".config/hypr/hyprpaper.conf".source = hypr/hyprpaper.conf;
