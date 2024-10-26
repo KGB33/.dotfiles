@@ -11,6 +11,7 @@
 
     extraPackages = with pkgs; [
       fzf
+      typescript
 
       # Lsp
       csharp-ls
@@ -25,6 +26,7 @@
       pyright
       ruff
       rust-analyzer
+      typescript-language-server
       zls
 
       # DAP
@@ -62,6 +64,7 @@
           p.tree-sitter-haskell
           p.tree-sitter-php
           p.tree-sitter-rust
+          p.tree-sitter-sql
           p.tree-sitter-toml
           p.tree-sitter-vim
           p.tree-sitter-yaml

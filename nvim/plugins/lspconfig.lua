@@ -84,6 +84,7 @@ local servers = {
     },
     markdown_oxide = {},
     phpactor = {},
+    ts_ls = {},
     ruff = {},
     zls = {}
 }

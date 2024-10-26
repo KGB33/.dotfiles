@@ -18,6 +18,7 @@
       url = "github:wez/wezterm/main?dir=nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs = {
@@ -27,23 +28,41 @@
     hmm,
     nasty,
     wezterm-flake,
+    mac-app-util,
     ...
   }: {
-    homeConfigurations."kgb33" = let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      dagPkgs = dagger.packages.${system};
-      hmm' = hmm.packages.${system}.hmm;
-      nasty' = nasty.packages.${system}.nasty;
-      wezterm' = wezterm-flake.packages.${system}.default;
-    in
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home.nix
-          ./linux/home.nix
-        ];
-        extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
-      };
+    homeConfigurations = {
+      "kgb33" = let
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+        dagPkgs = dagger.packages.${system};
+        hmm' = hmm.packages.${system}.hmm;
+        nasty' = nasty.packages.${system}.nasty;
+        wezterm' = wezterm-flake.packages.${system}.default;
+      in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home.nix
+            ./linux/home.nix
+          ];
+          extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
+        };
+      "keltonbassingthwaite" = let
+        system = "aarch64-darwin";
+        pkgs = nixpkgs.legacyPackages.${system};
+        dagPkgs = dagger.packages.${system};
+        hmm' = hmm.packages.${system}.hmm;
+        wezterm' = wezterm-flake.packages.${system}.default;
+      in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home.nix
+            ./darwin/home.nix
+          ];
+          extraSpecialArgs = {inherit dagPkgs hmm' wezterm' mac-app-util;};
+        };
+    };
   };
 }
