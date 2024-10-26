@@ -141,6 +141,9 @@
       init = {
         defaultBranch = "main";
       };
+      diff."nodiff" = {
+        command = "echo Diff Not Shown.";
+      };
     };
   };
 
