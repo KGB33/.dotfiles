@@ -50,15 +50,13 @@ def upgrade [] {
 
 def "upgrade nixos" [] {
     enter /etc/nixos
-    sudo nix flake update
-    nh os switch /etc/nixos
+    nh os switch --update /etc/nixos
     dexit
 }
 
 def "upgrade home" [] {
     enter ~/.config/home-manager/
-    nix flake update
-    nh home switch ~/.config/home-manager/
+    nh home switch --update ~/.config/home-manager/
     dexit
 }
 
