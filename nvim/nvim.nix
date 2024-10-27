@@ -98,6 +98,8 @@
       telescope-dap-nvim
       nvim-dap-ui
       nvim-nio
+
+      which-key-nvim
     ];
 
     extraLuaConfig = ''
