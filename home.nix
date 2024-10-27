@@ -219,9 +219,9 @@
   programs.tmux = {
     enable = true;
     escapeTime = 300;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     extraConfig = ''
-      set-option -sa terminal-features ',xterm-kitty:RGB'
+      set-option -sa terminal-features 'xterm-256color:RGB'
     '';
   };
 
