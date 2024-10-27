@@ -71,9 +71,9 @@ local servers = {
             }
         },
     },
-    ltex = {},
     gleam = {},
     gopls = {},
+    harper_ls = {},
     hls = {}, -- Haskell
     elixirls = {
         cmd = { "/run/current-system/sw/bin/elixir-ls" }
@@ -88,6 +88,7 @@ local servers = {
         }
     },
     markdown_oxide = {},
+    marksman = {},
     phpactor = {},
     ts_ls = {},
     ruff = {},

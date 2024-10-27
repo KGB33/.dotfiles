@@ -14,10 +14,12 @@
       csharp-ls
       elixir-ls
       gopls
+      harper
       haskell-language-server
       lua-language-server
       ltex-ls
       markdown-oxide
+      marksman
       nixd
       phpactor
       pyright
