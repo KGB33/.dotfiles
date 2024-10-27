@@ -85,6 +85,7 @@
         type = "lua";
         config = builtins.readFile ./plugins/telescope.lua;
       }
+      telescope-ui-select-nvim
 
       # DAP
       {
