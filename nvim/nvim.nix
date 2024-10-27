@@ -1,8 +1,5 @@
 {pkgs, ...}: {
-  programs.neovim = let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in {
+  programs.neovim = {
     enable = true;
 
     viAlias = true;
@@ -36,7 +33,8 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-lspconfig;
-        config = toLuaFile ./plugins/lspconfig.lua;
+        config = builtins.readFile ./plugins/lspconfig.lua;
+        type = "lua";
       }
 
       # nvim-cmp sources
@@ -46,7 +44,8 @@
       cmp-path
       {
         plugin = nvim-cmp;
-        config = toLuaFile ./plugins/cmp.lua;
+        config = builtins.readFile ./plugins/cmp.lua;
+        type = "lua";
       }
       {
         plugin = nvim-treesitter.withPlugins (p: [
@@ -71,23 +70,27 @@
           p.tree-sitter-yuck
           p.tree-sitter-zig
         ]);
-        config = toLuaFile ./plugins/treesitter.lua;
+        config = builtins.readFile ./plugins/treesitter.lua;
+        type = "lua";
       }
       nvim-treesitter-parsers.yuck
       {
         plugin = everforest;
-        config = toLuaFile ./plugins/everforest.lua;
+        config = builtins.readFile ./plugins/everforest.lua;
+        type = "lua";
       }
       nvim-treesitter-parsers.vimdoc
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./plugins/telescope.lua;
+        type = "lua";
+        config = builtins.readFile ./plugins/telescope.lua;
       }
 
       # DAP
       {
         plugin = nvim-dap;
-        config = toLuaFile ./plugins/dap.lua;
+        config = builtins.readFile ./plugins/dap.lua;
+        type = "lua";
       }
       telescope-dap-nvim
       nvim-dap-ui
