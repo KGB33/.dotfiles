@@ -1,5 +1,5 @@
 ;; {"active_workspace":1,"workspaces":[1,2]}
-(deflisten nasty_ws `nasty workspaces sway`)
+(deflisten nasty_ws `nasty workspaces`)
 
 (defwidget workspace [id active]
   (button
