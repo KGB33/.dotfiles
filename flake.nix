@@ -32,7 +32,7 @@
     ...
   }: {
     homeConfigurations = {
-      "kgb33" = let
+      "kgb33@geppetto" = let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.${system};
         dagPkgs = dagger.packages.${system};
@@ -48,7 +48,7 @@
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
         };
-      "keltonbassingthwaite" = let
+      "keltonbassingthwaite@kelton-mbp.cdl.local" = let
         system = "aarch64-darwin";
         pkgs = nixpkgs.legacyPackages.${system};
         dagPkgs = dagger.packages.${system};
