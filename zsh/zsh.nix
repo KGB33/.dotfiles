@@ -10,12 +10,4 @@
       obs = "nvim `fd . --extension md ~/notes/ObsNotes/ | fzf`";
     };
   };
-
-  programs = {
-    atuin.enableZshIntergration = true;
-    broot.enableZshIntergration = true;
-    direnv.enableZshIntergration = true;
-    eza.enableZshIntergration = true;
-    starship.enableZshIntergration = true;
-  };
 }
