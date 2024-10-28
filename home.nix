@@ -4,7 +4,6 @@
   lib,
   dagPkgs,
   hmm',
-  nasty',
   wezterm',
   ...
 }: {
@@ -48,7 +47,7 @@
       zig
       (nerdfonts.override {fonts = ["FiraCode"];})
     ]
-    ++ [dagPkgs.dagger hmm' nasty'];
+    ++ [dagPkgs.dagger hmm'];
 
   fonts.fontconfig = {
     enable = true;
