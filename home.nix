@@ -126,7 +126,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "keltonbassingthwaite@gmail.com";
+    userEmail = lib.mkOptionDefault "keltonbassingthwaite@gmail.com";
     userName = "Kelton Bassingthwaite";
 
     lfs = {
