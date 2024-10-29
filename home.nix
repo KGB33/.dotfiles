@@ -154,6 +154,9 @@
       };
     };
   };
+  xdg.configFile."git/attributes" = {
+    text = "*.lock diff=nodiff";
+  };
 
   programs.btop = {
     enable = true;
