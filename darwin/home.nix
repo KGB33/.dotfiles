@@ -12,6 +12,9 @@
   home.homeDirectory = "/Users/keltonbassingthwaite";
 
   home.packages = with pkgs; [
+        php82
+        php82Packages.composer
+        postgresql
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";
