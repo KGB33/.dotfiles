@@ -76,6 +76,7 @@
         config = builtins.readFile ./plugins/treesitter.lua;
         type = "lua";
       }
+      nvim-treesitter-parsers.angular
       nvim-treesitter-parsers.yuck
       {
         plugin = everforest;
