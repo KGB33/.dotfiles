@@ -107,6 +107,11 @@
         config = builtins.readFile ./plugins/flash.lua;
         type = "lua";
       }
+      {
+        plugin = glance-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/glance.lua;
+      }
     ];
 
     extraLuaConfig = ''
