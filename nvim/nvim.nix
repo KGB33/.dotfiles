@@ -102,6 +102,11 @@
       nvim-nio
 
       which-key-nvim
+      {
+        plugin = flash-nvim;
+        config = builtins.readFile ./plugins/flash.lua;
+        type = "lua";
+      }
     ];
 
     extraLuaConfig = ''
