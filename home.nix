@@ -45,7 +45,7 @@
       obsidian
       ripgrep
       zig
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      nerd-fonts.fira-code
     ]
     ++ [dagPkgs.dagger hmm'];
 
