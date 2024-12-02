@@ -21,12 +21,16 @@
       markdown-oxide
       marksman
       nixd
+      ocamlPackages.ocaml-lsp
       phpactor
       pyright
       ruff
       rust-analyzer
       typescript-language-server
       zls
+
+      # Formatters
+      ocamlformat
 
       # DAP
       netcoredbg # C#
@@ -53,17 +57,18 @@
         plugin = nvim-treesitter.withPlugins (p: [
           p.tree-sitter-c-sharp
           p.tree-sitter-dockerfile
-          p.tree-sitter-json
           p.tree-sitter-gleam
-          p.tree-sitter-lua
+          p.tree-sitter-haskell
           p.tree-sitter-hcl
+          p.tree-sitter-json
+          p.tree-sitter-lua
           p.tree-sitter-markdown
           p.tree-sitter-markdown-inline
           p.tree-sitter-nix
           p.tree-sitter-nu
-          p.tree-sitter-python
-          p.tree-sitter-haskell
+          p.tree-sitter-ocaml
           p.tree-sitter-php
+          p.tree-sitter-python
           p.tree-sitter-rust
           p.tree-sitter-sql
           p.tree-sitter-toml

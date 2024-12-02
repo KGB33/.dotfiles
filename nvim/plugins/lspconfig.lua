@@ -89,6 +89,7 @@ local servers = {
     },
     markdown_oxide = {},
     marksman = {},
+    ocamllsp = {},
     phpactor = {},
     ts_ls = {},
     ruff = {},
