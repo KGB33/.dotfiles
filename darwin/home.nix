@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   mac-app-util,
   ...
 }: {
@@ -11,11 +10,6 @@
 
   home.username = "keltonbassingthwaite";
   home.homeDirectory = "/Users/keltonbassingthwaite";
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "postman"
-    ];
 
   home.packages = with pkgs; [
     (php82.buildEnv {
