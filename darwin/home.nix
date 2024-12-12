@@ -25,6 +25,7 @@
     php82Packages.composer
     postgresql
     postman
+    zed-editor
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";

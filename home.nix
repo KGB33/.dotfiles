@@ -35,6 +35,7 @@
       alejandra # Nix formatter
       cabal-install
       cargo
+      docker-client
       fd
       fzf
       gh
