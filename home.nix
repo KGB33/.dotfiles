@@ -157,7 +157,10 @@
     };
   };
   xdg.configFile."git/attributes" = {
-    text = "*.lock diff=nodiff";
+    text = ''
+      *.lock diff=nodiff
+      package-lock.json diff=nodiff
+    '';
   };
 
   programs.btop = {
