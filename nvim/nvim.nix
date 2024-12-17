@@ -11,6 +11,7 @@
       typescript
 
       # Lsp
+      biome
       csharp-ls
       elixir-ls
       gopls
@@ -56,10 +57,12 @@
       {
         plugin = nvim-treesitter.withPlugins (p: [
           p.tree-sitter-c-sharp
+          p.tree-sitter-css
           p.tree-sitter-dockerfile
           p.tree-sitter-gleam
           p.tree-sitter-haskell
           p.tree-sitter-hcl
+          p.tree-sitter-html
           p.tree-sitter-json
           p.tree-sitter-lua
           p.tree-sitter-markdown
@@ -70,6 +73,7 @@
           p.tree-sitter-php
           p.tree-sitter-python
           p.tree-sitter-rust
+          p.tree-sitter-scss
           p.tree-sitter-sql
           p.tree-sitter-toml
           p.tree-sitter-typescript
