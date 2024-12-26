@@ -5,6 +5,7 @@
   dagPkgs,
   hmm',
   wezterm',
+  ghostty',
   ...
 }: {
   imports = [
@@ -49,7 +50,7 @@
       zig
       nerd-fonts.fira-code
     ]
-    ++ [dagPkgs.dagger hmm'];
+    ++ [dagPkgs.dagger hmm' ghostty'];
 
   fonts.fontconfig = {
     enable = true;

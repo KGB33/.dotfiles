@@ -11,6 +11,7 @@
       url = "github:dagger/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty.url = "github:ghostty-org/ghostty";
     hmm.url = "github:KGB33/hmm";
     nasty.url = "github:KGB33/nasty";
     wezterm-flake = {
@@ -24,6 +25,7 @@
   outputs = {
     nixpkgs,
     home-manager,
+    ghostty,
     dagger,
     hmm,
     nasty,
@@ -39,6 +41,7 @@
         hmm' = hmm.packages.${system}.hmm;
         nasty' = nasty.packages.${system}.nasty;
         wezterm' = wezterm-flake.packages.${system}.default;
+        ghostty' = ghostty.packages.${system}.default;
       in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -46,7 +49,7 @@
             ./home.nix
             ./linux/home.nix
           ];
-          extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm';};
+          extraSpecialArgs = {inherit dagPkgs hmm' nasty' wezterm' ghostty';};
         };
       "keltonbassingthwaite@kelton-mbp.cdl.local" = let
         system = "aarch64-darwin";
@@ -54,6 +57,7 @@
         dagPkgs = dagger.packages.${system};
         hmm' = hmm.packages.${system}.hmm;
         wezterm' = wezterm-flake.packages.${system}.default;
+        ghostty' = ghostty.packages.${system}.default;
       in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -61,7 +65,7 @@
             ./home.nix
             ./darwin/home.nix
           ];
-          extraSpecialArgs = {inherit dagPkgs hmm' wezterm' mac-app-util;};
+          extraSpecialArgs = {inherit dagPkgs hmm' wezterm' ghostty' mac-app-util;};
         };
     };
   };
