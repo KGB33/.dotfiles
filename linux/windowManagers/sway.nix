@@ -17,6 +17,7 @@
       in
         lib.mkOptionDefault {
           "${mod}+r" = "exec fuzzel";
+          "${mod}+g" = "exec ghostty";
           "${mod}+l" = "exec hyprlock";
         };
       startup = [

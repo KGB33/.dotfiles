@@ -15,6 +15,7 @@
 
             # Spawns
             "Super R" = "spawn fuzzel";
+            "Super G" = "spawn ghostty";
             "Alt L" = "spawn hyprlock";
             "Super C" = "close";
             "Super+Shift S" = "spawn 'grim -g \"$(slurp -d)\" - | wl-copy'";
