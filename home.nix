@@ -206,7 +206,7 @@
     '';
     loginShellInit = ''
       if test (tty) = /dev/tty1
-        river
+        sway
       end
     '';
   };
