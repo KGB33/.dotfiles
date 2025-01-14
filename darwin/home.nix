@@ -24,7 +24,6 @@
     })
     php82Packages.composer
     postgresql
-    postman
     zed-editor
   ];
 
