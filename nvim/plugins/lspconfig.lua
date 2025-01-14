@@ -56,7 +56,6 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
     biome = {},
-    csharp_ls = {},
     pyright = {},
     rust_analyzer = {},
     lua_ls = {

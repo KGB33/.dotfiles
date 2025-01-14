@@ -12,7 +12,6 @@
 
       # Lsp
       biome
-      csharp-ls
       elixir-ls
       gopls
       harper
@@ -34,7 +33,6 @@
       ocamlformat
 
       # DAP
-      netcoredbg # C#
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -56,7 +54,6 @@
       }
       {
         plugin = nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-c-sharp
           p.tree-sitter-css
           p.tree-sitter-dockerfile
           p.tree-sitter-gleam
