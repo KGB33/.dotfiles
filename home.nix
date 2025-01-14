@@ -4,7 +4,6 @@
   lib,
   dagPkgs,
   hmm',
-  ghostty',
   ...
 }: {
   imports = [
@@ -28,9 +27,6 @@
       "postman"
     ];
 
-  home.file = {
-    ".config/ghostty/config".source = ./ghostty/config;
-  };
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs;
@@ -52,7 +48,7 @@
       zig
       nerd-fonts.fira-code
     ]
-    ++ [dagPkgs.dagger hmm' ghostty'];
+    ++ [dagPkgs.dagger hmm'];
 
   fonts.fontconfig = {
     enable = true;

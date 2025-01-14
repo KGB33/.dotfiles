@@ -16,6 +16,7 @@
     [
       freecad
       brightnessctl
+      ghostty
       grim
       hyprlock
       prusa-slicer
@@ -53,6 +54,14 @@
   programs.git.signing = {
     key = "B9192CEACB44520B";
     signByDefault = true;
+  };
+
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      font-family = "FiraCode Nerd Font Mono";
+      theme = "Everforest Dark - Hard";
+    };
   };
 
   services.ssh-agent.enable = true;
