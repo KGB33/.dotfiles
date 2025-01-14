@@ -1,4 +1,11 @@
 {pkgs, ...}: {
+  home.file.tsQueries = {
+    enable = true;
+    recursive = true;
+    source = ./ts_queries;
+    target = ".config/nvim/after/queries/";
+  };
+
   programs.neovim = {
     enable = true;
 
