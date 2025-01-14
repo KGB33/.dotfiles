@@ -4,7 +4,6 @@
   lib,
   dagPkgs,
   hmm',
-  wezterm',
   ghostty',
   ...
 }: {
