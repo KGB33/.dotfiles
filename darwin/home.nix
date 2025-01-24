@@ -13,6 +13,9 @@
 
   home.packages = with pkgs; [
     (php82.buildEnv {
+      extraConfig = ''
+        memory_limit = 2G
+      '';
       extensions = {
         enabled,
         all,
