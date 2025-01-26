@@ -7,6 +7,7 @@
     ./windowManagers/sway.nix
     ./windowManagers/river.nix
     ./windowManagers/hypr.nix
+    ./windowManagers/niri.nix
   ];
 
   home.username = "kgb33";

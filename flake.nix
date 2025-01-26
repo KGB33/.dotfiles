@@ -13,6 +13,10 @@
     };
     hmm.url = "github:KGB33/hmm";
     nasty.url = "github:KGB33/nasty";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mac-app-util.url = "github:hraban/mac-app-util";
   };
 
@@ -22,6 +26,7 @@
     dagger,
     hmm,
     nasty,
+    niri,
     mac-app-util,
     ...
   }: {
@@ -38,6 +43,7 @@
           modules = [
             ./home.nix
             ./linux/home.nix
+            niri.homeModules.niri
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
         };
