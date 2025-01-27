@@ -38,14 +38,16 @@
       fzf
       gh
       ghc
-      uv
-      python313
       gnused
+      lazydocker
+      lazyjournal
+      nerd-fonts.fira-code
       noto-fonts-color-emoji
       obsidian
+      python313
       ripgrep
+      uv
       zig
-      nerd-fonts.fira-code
     ]
     ++ [dagPkgs.dagger hmm'];
 
@@ -261,6 +263,10 @@
     settings = {
       theme = "Gruvbox Dark";
     };
+  };
+
+  programs.lazygit = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.
