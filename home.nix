@@ -258,14 +258,11 @@
     package = pkgs.taskwarrior3;
   };
 
-  programs.zellij = {
+  programs.lazygit = {
     enable = true;
-    settings = {
-      theme = "Gruvbox Dark";
-    };
   };
 
-  programs.lazygit = {
+  services.ollama = {
     enable = true;
   };
 
