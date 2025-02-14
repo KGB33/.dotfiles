@@ -61,13 +61,19 @@
       }
       {
         plugin = nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-bash
           p.tree-sitter-css
           p.tree-sitter-dockerfile
+          p.tree-sitter-fish
           p.tree-sitter-gleam
+          p.tree-sitter-graphql
           p.tree-sitter-haskell
           p.tree-sitter-hcl
+          p.tree-sitter-hjson
           p.tree-sitter-html
           p.tree-sitter-json
+          p.tree-sitter-json5
+          p.tree-sitter-just
           p.tree-sitter-lua
           p.tree-sitter-markdown
           p.tree-sitter-markdown-inline
