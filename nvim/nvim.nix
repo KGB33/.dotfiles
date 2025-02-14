@@ -131,6 +131,16 @@
         type = "lua";
         config = builtins.readFile ./plugins/glance.lua;
       }
+      {
+        plugin = avante-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/avante.lua;
+      }
+      {
+        plugin = codecompanion-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/codecompanion.lua;
+      }
     ];
 
     extraLuaConfig = ''
