@@ -202,7 +202,7 @@
     '';
     loginShellInit = ''
       if test (tty) = /dev/tty1
-        sway
+        niri
       end
     '';
   };
