@@ -10,6 +10,7 @@
     ./wezterm/wezterm.nix
     ./nushell/nushell.nix
     ./nvim/nvim.nix
+    ./scripts/scripts.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
