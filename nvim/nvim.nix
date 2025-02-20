@@ -29,6 +29,7 @@
       marksman
       nixd
       ocamlPackages.ocaml-lsp
+      postgres-lsp
       phpactor
       pyright
       ruff

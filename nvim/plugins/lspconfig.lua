@@ -90,6 +90,7 @@ local servers = {
     markdown_oxide = {},
     marksman = {},
     ocamllsp = {},
+    postgres_lsp = {},
     phpactor = {},
     ts_ls = {},
     ruff = {},
