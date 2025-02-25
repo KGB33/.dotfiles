@@ -18,7 +18,6 @@
       typescript
 
       # Lsp
-      biome
       elixir-ls
       gopls
       harper
@@ -138,9 +137,11 @@
         config = builtins.readFile ./plugins/avante.lua;
       }
       {
-        plugin = codecompanion-nvim;
+        plugin = nvim-dbee;
         type = "lua";
-        config = builtins.readFile ./plugins/codecompanion.lua;
+        config = ''
+            require("dbee").setup()
+        '';
       }
     ];
 
