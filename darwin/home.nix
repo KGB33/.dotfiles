@@ -25,13 +25,14 @@
           # swoole
         ]);
     })
-    php82Packages.composer
-    slack
-    colima
-    postgresql
-    zed-editor
     _1password-cli
     claude-code
+    colima
+    nodejs_latest
+    php82Packages.composer
+    postgresql
+    slack
+    zed-editor
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";
