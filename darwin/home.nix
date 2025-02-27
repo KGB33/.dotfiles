@@ -26,9 +26,12 @@
         ]);
     })
     php82Packages.composer
+    slack
+    colima
     postgresql
     zed-editor
     _1password-cli
+    _1password-gui
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";
