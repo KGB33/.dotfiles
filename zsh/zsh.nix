@@ -8,6 +8,7 @@
     shellAliases = {
       ll = "eza -F -lbh $argv";
       obs = "nvim `fd . --extension md ~/notes/ObsNotes/ | fzf`";
+      ng = "npx @angular/cli";
     };
   };
 }
