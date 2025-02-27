@@ -31,7 +31,7 @@
     postgresql
     zed-editor
     _1password-cli
-    _1password-gui
+    claude-code
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";

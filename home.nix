@@ -26,8 +26,8 @@
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "1password-cli"
-      "1password-gui"
       "slack"
+      "claude-code"
     ];
 
   # The home.packages option allows you to install Nix packages into your
