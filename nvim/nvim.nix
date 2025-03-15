@@ -140,7 +140,7 @@
         plugin = nvim-dbee;
         type = "lua";
         config = ''
-            require("dbee").setup()
+          require("dbee").setup()
         '';
       }
     ];
