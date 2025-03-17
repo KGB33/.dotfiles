@@ -85,6 +85,8 @@
     OPAMROOT = "${data}/opam"; # oCaml pkgs manager
   };
 
+  xdg.systemDirs.config = ["/etc/xdg"];
+
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
@@ -170,7 +172,6 @@
   programs.btop = {
     enable = true;
     settings = {
-      color_theme = "everforest-dark-hard";
       truecolor = true;
     };
   };
@@ -219,10 +220,6 @@
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
-    font = {
-      name = "FiraCode Nerd Font";
-      size = 10;
-    };
     themeFile = "everforest_dark_medium";
     # enable_audio_bell = "no";
   };
