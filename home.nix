@@ -85,8 +85,6 @@
     OPAMROOT = "${data}/opam"; # oCaml pkgs manager
   };
 
-  xdg.systemDirs.config = ["/etc/xdg"];
-
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
