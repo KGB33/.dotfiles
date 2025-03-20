@@ -136,6 +136,7 @@
         type = "lua";
         config = builtins.readFile ./plugins/avante.lua;
       }
+      img-clip-nvim
       {
         plugin = nvim-dbee;
         type = "lua";

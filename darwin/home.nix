@@ -26,7 +26,6 @@
         ]);
     })
     _1password-cli
-    claude-code
     colima
     nodejs_latest
     php82Packages.composer
@@ -36,4 +35,11 @@
   ];
 
   programs.git.userEmail = "kelton@cdlpowersuite.com";
+
+  programs.aerospace = {
+    enable = true;
+    userSettings = {
+      start-at-login = true;
+    };
+  };
 }
