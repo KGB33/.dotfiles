@@ -38,6 +38,7 @@
       cabal-install
       cargo
       docker-client
+      doggo
       fd
       fzf
       gh
@@ -45,12 +46,14 @@
       gnused
       lazydocker
       lazyjournal
+      lefthook
       nerd-fonts.fira-code
       noto-fonts-color-emoji
       obsidian
       python313
       ripgrep
       uv
+      wireguard-tools
       zig
     ]
     ++ [dagPkgs.dagger hmm'];
