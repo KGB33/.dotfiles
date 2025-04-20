@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: let
+  avanteOverride = import ./avante.nix { pkgs = pkgs; lib = lib; };
+in {
   home.file.tsQueries = {
     enable = true;
     recursive = true;
@@ -132,7 +134,7 @@
         config = builtins.readFile ./plugins/glance.lua;
       }
       {
-        plugin = avante-nvim;
+        plugin = avanteOverride;
         type = "lua";
         config = builtins.readFile ./plugins/avante.lua;
       }
