@@ -208,7 +208,7 @@
     '';
     loginShellInit = ''
       if test (tty) = /dev/tty1
-        niri
+        Hyprland
       end
     '';
   };
