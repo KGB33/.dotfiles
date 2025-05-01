@@ -40,6 +40,7 @@
       docker-client
       doggo
       fd
+      fnlfmt
       fzf
       gh
       ghc

@@ -71,6 +71,7 @@ local servers = {
             }
         },
     },
+    fennel_ls = {},
     gleam = {},
     gopls = {},
     harper_ls = {},
@@ -97,15 +98,15 @@ local servers = {
     zls = {}
 }
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilites = require('blink.cmp').get_lsp_capabilities(capabilities);
 
 for server_name, _ in pairs(servers) do
-    require('lspconfig')[server_name].setup {
+    vim.lsp.config[server_name] = {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = servers[server_name]["settings"],
         cmd = servers[server_name]["cmd"]
     }
+    vim.lsp.enable(server_name)
 end

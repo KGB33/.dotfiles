@@ -1,5 +1,12 @@
-{pkgs, lib, ...}: let
-  avanteOverride = import ./avante.nix { pkgs = pkgs; lib = lib; };
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  avanteOverride = import ./avante.nix {
+    pkgs = pkgs;
+    lib = lib;
+  };
 in {
   home.file.tsQueries = {
     enable = true;
@@ -22,6 +29,7 @@ in {
       # Lsp
       elixir-ls
       gopls
+      fennel-ls
       harper
       haskell-language-server
       lua-language-server
@@ -40,6 +48,7 @@ in {
 
       # Formatters
       ocamlformat
+      fnlfmt
 
       # DAP
     ];
@@ -52,13 +61,18 @@ in {
       }
 
       # nvim-cmp sources
-      luasnip
-      cmp_luasnip
-      cmp-nvim-lsp
-      cmp-path
+      # luasnip
+      # cmp_luasnip
+      # cmp-nvim-lsp
+      # cmp-path
+      # {
+      #   plugin = nvim-cmp;
+      #   config = builtins.readFile ./plugins/cmp.lua;
+      #   type = "lua";
+      # }
       {
-        plugin = nvim-cmp;
-        config = builtins.readFile ./plugins/cmp.lua;
+        plugin = blink-cmp;
+        config = builtins.readFile ./plugins/blink.lua;
         type = "lua";
       }
       {
@@ -66,6 +80,7 @@ in {
           p.tree-sitter-bash
           p.tree-sitter-css
           p.tree-sitter-dockerfile
+          p.tree-sitter-fennel
           p.tree-sitter-fish
           p.tree-sitter-gleam
           p.tree-sitter-graphql
