@@ -71,6 +71,9 @@ in {
       #   type = "lua";
       # }
       {
+        plugin = blink-cmp-avante;
+      }
+      {
         plugin = blink-cmp;
         config = builtins.readFile ./plugins/blink.lua;
         type = "lua";
