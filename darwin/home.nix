@@ -95,11 +95,10 @@
           builtins.listToAttrs mappings
           // {
             alt-tab = "workspace-back-and-forth";
-            alt-shift-tab = "move-workspace-to-monitor --warp-around next";
+            alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
             alt-shift-semicolon = "mode service";
           };
         service.binding = {
-          esc = ["reload config" "mode main"];
           r = ["flatten-workspace-tree" "mode main"];
           f = ["layout floating tiling" "mode main"];
           backspace = ["close-all-windows-but-current" "mode main"];
