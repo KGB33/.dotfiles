@@ -30,7 +30,6 @@
     nodejs_latest
     php82Packages.composer
     postgresql
-    slack
     wireguard-tools
     zed-editor
   ];

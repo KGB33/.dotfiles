@@ -26,7 +26,6 @@
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "1password-cli"
-      "slack"
       "claude-code"
     ];
 
