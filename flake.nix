@@ -56,7 +56,7 @@
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
         };
-      "keltonbassingthwaite@kelton-mbp.cdl.local" = let
+      "keltonbassingthwaite" = let
         system = "aarch64-darwin";
         pkgs = nixpkgs.legacyPackages.${system};
         dagPkgs = dagger.packages.${system};
