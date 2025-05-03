@@ -67,6 +67,7 @@
           modules = [
             ./home.nix
             ./darwin/home.nix
+            stylix.homeManagerModules.stylix
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' mac-app-util;};
         };

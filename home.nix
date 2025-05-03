@@ -11,6 +11,7 @@
     ./nushell/nushell.nix
     ./nvim/nvim.nix
     ./scripts/scripts.nix
+    ./stylix.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -238,7 +239,6 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      imports = lib.mkForce ["skins/dark-gruvbox.hjson"];
       verbs = [
         {
           invocation = "edit";

@@ -8,7 +8,6 @@
     ./windowManagers/river.nix
     ./windowManagers/hypr.nix
     ./windowManagers/niri.nix
-    ./stylix.nix
   ];
 
   home.username = "kgb33";
@@ -62,7 +61,6 @@
     enable = true;
     settings = {
       font-family = "FiraCode Nerd Font Mono";
-      theme = "Everforest Dark - Hard";
     };
   };
 
@@ -71,6 +69,6 @@
   services.gpg-agent = {
     enable = true;
     enableFishIntegration = true;
-    pinentryPackage = pkgs.pinentry-tty;
+    pinentry.package = pkgs.pinentry-tty;
   };
 }
