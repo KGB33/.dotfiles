@@ -26,6 +26,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "obsidian"
+      "discord"
       "1password-cli"
       "claude-code"
     ];

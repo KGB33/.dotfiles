@@ -8,6 +8,7 @@
     ./windowManagers/river.nix
     ./windowManagers/hypr.nix
     ./windowManagers/niri.nix
+    ../nixcord.nix
   ];
 
   home.username = "kgb33";

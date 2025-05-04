@@ -25,6 +25,8 @@
     mac-app-util.url = "github:hraban/mac-app-util";
 
     stylix.url = "github:danth/stylix";
+
+    nixcord.url = "github:kaylorben/nixcord";
   };
 
   outputs = {
@@ -34,6 +36,7 @@
     mac-app-util,
     nasty,
     niri,
+    nixcord,
     nixpkgs,
     stylix,
     ...
@@ -53,6 +56,7 @@
             ./linux/home.nix
             stylix.homeManagerModules.stylix
             niri.homeModules.niri
+            nixcord.homeModules.nixcord
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
         };
