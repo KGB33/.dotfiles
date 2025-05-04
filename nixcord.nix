@@ -5,7 +5,7 @@
       plugins = {
         alwaysExpandRoles.enable = true;
         betterFolders.enable = true;
-        clearUrls.enable = true;
+        clearURLs.enable = true;
         callTimer.enable = true;
         mentionAvatars.enable = true;
         messageLogger.enable = true;

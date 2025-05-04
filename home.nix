@@ -41,6 +41,7 @@
       docker-client
       doggo
       fd
+      firefox
       fnlfmt
       fzf
       gh

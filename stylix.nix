@@ -13,5 +13,6 @@
         name = "FiraCode Nerd Font";
       };
     };
+    targets.firefox.profileNames = ["default"];
   };
 }
