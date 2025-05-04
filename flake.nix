@@ -27,6 +27,8 @@
     stylix.url = "github:danth/stylix";
 
     nixcord.url = "github:kaylorben/nixcord";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
@@ -39,6 +41,7 @@
     nixcord,
     nixpkgs,
     stylix,
+    nixos-hardware,
     ...
   }: {
     homeConfigurations = {
@@ -75,6 +78,17 @@
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' mac-app-util;};
         };
+    };
+    nixosConfigurations = {
+      geppetto = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./systems/configuration.nix
+          ./systems/users.nix
+          ./systems/geppetto/configuration.nix
+          nixos-hardware.nixosModules.framework-16-7040-amd
+        ];
+      };
     };
   };
 }
