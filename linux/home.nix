@@ -8,6 +8,7 @@
     ./windowManagers/river.nix
     ./windowManagers/hypr.nix
     ./windowManagers/niri.nix
+    ./windowManagers/waybar.nix
     ../nixcord.nix
   ];
 
@@ -49,7 +50,7 @@
   };
 
   programs.eww = {
-    enable = true;
+    enable = false;
     configDir = ./eww;
   };
 
