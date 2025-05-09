@@ -8,7 +8,7 @@ window#waybar {
   font-family: FontAwesome, monospace;
   background-color: transparent;
   border-bottom: 0px;
-  color: #ebdbb2;
+  color: @base07;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -38,13 +38,13 @@ button {
 }
 
 #workspaces {
-  background-color: #282828;
+  background-color: @base00;
 }
 
 #workspaces button {
   padding: 0 5px;
   background-color: transparent;
-  color: #ebdbb2;
+  color: @base0F;
   border-radius: 0;
 }
 
@@ -84,14 +84,13 @@ button {
 #window,
 #wireplumber {
   padding: 0 10px;
-  background-color: #282828;
-  color: #ebdbb2;
+  background-color: @base00;
+  color: @base07;
 }
 
 #mode {
-  background-color: #689d6a;
-  color: #282828;
-  /* box-shadow: inset 0 -3px #ffffff; */
+  background-color: @base02;
+  color: @base07;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -110,13 +109,13 @@ button {
 
 #battery.charging,
 #battery.plugged {
-  background-color: #98971a;
-  color: #282828;
+  background-color: @base00;
+  color: @base04;
 }
 
 @keyframes blink {
   to {
-    background-color: #282828;
+    background-color: @base00;
     color: #ebdbb2;
   }
 }
