@@ -6,6 +6,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-light-hard.yaml";
     targets = {
       kde.enable = false;
+      gnome.enable = false;
     };
     fonts = {
       monospace = {
