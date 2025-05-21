@@ -3,7 +3,10 @@
   pkgs,
   ...
 }: {
-  imports = [];
+  imports = [
+    ./users.nix
+    ./virtualisation.nix
+  ];
 
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];

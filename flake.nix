@@ -83,8 +83,7 @@
       geppetto = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./systems/configuration.nix
-          ./systems/users.nix
+          ./systems/base/configuration.nix
           ./systems/geppetto/configuration.nix
           nixos-hardware.nixosModules.framework-16-7040-amd
         ];
