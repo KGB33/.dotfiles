@@ -3,6 +3,6 @@
     isNormalUser = true;
     description = "Kelton";
     extraGroups = ["wheel" "docker" "video" "audio"];
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
 }

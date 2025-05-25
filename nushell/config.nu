@@ -49,8 +49,8 @@ def upgrade [] {
 }
 
 def "upgrade nixos" [] {
-    enter /etc/nixos
-    nh os switch --update /etc/nixos
+    enter ~/.config/home-manager/
+    nh os switch --update ~/.config/home-manager/
     dexit
 }
 
