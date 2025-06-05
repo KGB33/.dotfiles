@@ -57,7 +57,7 @@
           modules = [
             ./home.nix
             ./linux/home.nix
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
             niri.homeModules.niri
             nixcord.homeModules.nixcord
           ];
@@ -74,7 +74,7 @@
           modules = [
             ./home.nix
             ./darwin/home.nix
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' mac-app-util;};
         };
