@@ -38,6 +38,7 @@
       alejandra # Nix formatter
       cabal-install
       cargo
+      clipse
       docker-client
       doggo
       fd
@@ -51,12 +52,17 @@
       lazyjournal
       lefthook
       nerd-fonts.fira-code
+      netscanner
       noto-fonts-color-emoji
       obsidian
+      posting
       python313
+      rainfrog
       ripgrep
+      serie
       uv
       wireguard-tools
+      yazi
       zig
     ]
     ++ [dagPkgs.dagger hmm'];

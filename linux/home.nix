@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   nasty',
   ...
 }: {
@@ -72,5 +73,11 @@
     enable = true;
     enableFishIntegration = true;
     pinentry.package = pkgs.pinentry-tty;
+  };
+
+  services.clipse = {
+    package = pkgs.clipse;
+    systemdTarget = "hyprland-session.target";
+    enable = true;
   };
 }

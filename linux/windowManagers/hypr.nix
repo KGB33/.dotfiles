@@ -1,5 +1,7 @@
-{...}: {
-  wayland.windowManager.hyprland = {
+{pkgs, ...}: {
+  wayland.windowManager.hyprland = let
+    term = "wezterm";
+  in {
     enable = true;
     settings = {
       exec-once = [
@@ -13,6 +15,11 @@
       decoration = {
         rounding = 5;
       };
+      windowrule = [
+        "float, class:(clipse)"
+        "size 800 800, class:(clipse)"
+        "stayfocused, class:clipse"
+      ];
       "$mod" = "SUPER";
       binde = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -31,6 +38,7 @@
           "$mod, Q, exec, kitty"
           "$mod, R, exec, fuzzel"
           "$mod, L, exec, hyprlock"
+          "$mod, V, exec, ${term} start --class clipse -- clipse"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
           ''$mod, Print, exec, grim -g "$(slurp -d)"''
