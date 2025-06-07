@@ -55,17 +55,15 @@
     configDir = ./eww;
   };
 
-  programs.git.signing = {
-    key = "B9192CEACB44520B";
-    signByDefault = true;
-  };
-
-  programs.ghostty = {
-    enable = true;
-    settings = {
-      font-family = "FiraCode Nerd Font Mono";
+  programs.git = {
+    signing = {
+      format = "ssh";
+      key = "~/.ssh/id_ed25519.pub";
+      signByDefault = true;
     };
+    extraConfig.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
   };
+  home.file.".config/git/allowed_signers".text = ''keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsItKA/n+4hj/qTtEURIGm3zpoelVwqyUOG88DqPGpB keltonbassingthwaite@gmail.com'';
 
   services.ssh-agent.enable = true;
 
