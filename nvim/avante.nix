@@ -49,6 +49,12 @@ in
       plenary-nvim
     ];
 
+    postPatch = ''
+      # Remove the specific debug lines
+      find . -name "*.lua" -exec sed -i '/M\.debug.*lazy\.nvim is not available/d' {} \;
+      find . -name "*.lua" -exec sed -i '/Utils\.debug.*Setting up avante colors/d' {} \;
+    '';
+
     postInstall = let
       ext = pkgs.stdenv.hostPlatform.extensions.sharedLibrary;
     in ''
