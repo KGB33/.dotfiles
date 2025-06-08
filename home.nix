@@ -95,6 +95,9 @@
 
     # Misc XDG nonsense
     OPAMROOT = "${data}/opam"; # oCaml pkgs manager
+
+    # Open man pages in Neovim
+    MANPAGER = "nvim -c 'Man!' -o -";
   };
 
   programs.atuin = {
