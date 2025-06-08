@@ -38,6 +38,13 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
+-- Sane Splits
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+vim.o.scrolloff = 10
+
+
 -- Set bang shell to non-NuShell shell
 vim.o.shell = "zsh"
 
