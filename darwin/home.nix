@@ -34,7 +34,17 @@
     zed-editor
   ];
 
-  programs.git.userEmail = "kelton@cdlpowersuite.com";
+  programs.git = {
+    userEmail = "kelton@cdlpowersuite.com";
+    signing = {
+      format = "ssh";
+      key = "~/.ssh/id_ed25519.pub";
+      signByDefault = true;
+    };
+    extraConfig.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+  };
+  home.file.".config/git/allowed_signers".text = ''    keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXEwMKmnpJVai5TxjTmDRnju98Dp9RgPmMXqahwuh8m kelton_bassingthwaite@cdlpowersuite.com
+  '';
 
   programs.aerospace = {
     enable = true;
