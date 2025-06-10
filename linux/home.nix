@@ -18,11 +18,11 @@
 
   home.packages = with pkgs;
     [
-      freecad
       brightnessctl
-      ghostty
+      freecad
       grim
       hyprlock
+      netscanner
       prusa-slicer
       slurp
       wl-clipboard

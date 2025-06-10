@@ -28,7 +28,6 @@
       "obsidian"
       "discord"
       "1password-cli"
-      "claude-code"
     ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -48,11 +47,11 @@
       gh
       ghc
       gnused
+      goose-cli
       lazydocker
       lazyjournal
       lefthook
       nerd-fonts.fira-code
-      netscanner
       noto-fonts-color-emoji
       obsidian
       posting
