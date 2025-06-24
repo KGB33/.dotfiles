@@ -46,7 +46,7 @@ vim.o.scrolloff = 10
 
 
 -- Set bang shell to non-NuShell shell
-vim.o.shell = "zsh"
+-- vim.o.shell = "zsh"
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

@@ -99,7 +99,7 @@ local servers = {
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local capabilites = require('blink.cmp').get_lsp_capabilities(capabilities);
+local capabilities = require('blink.cmp').get_lsp_capabilities(capabilities);
 
 for server_name, _ in pairs(servers) do
     vim.lsp.config[server_name] = {
