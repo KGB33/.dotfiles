@@ -27,6 +27,7 @@
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "discord"
+      "steam-unwrapped"
       "1password-cli"
     ];
 

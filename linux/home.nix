@@ -27,6 +27,7 @@
       slurp
       wl-clipboard
       xdg-utils
+      xivlauncher
     ]
     ++ [nasty'];
 
