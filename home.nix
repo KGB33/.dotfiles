@@ -62,6 +62,7 @@
       serie
       uv
       wireguard-tools
+      wireshark-qt
       yazi
       zig
     ]
