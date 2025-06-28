@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [carapace];
   programs.nushell = {
-    enable = true;
+    enable = false;
     plugins = with pkgs.nushellPlugins; [
       gstat
       query
