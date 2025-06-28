@@ -20,7 +20,7 @@
         "size 800 800, class:(clipse)"
         "stayfocused, class:clipse"
       ];
-      "$mod" = "SUPER";
+      "$mod" = "ALT";
       binde = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
@@ -36,7 +36,7 @@
           "$mod, M, exit"
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
-          "$mod, R, exec, fuzzel"
+          "$mod, space, exec, fuzzel"
           "$mod, L, exec, hyprlock"
           "$mod, V, exec, ${term} start --class clipse -- clipse"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
