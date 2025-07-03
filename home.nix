@@ -278,6 +278,12 @@
 
   services.ollama = {
     enable = true;
+    acceleration = "rocm";
+    environmentVariables = {
+      OLLAMA_CONTEXT_LENGTH = "32768";
+      OLLAMA_FLASH_ATTENTION = "true";
+      OLLAMA_KV_CACHE_TYPE = "q4_0";
+    };
   };
 
   # Let Home Manager install and manage itself.
