@@ -12,6 +12,7 @@
     ./nvim/nvim.nix
     ./scripts/scripts.nix
     ./stylix.nix
+    ./apps/tmux.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -236,15 +237,6 @@
     shellIntegration.enableFishIntegration = true;
     themeFile = "everforest_dark_medium";
     # enable_audio_bell = "no";
-  };
-
-  programs.tmux = {
-    enable = true;
-    escapeTime = 300;
-    terminal = "tmux-256color";
-    extraConfig = ''
-      set-option -sa terminal-features 'xterm-256color:RGB'
-    '';
   };
 
   programs.broot = {
