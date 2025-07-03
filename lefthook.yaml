@@ -1,4 +1,4 @@
 pre-commit:
   jobs:
-    - run: alejandra .
+    - run: alejandra --check .
       glob: "*.nix"
