@@ -6,15 +6,15 @@
   src = pkgs.fetchFromGitHub {
     owner = "yetone";
     repo = "avante.nvim";
-    rev = "46d27ff0fd30f5934c8655c96df5220c962916b6";
-    hash = "sha256-m12oSc8MqPTP33q3AOssI8Jh5FCFbEU3kQQ//htKDBg=";
+    rev = "935234981b01da1bbfc03de963eb5132e58fc805";
+    hash = "sha256-FwB9zifsQlYz/cKQDlwftkKrs8djZokq6Ua6/lyujU8";
   };
   avante-nvim-lib = pkgs.rustPlatform.buildRustPackage {
     pname = "avante-nvim-lib";
     inherit version src;
 
     useFetchCargoVendor = true;
-    cargoHash = "sha256-pmnMoNdaIR0i+4kwW3cf01vDQo39QakTCEG9AXA86ck=";
+    cargoHash = "sha256-8mBpzndz34RrmhJYezd4hLrJyhVL4S4IHK3plaue1k8=";
 
     nativeBuildInputs = [
       pkgs.pkg-config
