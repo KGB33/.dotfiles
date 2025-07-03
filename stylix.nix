@@ -30,6 +30,5 @@
       };
     };
     targets.firefox.profileNames = ["default"];
-    targets.waybar.enable = false;
   };
 }
