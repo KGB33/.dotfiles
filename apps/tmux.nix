@@ -5,7 +5,8 @@
     terminal = "tmux-256color";
     extraConfig = ''
       set-option -sa terminal-features 'xterm-256color:RGB'
-      bind C-g display-popup -w 85% -h 85% "${pkgs.lazygit}/bin/lazygit"
+      bind C-g display-popup -E -w 85% -h 85% "${pkgs.lazygit}/bin/lazygit"
+      bind t display-popup -E -w 85% -h 85% "tss"
     '';
   };
 }
