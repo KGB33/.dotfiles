@@ -7,7 +7,7 @@
     })
     (writeShellApplication {
       name = "faff";
-      runtimeInputs = [curl jq bc];
+      runtimeInputs = [curl jq bc uutils-coreutils-noprefix];
       text = builtins.readFile ./faff.sh;
     })
   ];
