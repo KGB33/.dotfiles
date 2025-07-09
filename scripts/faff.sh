@@ -68,7 +68,7 @@ Specification for Conventional Commits:
 - BREAKING-CHANGE MUST be synonymous with BREAKING CHANGE, when used as a token in a footer.'
 # Spinner characters for progress indication
 readonly SPINNER_CHARS=( "⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏" )
-FAFF_MODEL=${FAFF_MODEL:-"qwen2.5-coder:7b"}
+FAFF_MODEL=${FAFF_MODEL:-"gemma3n:latest"}
 OLLAMA_HOST=${OLLAMA_HOST:-"localhost"}
 OLLAMA_PORT=${OLLAMA_PORT:-"11434"}
 OLLAMA_BASE_URL="http://${OLLAMA_HOST}:${OLLAMA_PORT}"
