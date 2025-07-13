@@ -13,6 +13,7 @@
     ./scripts/scripts.nix
     ./stylix.nix
     ./apps/tmux.nix
+    ./apps/television.nix
   ];
 
   # This value determines the Home Manager release that your configuration is

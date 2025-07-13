@@ -29,6 +29,9 @@
     nixcord.url = "github:kaylorben/nixcord";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # TODO: Use nixpkgs version once its updated to 0.12.x
+    television.url = "github:alexpasmantier/television";
   };
 
   outputs = {
@@ -39,9 +42,10 @@
     nasty,
     niri,
     nixcord,
+    nixos-hardware,
     nixpkgs,
     stylix,
-    nixos-hardware,
+    television,
     ...
   }: {
     homeConfigurations = {
@@ -51,6 +55,7 @@
         dagPkgs = dagger.packages.${system};
         hmm' = hmm.packages.${system}.hmm;
         nasty' = nasty.packages.${system}.nasty;
+        tv = television.packages.${system}.default;
       in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -61,7 +66,7 @@
             niri.homeModules.niri
             nixcord.homeModules.nixcord
           ];
-          extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
+          extraSpecialArgs = {inherit dagPkgs hmm' nasty' tv;};
         };
       "keltonbassingthwaite" = let
         system = "aarch64-darwin";
