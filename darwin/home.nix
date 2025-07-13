@@ -46,6 +46,14 @@
   home.file.".config/git/allowed_signers".text = ''    keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXEwMKmnpJVai5TxjTmDRnju98Dp9RgPmMXqahwuh8m kelton_bassingthwaite@cdlpowersuite.com
   '';
 
+  services.jankyborders = {
+    enable = true;
+    settings = {
+      active_color = "#8da101";
+      inactive_color = "#35a77c";
+    };
+  };
+
   programs.aerospace = {
     enable = true;
     userSettings = {
