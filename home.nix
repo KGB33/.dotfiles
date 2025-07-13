@@ -51,6 +51,8 @@
       ghc
       gnused
       goose-cli
+      jq
+      jqp
       lazydocker
       lazyjournal
       lefthook
@@ -66,6 +68,7 @@
       wireguard-tools
       wireshark-qt
       yazi
+      yq-go
       zig
     ]
     ++ [dagPkgs.dagger hmm'];
