@@ -20,7 +20,7 @@
         "size 800 800, class:(clipse)"
         "stayfocused, class:clipse"
       ];
-      "$mod" = "ALT";
+      "$mod" = "SUPER";
       binde = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
