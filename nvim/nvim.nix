@@ -164,6 +164,15 @@ in {
           require("dbee").setup()
         '';
       }
+      {
+        plugin = render-markdown-nvim;
+        type = "lua";
+        config = ''
+          require('render-markdown').setup({
+            completions = { blink = { enabled = true } },
+          })
+        '';
+      }
     ];
 
     extraLuaConfig = ''
