@@ -138,11 +138,7 @@ in {
       nvim-nio
 
       which-key-nvim
-      {
-        plugin = flash-nvim;
-        config = builtins.readFile ./plugins/flash.lua;
-        type = "lua";
-      }
+      flash-nvim
       {
         plugin = glance-nvim;
         type = "lua";

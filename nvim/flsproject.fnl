@@ -1,1 +1,1 @@
-  {:libraries {:nvim true}}
+{:libraries {:nvim true}}
