@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   avanteOverride = import ./avante.nix {
@@ -117,11 +118,7 @@ in {
       }
       nvim-treesitter-parsers.angular
       nvim-treesitter-parsers.yuck
-      {
-        plugin = everforest;
-        config = builtins.readFile ./plugins/everforest.lua;
-        type = "lua";
-      }
+      everforest
       nvim-treesitter-parsers.vimdoc
       {
         plugin = telescope-nvim;
@@ -151,11 +148,7 @@ in {
         type = "lua";
         config = builtins.readFile ./plugins/glance.lua;
       }
-      {
-        plugin = avanteOverride;
-        type = "lua";
-        config = builtins.readFile ./plugins/avante.lua;
-      }
+      avanteOverride
       img-clip-nvim
       {
         plugin = nvim-dbee;
@@ -173,6 +166,18 @@ in {
           })
         '';
       }
+      {
+        plugin = hotpot-nvim;
+        config = let
+          fnlConfigs = builtins.attrNames (builtins.readDir ./fnl);
+          reqNames = map (file: lib.removeSuffix ".fnl" file) fnlConfigs;
+        in
+          ''
+            require("hotpot")
+          ''
+          + lib.concatStrings (map (name: "require(\"${name}\")") reqNames);
+        type = "lua";
+      }
     ];
 
     extraLuaConfig = ''
@@ -181,5 +186,11 @@ in {
           path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
       })
     '';
+  };
+
+  home.file.".config/nvim/fnl" = {
+    source = ./fnl;
+    enable = config.programs.neovim.enable;
+    recursive = true;
   };
 }
