@@ -59,7 +59,7 @@
       nerd-fonts.fira-code
       noto-fonts-color-emoji
       obsidian
-      posting
+      # posting
       python313
       rainfrog
       ripgrep
