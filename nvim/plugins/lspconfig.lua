@@ -79,6 +79,7 @@ local servers = {
     elixirls = {
         cmd = { "/run/current-system/sw/bin/elixir-ls" }
     },
+    nickel_ls = {},
     nixd = {
         settings = {
             nixd = {

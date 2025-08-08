@@ -58,6 +58,7 @@
       lazyjournal
       lefthook
       nerd-fonts.fira-code
+      nickel
       noto-fonts-color-emoji
       obsidian
       # posting

@@ -38,6 +38,7 @@ in {
       markdown-oxide
       marksman
       nixd
+      nls # Nickel LSP
       ocamlPackages.ocaml-lsp
       postgres-lsp
       phpactor
@@ -98,6 +99,7 @@ in {
           p.tree-sitter-lua
           p.tree-sitter-markdown
           p.tree-sitter-markdown-inline
+          p.tree-sitter-nickel
           p.tree-sitter-nix
           p.tree-sitter-nu
           p.tree-sitter-ocaml
