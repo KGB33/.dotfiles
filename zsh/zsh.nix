@@ -1,7 +1,7 @@
-{...}: {
+{config, ...}: {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "viins";
     syntaxHighlighting.enable = true;
     initExtraFirst = builtins.readFile ./zshrc;
