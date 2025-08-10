@@ -11,7 +11,7 @@
     extraConfig = let
       tss =
         if config.programs.television.enable
-        then "tv tss"
+        then "bash -c 'exec `tv tss`'"
         else "tss";
     in ''
           bind C-g display-popup -E -w 85% -h 85% "${pkgs.lazygit}/bin/lazygit"

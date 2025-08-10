@@ -55,7 +55,17 @@ in {
       enable = tvOn;
       source = formatter.generate "tss.toml" {
         metadata = {name = "tss";};
-        source = {command = "tmux ls -F '#{session_name}'";};
+        source = {
+          command = "tmux ls -F '#{session_name}'";
+          output = "tmux switch -t {}";
+        };
+        keybindings = {
+          ctrl-y = "actions:switch";
+        };
+        actions.switch = {
+          description = "Switch to session";
+          command = "tmux switch -t {}";
+        };
       };
     };
     "${prefix}/meta.toml" = {
