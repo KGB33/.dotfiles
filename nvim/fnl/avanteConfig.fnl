@@ -6,4 +6,4 @@
 (avante.setup {:auto_suggestions_provider :ollama
                :debug true
                :provider :ollama
-               :providers {:ollama {:model :devstral}}})
+               :providers {:ollama {:model :qwen3-coder}}})
