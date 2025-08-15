@@ -50,7 +50,6 @@
       fzf
       gh
       ghc
-      ghostty
       gnused
       goose-cli
       jq
