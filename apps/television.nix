@@ -2,10 +2,10 @@
   lib,
   config,
   pkgs,
-  tv,
   ...
 }: let
   tvOn = config.programs.television.enable;
+  tv = pkgs.television;
 in {
   programs.television = {
     package = tv;
@@ -45,15 +45,8 @@ in {
         };
       };
     };
-  };
-
-  home.file = let
-    prefix = ".config/television/cable";
-    formatter = pkgs.formats.toml {};
-  in {
-    "${prefix}/tss.toml" = {
-      enable = tvOn;
-      source = formatter.generate "tss.toml" {
+    channels = {
+      tss = {
         metadata = {name = "tss";};
         source = {
           command = "tmux ls -F '#{session_name}'";
@@ -67,10 +60,7 @@ in {
           command = "tmux switch -t {}";
         };
       };
-    };
-    "${prefix}/meta.toml" = {
-      enable = tvOn;
-      source = formatter.generate "meta.toml" {
+      meta = {
         metadata = {name = "meta";};
         source = {
           command = "tv list-channels";
@@ -78,11 +68,8 @@ in {
       };
     };
   };
-  home.activation =
-    lib.mkIf tvOn
-    {
-      televisionSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        run ${tv}/bin/tv update-channels
-      '';
-    };
+
+  programs.nix-search-tv = {
+    enable = true;
+  };
 }
