@@ -14,6 +14,7 @@
     ./stylix.nix
     ./apps/tmux.nix
     ./apps/television.nix
+    ./apps/ollama.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -272,16 +273,6 @@
 
   programs.lazygit = {
     enable = true;
-  };
-
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    environmentVariables = {
-      OLLAMA_CONTEXT_LENGTH = "32768";
-      OLLAMA_FLASH_ATTENTION = "true";
-      OLLAMA_KV_CACHE_TYPE = "q4_0";
-    };
   };
 
   # Let Home Manager install and manage itself.
