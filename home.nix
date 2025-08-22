@@ -15,6 +15,7 @@
     ./apps/tmux.nix
     ./apps/television.nix
     ./apps/ollama.nix
+    ./apps/container-use.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
