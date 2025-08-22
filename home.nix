@@ -29,10 +29,12 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "obsidian"
-      "discord"
-      "steam-unwrapped"
       "1password-cli"
+      "claude-code"
+      "crush"
+      "discord"
+      "obsidian"
+      "steam-unwrapped"
     ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -43,6 +45,8 @@
       cabal-install
       cargo
       clipse
+      claude-code
+      crush
       docker-client
       doggo
       fd
