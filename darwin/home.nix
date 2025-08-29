@@ -12,7 +12,7 @@
   home.homeDirectory = "/Users/keltonbassingthwaite";
 
   home.packages = with pkgs; [
-    (php82.buildEnv {
+    (php84.buildEnv {
       extraConfig = ''
         memory_limit = 2G
       '';
@@ -28,7 +28,7 @@
     _1password-cli
     colima
     nodejs_latest
-    php82Packages.composer
+    php84Packages.composer
     postgresql
     wireguard-tools
     zed-editor
