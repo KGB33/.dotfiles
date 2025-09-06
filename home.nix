@@ -16,6 +16,7 @@
     ./apps/television.nix
     ./apps/ollama.nix
     ./apps/container-use.nix
+    ./apps/ssh.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -146,11 +147,6 @@
         map_symbol = true;
       };
     };
-  };
-
-  programs.ssh = {
-    enable = true;
-    addKeysToAgent = "yes";
   };
 
   programs.gpg = {
