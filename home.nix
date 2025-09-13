@@ -57,6 +57,7 @@
       gh
       ghc
       gnused
+      go
       goose-cli
       jq
       jqp

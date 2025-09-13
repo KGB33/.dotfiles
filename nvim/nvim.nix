@@ -88,6 +88,7 @@ in {
           p.tree-sitter-fennel
           p.tree-sitter-fish
           p.tree-sitter-gleam
+          p.tree-sitter-go
           p.tree-sitter-graphql
           p.tree-sitter-haskell
           p.tree-sitter-hcl
