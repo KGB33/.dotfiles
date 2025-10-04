@@ -28,6 +28,8 @@
 
     nixcord.url = "github:kaylorben/nixcord";
 
+    vicinae.url = "github:vicinaehq/vicinae";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
@@ -42,6 +44,7 @@
     nixos-hardware,
     nixpkgs,
     stylix,
+    vicinae,
     ...
   }: {
     homeConfigurations = {
@@ -60,6 +63,7 @@
             stylix.homeModules.stylix
             niri.homeModules.niri
             nixcord.homeModules.nixcord
+            vicinae.homeManagerModules.default
           ];
           extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
         };
