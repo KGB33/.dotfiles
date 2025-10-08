@@ -243,7 +243,6 @@
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
-    themeFile = "everforest_dark_medium";
     # enable_audio_bell = "no";
   };
 

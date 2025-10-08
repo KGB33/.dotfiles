@@ -22,7 +22,8 @@
     enable = true;
     autoEnable = true;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
-    base16Scheme = everforestLight;
+    # base16Scheme = everforestLight;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
     fonts = {
       monospace = {
         package = pkgs.fira-code;

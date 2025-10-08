@@ -121,7 +121,6 @@ in {
       }
       nvim-treesitter-parsers.angular
       nvim-treesitter-parsers.yuck
-      everforest
       nvim-treesitter-parsers.vimdoc
       {
         plugin = telescope-nvim;
