@@ -1,6 +1,6 @@
 {...}: {
   networking = {
-    hostName = "tower";
+    hostName = "helm";
     firewall = {
       allowedTCPPorts = [];
     };
