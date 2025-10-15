@@ -12,8 +12,4 @@
       enable = false;
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    podman-tui
-  ];
 }

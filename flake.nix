@@ -95,6 +95,13 @@
           nixos-hardware.nixosModules.framework-16-7040-amd
         ];
       };
+      tower = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./systems/base/configuration.nix
+          ./systems/tower/configuration.nix
+        ];
+      };
     };
   };
 }
