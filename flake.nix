@@ -25,7 +25,6 @@
     mac-app-util.url = "github:hraban/mac-app-util";
 
     stylix.url = "github:danth/stylix";
-    catppuccin.url = "github:catppuccin/nix";
 
     nixcord.url = "github:kaylorben/nixcord";
 
@@ -35,7 +34,6 @@
   };
 
   outputs = {
-    catppuccin,
     dagger,
     hmm,
     home-manager,
@@ -50,7 +48,7 @@
     ...
   }: {
     homeConfigurations = {
-      "kgb33@geppetto" = let
+      "kgb33" = let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.${system};
         dagPkgs = dagger.packages.${system};
@@ -63,7 +61,6 @@
             ./home.nix
             ./linux/home.nix
             stylix.homeModules.stylix
-            catppuccin.homeModules.catppuccin
             niri.homeModules.niri
             nixcord.homeModules.nixcord
             vicinae.homeManagerModules.default
