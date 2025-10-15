@@ -15,7 +15,6 @@
     ./apps/tmux.nix
     ./apps/television.nix
     ./apps/ollama.nix
-    ./apps/container-use.nix
     ./apps/ssh.nix
   ];
 
