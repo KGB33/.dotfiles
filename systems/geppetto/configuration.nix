@@ -6,6 +6,7 @@
   imports = [
     ./network.nix
     ./hardware-configuration.nix
+    ../apps/steam.nix
   ];
 
   boot.initrd.kernelModules = ["amdgpu"];
@@ -15,18 +16,6 @@
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
-
-  programs.steam = {
-    enable = true;
-  };
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-unwrapped"
-      "steam-run"
-    ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

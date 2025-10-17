@@ -4,6 +4,9 @@
   in {
     enable = true;
     settings = {
+      input = {
+        accel_profile = "flat";
+      };
       exec-once = [
         "eww open top_bar"
         "hyprpaper"
