@@ -8,7 +8,6 @@
         accel_profile = "flat";
       };
       exec-once = [
-        "eww open top_bar"
         "hyprpaper"
       ];
       monitor = [
@@ -39,7 +38,7 @@
           "$mod, M, exit"
           "$mod, F, exec, firefox"
           "$mod, Q, exec, kitty"
-          "$mod, space, exec, fuzzel"
+          "$mod, space, exec, vicinae toggle"
           "$mod, L, exec, hyprlock"
           "$mod, V, exec, ${term} start --class clipse -- clipse"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"

@@ -51,8 +51,9 @@
       in
         lib.attrsets.mergeAttrsList [
           {
-            "Mod+G".action = spawn "ghostty";
-            "Mod+A".action = spawn "fuzzel";
+            "Mod+G".action = spawn "wezterm";
+            "Mod+Space".action = spawn-sh "vicinae toggle";
+            "Mod+A".action = spawn "vicinae toggle";
             "Mod+W".action = sh (builtins.concatStringsSep "; " [
               "systemctl --user restart waybar.service"
               "systemctl --user restart swaybg.service"

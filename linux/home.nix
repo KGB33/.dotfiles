@@ -11,6 +11,7 @@
     ./windowManagers/niri.nix
     ./windowManagers/waybar.nix
     ../nixcord.nix
+    ../apps/vicinae.nix
   ];
 
   home.username = "kgb33";
@@ -46,6 +47,7 @@
       extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
   };
+  systemd.user.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
   programs.fuzzel = {
     enable = true;
