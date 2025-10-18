@@ -4,8 +4,11 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.programs.tmux.enable {
+  options.apps.tmux.enable = lib.mkEnableOption "tmux" // {default = true;};
+
+  config = lib.mkIf config.apps.tmux.enable {
     programs.tmux = {
+      enable = true;
       escapeTime = 300;
       terminal = "tmux-256color";
       keyMode = "vi";
