@@ -153,43 +153,6 @@
     homedir = "${config.xdg.configHome}/gnupg";
   };
 
-  programs.git = {
-    enable = true;
-    userEmail = lib.mkDefault "keltonbassingthwaite@gmail.com";
-    userName = "Kelton Bassingthwaite";
-
-    lfs = {
-      enable = true;
-    };
-
-    difftastic = {
-      enable = true;
-      display = "inline";
-    };
-
-    extraConfig = {
-      rerere.enabled = true;
-      status = {
-        showUntrackedFiles = "all";
-      };
-      pull = {
-        rebase = true;
-      };
-      init = {
-        defaultBranch = "main";
-      };
-      diff."nodiff" = {
-        command = "echo Diff Not Shown.";
-      };
-    };
-  };
-  xdg.configFile."git/attributes" = {
-    text = ''
-      *.lock diff=nodiff
-      package-lock.json diff=nodiff
-    '';
-  };
-
   programs.btop = {
     enable = true;
     settings = {
