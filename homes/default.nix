@@ -8,15 +8,14 @@
   ...
 }: {
   imports = [
-    ./wezterm/wezterm.nix
-    ./nushell/nushell.nix
-    ./nvim/nvim.nix
-    ./scripts/scripts.nix
-    ./stylix.nix
-    ./apps/tmux.nix
-    ./apps/television.nix
-    ./apps/ollama.nix
-    ./apps/ssh.nix
+    ../wezterm/wezterm.nix
+    ../nushell/nushell.nix
+    ../nvim/nvim.nix
+    ../scripts/scripts.nix
+    ../stylix.nix
+    ../apps
+    ./darwin.nix
+    ./linux.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -215,10 +214,10 @@
       fish_command_not_found = ''echo "Command `$argv` not found."'';
       ll_ = ''eza -F -lbh $argv'';
       obs = ''command nvim (${pkgs.fd} . --extention md ~/notes/obsidianVault | ${pkgs.fzf})'';
-      venv = ''${builtins.readFile ./fish/functions/venv.fish}'';
-      update = ''${builtins.readFile ./fish/functions/update.fish}'';
-      dagvenv = ''${builtins.readFile ./fish/functions/dagvenv.fish}'';
-      sealSecret = ''${builtins.readFile ./fish/functions/sealSecret.fish}'';
+      venv = ''${builtins.readFile ../fish/functions/venv.fish}'';
+      update = ''${builtins.readFile ../fish/functions/update.fish}'';
+      dagvenv = ''${builtins.readFile ../fish/functions/dagvenv.fish}'';
+      sealSecret = ''${builtins.readFile ../fish/functions/sealSecret.fish}'';
     };
     interactiveShellInit = ''
       fish_vi_key_bindings

@@ -48,12 +48,15 @@
       systems = ["x86_64-linux" "aarch64-darwin"];
       flake = {
         homeConfigurations = let
-          mkArgs = sys: {
-            dagger' = inputs.dagger.packages."${sys}".dagger;
-            hmm' = inputs.hmm.packages."${sys}".hmm;
-            nasty' = inputs.nasty.packages."${sys}".nasty;
-          };
+          mkArgs = sys:
+            {inherit inputs;}
+            // {
+              dagger' = inputs.dagger.packages."${sys}".dagger;
+              hmm' = inputs.hmm.packages."${sys}".hmm;
+              nasty' = inputs.nasty.packages."${sys}".nasty;
+            };
           defaultModules = [
+            ./homes
             inputs.stylix.homeModules.stylix
             inputs.niri.homeModules.niri
             inputs.nixcord.homeModules.nixcord
@@ -66,13 +69,8 @@
           in
             inputs.home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
-              modules =
-                defaultModules
-                ++ [
-                  ./home.nix
-                  ./linux/home.nix
-                ];
-              extraSpecialArgs = {inherit inputs;} // mkArgs system;
+              modules = defaultModules;
+              extraSpecialArgs = mkArgs system;
             };
           "keltonbassingthwaite" = let
             system = "aarch64-darwin";
@@ -80,13 +78,8 @@
           in
             inputs.home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
-              modules =
-                defaultModules
-                ++ [
-                  ./home.nix
-                  ./darwin/home.nix
-                ];
-              extraSpecialArgs = let mau = inputs.mac-app-util; in {inherit inputs mau;} // mkArgs system;
+              modules = defaultModules;
+              extraSpecialArgs = mkArgs system;
             };
         };
         nixosConfigurations = {
