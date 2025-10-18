@@ -10,7 +10,6 @@
   imports = [
     ../wezterm/wezterm.nix
     ../nushell/nushell.nix
-    ../nvim/nvim.nix
     ../scripts/scripts.nix
     ../stylix.nix
     ../apps
