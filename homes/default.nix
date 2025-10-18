@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   dagger',
   hmm',
   ...
@@ -10,7 +9,6 @@
   imports = [
     ../nushell/nushell.nix
     ../scripts/scripts.nix
-    ../stylix.nix
     ../apps
     ./darwin.nix
     ./linux.nix
