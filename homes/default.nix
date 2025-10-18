@@ -79,7 +79,7 @@
       yq-go
       zig
     ]
-    ++ [dagger' hmm'];
+    ++ [dagger'.dagger hmm'];
 
   fonts.fontconfig = {
     enable = true;

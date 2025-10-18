@@ -51,7 +51,7 @@
           mkArgs = sys:
             {inherit inputs;}
             // {
-              dagger' = inputs.dagger.packages."${sys}".dagger;
+              dagger' = inputs.dagger.packages."${sys}";
               hmm' = inputs.hmm.packages."${sys}".hmm;
               nasty' = inputs.nasty.packages."${sys}".nasty;
             };
