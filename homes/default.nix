@@ -8,7 +8,6 @@
   ...
 }: {
   imports = [
-    ../wezterm/wezterm.nix
     ../nushell/nushell.nix
     ../scripts/scripts.nix
     ../stylix.nix

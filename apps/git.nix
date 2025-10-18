@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  option.apps.git.enable = lib.mkEnableOption "git" // {default = true;};
+  options.apps.git.enable = lib.mkEnableOption "git" // {default = true;};
 
   config = lib.mkIf config.apps.git.enable {
     programs.git = {
