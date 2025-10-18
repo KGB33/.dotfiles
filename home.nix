@@ -2,7 +2,8 @@
   config,
   pkgs,
   lib,
-  dagPkgs,
+  inputs,
+  dagger',
   hmm',
   ...
 }: {
@@ -79,7 +80,7 @@
       yq-go
       zig
     ]
-    ++ [dagPkgs.dagger hmm'];
+    ++ [dagger' hmm'];
 
   fonts.fontconfig = {
     enable = true;

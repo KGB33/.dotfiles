@@ -31,74 +31,81 @@
     vicinae.url = "github:vicinaehq/vicinae";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = {
-    dagger,
-    hmm,
-    home-manager,
-    mac-app-util,
-    nasty,
-    niri,
-    nixcord,
-    nixos-hardware,
-    nixpkgs,
-    stylix,
-    vicinae,
-    ...
-  }: {
-    homeConfigurations = {
-      "kgb33" = let
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-        dagPkgs = dagger.packages.${system};
-        hmm' = hmm.packages.${system}.hmm;
-        nasty' = nasty.packages.${system}.nasty;
-      in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home.nix
-            ./linux/home.nix
-            stylix.homeModules.stylix
-            niri.homeModules.niri
-            nixcord.homeModules.nixcord
-            vicinae.homeManagerModules.default
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
+      config,
+      withSystem,
+      moduleWithSystem,
+      ...
+    }: {
+      imports = [
+        inputs.home-manager.flakeModules.home-manager
+      ];
+      systems = ["x86_64-linux" "aarch64-darwin"];
+      flake = {
+        homeConfigurations = let
+          mkArgs = sys: {
+            dagger' = inputs.dagger.packages."${sys}".dagger;
+            hmm' = inputs.hmm.packages."${sys}".hmm;
+            nasty' = inputs.nasty.packages."${sys}".nasty;
+          };
+          defaultModules = [
+            inputs.stylix.homeModules.stylix
+            inputs.niri.homeModules.niri
+            inputs.nixcord.homeModules.nixcord
+            inputs.vicinae.homeManagerModules.default
           ];
-          extraSpecialArgs = {inherit dagPkgs hmm' nasty';};
+        in {
+          "kgb33" = let
+            system = "x86_64-linux";
+            pkgs = inputs.nixpkgs.legacyPackages.${system};
+          in
+            inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules =
+                defaultModules
+                ++ [
+                  ./home.nix
+                  ./linux/home.nix
+                ];
+              extraSpecialArgs = {inherit inputs;} // mkArgs system;
+            };
+          "keltonbassingthwaite" = let
+            system = "aarch64-darwin";
+            pkgs = inputs.nixpkgs.legacyPackages.${system};
+          in
+            inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules =
+                defaultModules
+                ++ [
+                  ./home.nix
+                  ./darwin/home.nix
+                ];
+              extraSpecialArgs = let mau = inputs.mac-app-util; in {inherit inputs mau;} // mkArgs system;
+            };
         };
-      "keltonbassingthwaite" = let
-        system = "aarch64-darwin";
-        pkgs = nixpkgs.legacyPackages.${system};
-        dagPkgs = dagger.packages.${system};
-        hmm' = hmm.packages.${system}.hmm;
-      in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home.nix
-            ./darwin/home.nix
-            stylix.homeModules.stylix
-          ];
-          extraSpecialArgs = {inherit dagPkgs hmm' mac-app-util;};
+        nixosConfigurations = {
+          geppetto = inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./systems/base/configuration.nix
+              ./systems/geppetto/configuration.nix
+              inputs.nixos-hardware.nixosModules.framework-16-7040-amd
+            ];
+          };
+          helm = inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./systems/base/configuration.nix
+              ./systems/helm/configuration.nix
+            ];
+          };
         };
-    };
-    nixosConfigurations = {
-      geppetto = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./systems/base/configuration.nix
-          ./systems/geppetto/configuration.nix
-          nixos-hardware.nixosModules.framework-16-7040-amd
-        ];
       };
-      helm = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./systems/base/configuration.nix
-          ./systems/helm/configuration.nix
-        ];
-      };
-    };
-  };
+    });
 }

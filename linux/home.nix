@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  nasty',
+  inputs,
   ...
 }: {
   imports = [
@@ -30,7 +30,7 @@
       xdg-utils
       xivlauncher
     ]
-    ++ [nasty'];
+    ++ [inputs.nasty];
 
   home.file = {
     # TODO: Move these hypr* configs into their programs/services
