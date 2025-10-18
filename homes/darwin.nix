@@ -7,7 +7,6 @@
 }: {
   imports = [
     inputs.mac-app-util.homeManagerModules.default
-    ../zsh/zsh.nix
   ];
 
   options = {
@@ -56,6 +55,8 @@
     };
     home.file.".config/git/allowed_signers".text = ''      keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXEwMKmnpJVai5TxjTmDRnju98Dp9RgPmMXqahwuh8m kelton_bassingthwaite@cdlpowersuite.com
     '';
+
+    apps.zsh.enable = true;
 
     services.jankyborders = {
       enable = true;
