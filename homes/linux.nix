@@ -11,7 +11,6 @@
     ../linux/windowManagers/hypr.nix
     ../linux/windowManagers/niri.nix
     ../linux/windowManagers/waybar.nix
-    ../nixcord.nix
   ];
 
   options = {
@@ -40,6 +39,8 @@
         xivlauncher
       ]
       ++ [inputs.nasty];
+
+    apps.nixcord.enable = true;
 
     home.file = {
       # TODO: Move these hypr* configs into their programs/services
