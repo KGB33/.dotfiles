@@ -7,7 +7,6 @@
   ...
 }: {
   imports = [
-    ../nushell/nushell.nix
     ../scripts/scripts.nix
     ../apps
     ./darwin.nix
