@@ -17,6 +17,7 @@
 
       difftastic = {
         enable = true;
+        enableAsDifftool = true;
         display = "inline";
       };
 

@@ -14,7 +14,7 @@
         gstat
         query
         # net
-        highlight
+        # highlight
         formats
       ];
       configFile.source = ./nushell/config.nu;

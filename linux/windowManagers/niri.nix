@@ -61,9 +61,9 @@
 
             "Mod+L".action = spawn "blurred-locker";
 
-            "Mod+Shift+S".action = screenshot;
+            # "Mod+Shift+S".action = screenshot;
             # "Print".action = screenshot-screen; # Only on Niri stable
-            "Mod+Print".action = screenshot-window;
+            # "Mod+Print".action = screenshot-window;
 
             "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
             "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
