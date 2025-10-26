@@ -28,11 +28,13 @@
     home.packages = with pkgs;
       [
         brightnessctl
+        efibootmgr
         freecad
         grim
         hyprlock
         netscanner
         prusa-slicer
+        pulsemixer
         slurp
         wl-clipboard
         xdg-utils
