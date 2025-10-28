@@ -21,8 +21,11 @@
     home.username = "keltonbassingthwaite";
     home.homeDirectory = "/Users/keltonbassingthwaite";
 
+    apps.zsh.enable = true;
+    apps.vicinae.enable = false;
+
     home.packages = with pkgs; [
-      (php84.buildEnv {
+      (php82.buildEnv {
         extraConfig = ''
           memory_limit = 2G
         '';
@@ -38,7 +41,7 @@
       _1password-cli
       colima
       nodejs_latest
-      php84Packages.composer
+      php82Packages.composer
       postgresql
       wireguard-tools
       zed-editor
@@ -55,8 +58,6 @@
     };
     home.file.".config/git/allowed_signers".text = ''      keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXEwMKmnpJVai5TxjTmDRnju98Dp9RgPmMXqahwuh8m kelton_bassingthwaite@cdlpowersuite.com
     '';
-
-    apps.zsh.enable = true;
 
     services.jankyborders = {
       enable = true;

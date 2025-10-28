@@ -62,14 +62,13 @@
       nickel
       noto-fonts-color-emoji
       obsidian
-      # posting
       python313
       rainfrog
       ripgrep
       serie
       uv
       wireguard-tools
-      wireshark-qt
+      yaak
       yazi
       yq-go
       zig
