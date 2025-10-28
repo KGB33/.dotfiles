@@ -8,20 +8,18 @@
   config = lib.mkIf config.apps.git.enable {
     programs.git = {
       enable = true;
-      userEmail = lib.mkDefault "keltonbassingthwaite@gmail.com";
-      userName = "Kelton Bassingthwaite";
+      settings = {
+        user = {
+          email = lib.mkDefault "keltonbassingthwaite@gmail.com";
+          name = "Kelton Bassingthwaite";
+        };
+      };
 
       lfs = {
         enable = true;
       };
 
-      difftastic = {
-        enable = true;
-        enableAsDifftool = true;
-        display = "inline";
-      };
-
-      extraConfig = {
+      settings = {
         rerere.enabled = true;
         status = {
           showUntrackedFiles = "all";
@@ -35,6 +33,14 @@
         diff."nodiff" = {
           command = "echo Diff Not Shown.";
         };
+      };
+    };
+    programs.difftastic = {
+      enable = true;
+      options.display = "inline";
+      git = {
+        diffToolMode = true;
+        enable = true;
       };
     };
     xdg.configFile."git/attributes" = {

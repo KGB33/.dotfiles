@@ -76,7 +76,7 @@
         key = "~/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
-      extraConfig.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+      settings.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
     };
     home.file.".config/git/allowed_signers".text = ''keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsItKA/n+4hj/qTtEURIGm3zpoelVwqyUOG88DqPGpB keltonbassingthwaite@gmail.com'';
 
