@@ -125,11 +125,7 @@ in {
         nvim-treesitter-parsers.angular
         nvim-treesitter-parsers.yuck
         nvim-treesitter-parsers.vimdoc
-        {
-          plugin = telescope-nvim;
-          type = "lua";
-          config = builtins.readFile ./nvim/plugins/telescope.lua;
-        }
+        telescope-nvim
         telescope-ui-select-nvim
 
         # DAP
@@ -176,7 +172,7 @@ in {
             ''
               require("hotpot")
             ''
-            + lib.concatStrings (map (name: "require(\"${name}\")") reqNames);
+            + lib.concatStrings (map (name: "require(\"${name}\")\n") reqNames);
           type = "lua";
         }
       ];
