@@ -29,6 +29,7 @@
       [
         brightnessctl
         efibootmgr
+        firefox
         freecad
         grim
         hyprlock
