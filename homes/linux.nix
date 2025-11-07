@@ -59,6 +59,7 @@
         extraPortals = [pkgs.xdg-desktop-portal-wlr];
       };
     };
+    home.sessionVariables.XDG_SESSION_TYPE = "wayland";
     systemd.user.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
     programs.fuzzel = {
