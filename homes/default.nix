@@ -37,6 +37,7 @@
   home.packages = with pkgs;
     [
       alejandra # Nix formatter
+      baobab
       cabal-install
       cargo
       clipse
