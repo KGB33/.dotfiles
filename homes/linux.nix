@@ -5,13 +5,7 @@
   config,
   ...
 }: {
-  imports = [
-    ../linux/windowManagers/sway.nix
-    ../linux/windowManagers/river.nix
-    ../linux/windowManagers/hypr.nix
-    ../linux/windowManagers/niri.nix
-    ../linux/windowManagers/waybar.nix
-  ];
+  imports = [];
 
   options = {
     linuxHome.enable = lib.mkOption {
