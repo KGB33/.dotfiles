@@ -30,6 +30,7 @@
         netscanner
         prusa-slicer
         pulsemixer
+        prismlauncher
         slurp
         wl-clipboard
         xdg-utils
