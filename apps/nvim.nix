@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  avanteOverride = import ./nvim/avante.nix {
-    pkgs = pkgs;
-    lib = lib;
-  };
+  # avanteOverride = import ./nvim/avante.nix {
+  #   pkgs = pkgs;
+  #   lib = lib;
+  # };
 in {
   options.apps.nvim.enable = lib.mkEnableOption "nvim" // {default = true;};
 
@@ -145,7 +145,7 @@ in {
           type = "lua";
           config = builtins.readFile ./nvim/plugins/glance.lua;
         }
-        avanteOverride
+        avante-nvim
         img-clip-nvim
         {
           plugin = nvim-dbee;
