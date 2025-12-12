@@ -129,11 +129,7 @@ in {
         telescope-ui-select-nvim
 
         # DAP
-        {
-          plugin = nvim-dap;
-          config = builtins.readFile ./nvim/plugins/dap.lua;
-          type = "lua";
-        }
+        nvim-dap
         telescope-dap-nvim
         nvim-dap-ui
         nvim-nio

@@ -26,7 +26,6 @@
     builtins.elem (lib.getName pkg) [
       "1password-cli"
       "claude-code"
-      "crush"
       "discord"
       "obsidian"
       "steam-unwrapped"
@@ -42,7 +41,6 @@
       cargo
       clipse
       claude-code
-      crush
       docker-client
       doggo
       fd
