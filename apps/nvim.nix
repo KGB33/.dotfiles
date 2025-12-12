@@ -60,6 +60,18 @@ in {
 
       plugins = with pkgs.vimPlugins; [
         {
+          plugin = hotpot-nvim;
+          config = let
+            fnlConfigs = builtins.attrNames (builtins.readDir ./nvim/fnl);
+            reqNames = map (file: lib.removeSuffix ".fnl" file) fnlConfigs;
+          in
+            ''
+              require("hotpot")
+            ''
+            + lib.concatStrings (map (name: "require(\"${name}\")\n") reqNames);
+          type = "lua";
+        }
+        {
           plugin = nvim-lspconfig;
           config = builtins.readFile ./nvim/plugins/lspconfig.lua;
           type = "lua";
@@ -159,22 +171,9 @@ in {
             })
           '';
         }
-        {
-          plugin = hotpot-nvim;
-          config = let
-            fnlConfigs = builtins.attrNames (builtins.readDir ./nvim/fnl);
-            reqNames = map (file: lib.removeSuffix ".fnl" file) fnlConfigs;
-          in
-            ''
-              require("hotpot")
-            ''
-            + lib.concatStrings (map (name: "require(\"${name}\")\n") reqNames);
-          type = "lua";
-        }
       ];
 
       extraLuaConfig = ''
-        ${builtins.readFile ./nvim/options.lua}
         vim.treesitter.language.add("nu", {
             path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
         })
