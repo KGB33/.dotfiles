@@ -30,6 +30,9 @@
 
 (set vim.o.scrolloff 10)
 
+(set vim.o.foldmethod :expr)
+(set vim.o.foldexpr "nvim_treesitter#foldexpr()")
+
 (vim.keymap.set :n :k "v:count == 0 ? 'gk' : 'k'" { :expr true :silent true })
 (vim.keymap.set :n :j "v:count == 0 ? 'gj' : 'j'" { :expr true :silent true })
 
