@@ -40,7 +40,6 @@
       })
       _1password-cli
       colima
-      nodejs_latest
       php82Packages.composer
       postgresql
       wireguard-tools

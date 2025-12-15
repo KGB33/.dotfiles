@@ -1,11 +1,28 @@
 (local dap (require :dap))
 
+;; *+*+*+*+* Firefox JS/TS Debugger *+*+*+*+*
+(set dap.adapters.firefox 
+  { :type "executable"
+    :command "node"
+    :args [(.. (os.getenv "NVIM_FIREFOX_DEBUG_EXTENSION") "/share/vscode/extensions/firefox-devtools.vscode-firefox-debug/dist/adapter.bundle.js")]
+  })
+
+(set dap.configurations.typescript
+  [{:name "Firefox Debugger"
+    :type "firefox"
+    :request "launch"
+    :reAttach true
+    :url "http://localhost:3000"
+    :webRoot "${workspaceFolder}"
+    :firefoxExecutable (-> (vim.fn.system "which firefox") (: :gsub "\n" ""))
+  }])
+
+;; *+*+*+*+* Erlang Debugger *+*+*+*+*
 (set dap.adapters.erlang-edb
   { :type "executable"
     :command "edb"
     :args ["dap"]
   })
-
 
 (set dap.configurations.gleam
   [{ :type "erlang-edb"

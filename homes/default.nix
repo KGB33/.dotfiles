@@ -58,6 +58,7 @@
       lefthook
       nerd-fonts.fira-code
       nickel
+      nodejs_latest
       noto-fonts-color-emoji
       obsidian
       python313
