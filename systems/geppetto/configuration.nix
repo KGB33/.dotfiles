@@ -6,7 +6,7 @@
   imports = [
     ./network.nix
     ./hardware-configuration.nix
-    ../apps/steam.nix
+    ../../components/steam.nix
   ];
 
   boot.initrd.kernelModules = ["amdgpu"];
