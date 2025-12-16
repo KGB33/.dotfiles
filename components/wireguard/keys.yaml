@@ -1,0 +1,17 @@
+geppetto-prv: ENC[AES256_GCM,data:fo/s5vie61Zvlh9hk5cuy0XbXXgwReWNT4IdlmpEqjQrJHxjwOkbA5jeQtI=,iv:cH+jSqJ7g2AT4batjULhvYiVIs4yS5G+hdVIk5Nu+9M=,tag:euntMUm0LXLFVwdKFXuKIw==,type:str]
+geppetto-psk: ENC[AES256_GCM,data:vb2yKLlksfmec44l29IM5W3ZksLpaPq46qiyJs95dWf+LXpFd/YAqZD7/O0=,iv:uoa2S3heDvPrl62jrOs+oOMXQGpK/z2Via0r80bS5RM=,tag:PDKMPxtfrgzViNBMISIXMQ==,type:str]
+sops:
+    age:
+        - recipient: age1fa5vgl8p2yvjfrllgflun48j3nyff8q7809chsd83lu28r95k55sskzgdk
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0aE5tUlZaNzVWMW13aEVU
+            UURxS1FoTVVtVFIwSXk5eVVSYlRqRC9hWkQwCmJvblozaWQwN0x2cExQSExvMDZC
+            SnBiUVZBcjRnOHgrU1VzYUJWRHJ4WjQKLS0tIDJiN3NNbXg3cUdhUGhFZmgyQjhK
+            S1NHMzg0S3RkSHVzYkRzeXczRUp4OFUKgIDeTSXTbzC9yVgOrlp6PG9eNwrRQ/MH
+            kVBwU8jGTPW1TDfFAug7svJ1Ces85wQRCHA+kxknUBkr7H4hIVXBvQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-16T17:10:04Z"
+    mac: ENC[AES256_GCM,data:x1/B6RTq36gcyRuCRtMtJd3Y5dh2WqboTyjttguu3iTTQ11PuPpipdhukTW46y0OE3jnmUk2u71rlXHo58wCcEOEsRdNBeFHf0/0W5FaYkxveOPYtEhZ9rWvv1fDt2PN2EqUwvjw6eYAdVgG52IOZ9SV5gdsa8Tmu/vbQKWk8xY=,iv:R7G/+jp707S5FcQ0ZRNsZwb24QjfvjnFGmSqleyJodE=,tag:TJHvPSVdsHHD8C7wtu6nkw==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.11.0

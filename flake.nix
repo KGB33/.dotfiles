@@ -24,6 +24,11 @@
     };
     mac-app-util.url = "github:hraban/mac-app-util";
 
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix.url = "github:danth/stylix";
 
     nixcord.url = "github:kaylorben/nixcord";
@@ -88,6 +93,7 @@
             modules = [
               ./systems/base/configuration.nix
               ./systems/geppetto/configuration.nix
+              inputs.sops-nix.nixosModules.sops
               inputs.nixos-hardware.nixosModules.framework-16-7040-amd
             ];
           };
@@ -96,6 +102,7 @@
             modules = [
               ./systems/base/configuration.nix
               ./systems/helm/configuration.nix
+              inputs.sops-nix.nixosModules.sops
             ];
           };
         };
