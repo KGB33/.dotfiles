@@ -7,7 +7,10 @@
   config = lib.mkIf config.apps.vicinae.enable {
     services.vicinae = {
       enable = true;
-      autoStart = true;
+      systemd = {
+        enable = true;
+        autoStart = true;
+      };
     };
   };
 }
