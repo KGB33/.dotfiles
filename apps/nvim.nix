@@ -56,19 +56,13 @@ in {
         fnlfmt
       ];
 
-      plugins = with pkgs.vimPlugins; [
-        {
-          plugin = hotpot-nvim;
-          config = let
-            fnlConfigs = builtins.attrNames (builtins.readDir ./nvim/fnl);
-            reqNames = map (file: lib.removeSuffix ".fnl" file) fnlConfigs;
-          in
-            ''
-              require("hotpot")
-            ''
-            + lib.concatStrings (map (name: "require(\"${name}\")\n") reqNames);
-          type = "lua";
-        }
+      plugins = with pkgs.vimPlugins; let
+        mkFnlPlugin = p: fn: {
+          plugin = p;
+          type = "fennel";
+          runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
+        };
+      in [
         {
           plugin = nvim-lspconfig;
           config = builtins.readFile ./nvim/plugins/lspconfig.lua;
@@ -135,23 +129,23 @@ in {
         nvim-treesitter-parsers.angular
         nvim-treesitter-parsers.yuck
         nvim-treesitter-parsers.vimdoc
-        telescope-nvim
+        (mkFnlPlugin telescope-nvim "telescope")
         telescope-ui-select-nvim
 
         # DAP
-        nvim-dap
+        (mkFnlPlugin nvim-dap "dap")
         telescope-dap-nvim
         nvim-dap-ui
         nvim-nio
 
         which-key-nvim
-        flash-nvim
+        (mkFnlPlugin flash-nvim "flash")
         {
           plugin = glance-nvim;
           type = "lua";
           config = builtins.readFile ./nvim/plugins/glance.lua;
         }
-        avante-nvim
+        (mkFnlPlugin avanteOverride "avante")
         img-clip-nvim
         {
           plugin = nvim-dbee;
@@ -169,6 +163,23 @@ in {
             })
           '';
         }
+        {
+          plugin = hotpot-nvim;
+          runtime."fnl/options.fnl".text = builtins.readFile ./nvim/fnl/options.fnl;
+          config = let
+            requireables =
+              ["hotpot" "options"]
+              ++ (config.programs.neovim.plugins
+                |> builtins.filter (p: p.type == "fennel")
+                |> builtins.concatMap (p: builtins.attrNames p.runtime)
+                |> builtins.map (p':
+                  p'
+                  |> builtins.baseNameOf
+                  |> lib.removeSuffix ".fnl"));
+          in
+            lib.concatStrings (map (name: "require(\"${name}\")\n") requireables);
+          type = "lua";
+        }
       ];
 
       extraLuaConfig = ''
@@ -176,12 +187,6 @@ in {
             path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
         })
       '';
-    };
-
-    home.file.".config/nvim/fnl" = {
-      source = ./nvim/fnl;
-      enable = config.programs.neovim.enable;
-      recursive = true;
     };
 
     home.sessionVariables = {
