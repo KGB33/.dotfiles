@@ -63,22 +63,16 @@ in {
           runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
       in [
+        vim-sexp
+        vim-sexp-mappings-for-regular-people
+        vim-repeat
+        vim-surround
+        conjure
         {
           plugin = nvim-lspconfig;
           config = builtins.readFile ./nvim/plugins/lspconfig.lua;
           type = "lua";
         }
-
-        # nvim-cmp sources
-        # luasnip
-        # cmp_luasnip
-        # cmp-nvim-lsp
-        # cmp-path
-        # {
-        #   plugin = nvim-cmp;
-        #   config = builtins.readFile ./plugins/cmp.lua;
-        #   type = "lua";
-        # }
         {
           plugin = blink-cmp-avante;
         }
