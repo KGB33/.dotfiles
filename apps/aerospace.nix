@@ -18,7 +18,7 @@
     programs.aerospace = {
       enable = true;
       launchd.enable = true;
-      userSettings = {
+      settings = {
         start-at-login = false;
         mode = {
           main.binding = let
