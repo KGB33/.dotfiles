@@ -81,48 +81,7 @@ in {
           config = builtins.readFile ./nvim/plugins/blink.lua;
           type = "lua";
         }
-        {
-          plugin = nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-bash
-            p.tree-sitter-css
-            p.tree-sitter-dockerfile
-            p.tree-sitter-fennel
-            p.tree-sitter-fish
-            p.tree-sitter-gleam
-            p.tree-sitter-go
-            p.tree-sitter-graphql
-            p.tree-sitter-haskell
-            p.tree-sitter-hcl
-            p.tree-sitter-hjson
-            p.tree-sitter-html
-            p.tree-sitter-json
-            p.tree-sitter-json5
-            p.tree-sitter-just
-            p.tree-sitter-lua
-            p.tree-sitter-markdown
-            p.tree-sitter-markdown-inline
-            p.tree-sitter-nickel
-            p.tree-sitter-nix
-            p.tree-sitter-nu
-            p.tree-sitter-ocaml
-            p.tree-sitter-php
-            p.tree-sitter-python
-            p.tree-sitter-rust
-            p.tree-sitter-scss
-            p.tree-sitter-sql
-            p.tree-sitter-toml
-            p.tree-sitter-typescript
-            p.tree-sitter-vim
-            p.tree-sitter-yaml
-            p.tree-sitter-yuck
-            p.tree-sitter-zig
-          ]);
-          config = builtins.readFile ./nvim/plugins/treesitter.lua;
-          type = "lua";
-        }
-        nvim-treesitter-parsers.angular
-        nvim-treesitter-parsers.yuck
-        nvim-treesitter-parsers.vimdoc
+        nvim-treesitter.withAllGrammars
         (mkFnlPlugin telescope-nvim "telescope")
         telescope-ui-select-nvim
 
