@@ -39,7 +39,6 @@
       baobab
       cabal-install
       cargo
-      clipse
       claude-code
       docker-client
       doggo
