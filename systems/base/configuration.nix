@@ -17,6 +17,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = ["ip_tables" "iptable_nat"];
+    extraModulePackages = [];
     loader.systemd-boot = {
       enable = true;
       configurationLimit = 10;
