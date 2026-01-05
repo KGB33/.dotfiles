@@ -63,6 +63,7 @@ in {
           runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
       in [
+        (mkFnlPlugin catppuccin-nvim "catppuccin")
         vim-sexp
         vim-sexp-mappings-for-regular-people
         vim-repeat

@@ -45,6 +45,7 @@
         };
       };
       targets.firefox.profileNames = ["default"];
+      targets.neovim.enable = false; # Handle separably for Tree-sitter enabled highlighting
     };
   };
 }
