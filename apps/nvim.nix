@@ -81,7 +81,7 @@ in {
           config = builtins.readFile ./nvim/plugins/blink.lua;
           type = "lua";
         }
-        nvim-treesitter.withAllGrammars
+        (mkFnlPlugin nvim-treesitter.withAllGrammars "treesitter")
         (mkFnlPlugin telescope-nvim "telescope")
         telescope-ui-select-nvim
 
@@ -125,9 +125,9 @@ in {
               ++ (config.programs.neovim.plugins
                 |> builtins.filter (p: p.type == "fennel")
                 |> builtins.concatMap (p: builtins.attrNames p.runtime)
-                |> builtins.map (p':
+                |> map (p':
                   p'
-                  |> builtins.baseNameOf
+                  |> baseNameOf
                   |> lib.removeSuffix ".fnl"));
           in
             lib.concatStrings (map (name: "require(\"${name}\")\n") requireables);
