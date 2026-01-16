@@ -6,8 +6,8 @@
   src = pkgs.fetchFromGitHub {
     owner = "yetone";
     repo = "avante.nvim";
-    rev = "d3ec7c7320151244f07252a73628b1417f694b06";
-    hash = "sha256-1NzzyWW2Tp91wa+Ujv2cDTv/Cb/HgA6LiDuwxVWdJwU=";
+    rev = "e89eb79abf5754645e20aa6074da10ed20bba33c";
+    hash = "sha256-jxbDBvaVtgC0L/MSyoZjGjBxvRUdNofRsiUHwntab7c=";
   };
   avante-nvim-lib = pkgs.rustPlatform.buildRustPackage {
     pname = "avante-nvim-lib";
