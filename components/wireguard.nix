@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  options.apps.wireguard.enable = lib.mkEnableOption "wireguard" // {default = pkgs.stdenv.isLinux;};
+  options.apps.wireguard.enable = lib.mkEnableOption "wireguard"; # // {default = pkgs.stdenv.isLinux;};
 
   config = lib.mkIf config.apps.wireguard.enable {
     sops = {
