@@ -62,7 +62,19 @@ in {
           type = "fennel";
           runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
+        code-review = pkgs.vimUtils.buildVimPlugin {
+          name = "code-review";
+          src = pkgs.fetchFromGitHub {
+            owner = "choplin";
+            repo = "code-review.nvim";
+            rev = "v0.6.0";
+            hash = "sha256-WpbQswkUpB4Nblos8+5UE5I/PHUQOi+RQ+hj4CCdL4o=";
+          };
+        };
       in [
+        (mkFnlPlugin code-review "code-review")
+        diffview-nvim
+
         (mkFnlPlugin catppuccin-nvim "catppuccin")
         vim-sexp
         vim-sexp-mappings-for-regular-people
