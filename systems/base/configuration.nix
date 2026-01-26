@@ -65,10 +65,19 @@
     pulse.enable = true;
   };
 
+  services.displayManager.ly = {
+    x11Support = false;
+    enable = true;
+  };
+
   security.pam.services = {
     hyprlock = {};
   };
+
+  # Enable here so Ly can see them,
+  # configure via home-manager
   programs.hyprland.enable = true;
+  programs.niri.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";

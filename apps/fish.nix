@@ -63,9 +63,6 @@
         fish_add_path "$CARGO_HOME/bin"
       '';
       loginShellInit = ''
-        if test (tty) = /dev/tty1
-          start-hyprland
-        end
       '';
     };
   };

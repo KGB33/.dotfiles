@@ -22,6 +22,12 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     mac-app-util.url = "github:hraban/mac-app-util";
 
     sops-nix = {
@@ -34,6 +40,10 @@
     nixcord.url = "github:kaylorben/nixcord";
 
     vicinae.url = "github:vicinaehq/vicinae";
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -66,6 +76,7 @@
             inputs.niri.homeModules.niri
             inputs.nixcord.homeModules.nixcord
             inputs.vicinae.homeManagerModules.default
+            inputs.noctalia.homeModules.default
           ];
         in {
           "kgb33" = let
