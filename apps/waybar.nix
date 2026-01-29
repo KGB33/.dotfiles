@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  options.apps.waybar.enable = lib.mkEnableOption "waybar" // {default = pkgs.stdenv.isLinux;};
+  options.apps.waybar.enable = lib.mkEnableOption "waybar"; # // {default = pkgs.stdenv.isLinux;};
   config = lib.mkIf config.apps.waybar.enable {
     programs.waybar = {
       enable = true;
