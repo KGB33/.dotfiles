@@ -6,8 +6,9 @@
   options.apps.nixcord.enable = lib.mkEnableOption "nixcord";
 
   config = lib.mkIf config.apps.nixcord.enable {
+    programs.discord.enable = true;
     programs.nixcord = {
-      enable = true;
+      enable = false;
       discord = {
         vencord.enable = false;
         equicord.enable = true;
