@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  self,
   ...
 }: {
   config.flake.lib = {
@@ -10,12 +11,6 @@
           inputs.self.modules.nixos.${name}
           {nixpkgs.hostPlatform = lib.mkDefault system;}
         ];
-      };
-    };
-
-    mkHome = system: name: {
-      ${name} = inputs.home-manager.lib.homeManagerConfiguration {
-        modules = [inputs.self.modules.home.${name}];
       };
     };
   };
