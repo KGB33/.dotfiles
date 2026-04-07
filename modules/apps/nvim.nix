@@ -44,7 +44,7 @@
           nixd
           nls # Nickel LSP
           ocamlPackages.ocaml-lsp
-          postgres-lsp
+          postgres-language-server
           phpactor
           pyright
           ruff
@@ -149,7 +149,7 @@
           }
         ];
 
-        extraLuaConfig = ''
+        initLua = ''
           vim.treesitter.language.add("nu", {
               path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
           })
