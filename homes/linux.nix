@@ -1,87 +1,67 @@
 {
   pkgs,
   lib,
-  inputs,
   config,
   ...
 }: {
-  imports = [];
+  home.packages = with pkgs; [
+    brightnessctl
+    efibootmgr
+    firefox
+    grim
+    hyprlock
+    netscanner
+    prusa-slicer
+    pulsemixer
+    prismlauncher
+    slurp
+    wl-clipboard
+    xdg-utils
+    xivlauncher
+  ];
 
-  options = {
-    linuxHome.enable = lib.mkOption {
-      default = pkgs.stdenv.isLinux;
-      description = "Enables Default Linux Home Module";
-      type = lib.types.bool;
-    };
+  home.file = {
+    # TODO: Move these hypr* configs into their programs/services
+    ".config/hypr/hypridle.conf".source = ../linux/hypr/hypridle.conf;
+    ".config/hypr/hyprlock.conf".source = ../linux/hypr/hyprlock.conf;
+    ".config/hypr/hyprpaper.conf".source = ../linux/hypr/hyprpaper.conf;
   };
 
-  config = lib.mkIf config.linuxHome.enable {
-    home.username = "kgb33";
-    home.homeDirectory = "/home/kgb33";
-
-    home.packages = with pkgs;
-      [
-        brightnessctl
-        efibootmgr
-        firefox
-        grim
-        hyprlock
-        netscanner
-        prusa-slicer
-        pulsemixer
-        prismlauncher
-        slurp
-        wl-clipboard
-        xdg-utils
-        xivlauncher
-      ]
-      ++ [inputs.nasty];
-
-    apps.nixcord.enable = true;
-
-    home.file = {
-      # TODO: Move these hypr* configs into their programs/services
-      ".config/hypr/hypridle.conf".source = ../linux/hypr/hypridle.conf;
-      ".config/hypr/hyprlock.conf".source = ../linux/hypr/hyprlock.conf;
-      ".config/hypr/hyprpaper.conf".source = ../linux/hypr/hyprpaper.conf;
-    };
-
-    xdg = {
+  xdg = {
+    enable = true;
+    portal = {
+      config.common.default = "*"; # Just use the first one found.
       enable = true;
-      portal = {
-        config.common.default = "*"; # Just use the first one found.
-        enable = true;
-        extraPortals = [pkgs.xdg-desktop-portal-wlr];
-      };
+      extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
-    home.sessionVariables.XDG_SESSION_TYPE = "wayland";
-    systemd.user.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
+  };
+  home.sessionVariables.XDG_SESSION_TYPE = "wayland";
+  systemd.user.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
-    programs.fuzzel = {
-      enable = true;
+  programs.fuzzel = {
+    enable = true;
+  };
+
+  programs.eww = {
+    enable = false;
+    configDir = ./eww;
+  };
+
+  programs.git = {
+    signing = {
+      format = "ssh";
+      key = "~/.ssh/id_ed25519.pub";
+      signByDefault = true;
     };
+    settings.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+  };
+  home.file.".config/git/allowed_signers".text = ''keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsItKA/n+4hj/qTtEURIGm3zpoelVwqyUOG88DqPGpB keltonbassingthwaite@gmail.com'';
 
-    programs.eww = {
-      enable = false;
-      configDir = ./eww;
-    };
+  services.ssh-agent.enable = true;
 
-    programs.git = {
-      signing = {
-        format = "ssh";
-        key = "~/.ssh/id_ed25519.pub";
-        signByDefault = true;
-      };
-      settings.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
-    };
-    home.file.".config/git/allowed_signers".text = ''keltonbassingthwaite@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsItKA/n+4hj/qTtEURIGm3zpoelVwqyUOG88DqPGpB keltonbassingthwaite@gmail.com'';
-
-    services.ssh-agent.enable = true;
-
-    services.gpg-agent = {
-      enable = true;
-      enableFishIntegration = true;
-      pinentry.package = pkgs.pinentry-tty;
-    };
+  services.gpg-agent = {
+    enable = true;
+    enableFishIntegration = true;
+    pinentry.package = pkgs.pinentry-tty;
   };
 }

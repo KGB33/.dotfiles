@@ -4,27 +4,19 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.homeModules.base = {
+  flake.modules.homeManager.base = {
     lib,
     pkgs,
     config,
     ...
   }: {
+    # TODO: Change these imports to dendritic pattern.
     imports = [
       ../../scripts/scripts.nix
       ../../apps
-      ../../homes/darwin.nix
+      # ../../homes/darwin.nix
       ../../homes/linux.nix
     ];
-
-    # This value determines the Home Manager release that your configuration is
-    # compatible with. This helps avoid breakage when a new Home Manager release
-    # introduces backwards incompatible changes.
-    #
-    # You should not change this value, even if you update Home Manager. If you do
-    # want to update the value, then make sure to first check the Home Manager
-    # release notes.
-    home.stateVersion = "23.11"; # Please read the comment before changing.
 
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
@@ -52,7 +44,6 @@
       ghc
       gnused
       go
-      goose-cli
       jq
       jqp
       lazydocker
