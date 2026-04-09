@@ -1,12 +1,17 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
-  options.apps.niri.enable = lib.mkEnableOption "niri" // {default = pkgs.stdenv.isLinux;};
+{inputs, ...}: {
+  flake-file.inputs.niri = {
+    url = "github:sodiboo/niri-flake";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-  config = lib.mkIf config.apps.niri.enable {
+  flake.modules.homeManager.niri = {
+    pkgs,
+    lib,
+    config,
+    ...
+  }: {
+    imports = [inputs.niri.homeModules.niri];
+
     programs.niri = {
       enable = true;
       package = pkgs.niri;
