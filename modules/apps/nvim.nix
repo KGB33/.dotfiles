@@ -60,18 +60,20 @@
           type = "fennel";
           runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
-        code-review = pkgs.vimUtils.buildVimPlugin {
-          name = "code-review";
+        review-nvim = pkgs.vimUtils.buildVimPlugin {
+          name = "review-nvim";
           src = pkgs.fetchFromGitHub {
-            owner = "choplin";
-            repo = "code-review.nvim";
-            rev = "v0.6.0";
-            hash = "sha256-WpbQswkUpB4Nblos8+5UE5I/PHUQOi+RQ+hj4CCdL4o=";
+            owner = "georgeguimaraes";
+            repo = "review.nvim";
+            rev = "v1.9.1";
+            hash = "sha256-/iP4ALu1oGamZe34FvP32qrzmg6wCsa5mmDaVUhIt0c=";
           };
+          nvimSkipModules = ["review.picker"];
         };
       in [
-        (mkFnlPlugin code-review "code-review")
-        diffview-nvim
+        nui-nvim
+        codediff-nvim
+        (mkFnlPlugin review-nvim "review")
 
         (mkFnlPlugin catppuccin-nvim "catppuccin")
         vim-sexp
@@ -156,5 +158,8 @@
     home.sessionVariables = {
       NVIM_FIREFOX_DEBUG_EXTENSION = "${pkgs.vscode-extensions.firefox-devtools.vscode-firefox-debug}";
     };
+    home.activation.hotpotSync = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      cd ~/.config/nvim && ${pkgs.neovim}/bin/nvim +"Hotpot sync force" +q
+    '';
   };
 }
