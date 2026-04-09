@@ -7,13 +7,7 @@ blink.setup({
         },
     },
     sources = {
-        default = { 'avante', 'lsp', 'path', 'buffer' },
-        providers = {
-            avante = {
-                module = 'blink-cmp-avante',
-                name = 'Avante',
-            }
-        },
+        default = { 'lsp', 'path', 'buffer' },
     },
     keymap = { preset = "default" },
     completion = {

@@ -4,12 +4,7 @@
     lib,
     config,
     ...
-  }: let
-    avanteOverride = import ./nvim/_avante.nix {
-      pkgs = pkgs;
-      lib = lib;
-    };
-  in {
+  }: {
     home.file.tsQueries = {
       enable = true;
       recursive = true;
@@ -87,9 +82,6 @@
           type = "lua";
         }
         {
-          plugin = blink-cmp-avante;
-        }
-        {
           plugin = blink-cmp;
           config = builtins.readFile ./nvim/plugins/blink.lua;
           type = "lua";
@@ -111,7 +103,6 @@
           type = "lua";
           config = builtins.readFile ./nvim/plugins/glance.lua;
         }
-        (mkFnlPlugin avanteOverride "avante")
         img-clip-nvim
         {
           plugin = nvim-dbee;
