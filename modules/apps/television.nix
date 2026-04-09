@@ -1,11 +1,5 @@
-{
-  lib,
-  config,
-  ...
-}: {
-  options.apps.television.enable = lib.mkEnableOption "television" // {default = true;};
-
-  config = lib.mkIf config.apps.television.enable {
+{...}: {
+  flake.modules.homeManager.television = {...}: {
     programs.television = {
       enable = true;
       settings = {

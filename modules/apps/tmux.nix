@@ -1,12 +1,17 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
-  options.apps.tmux.enable = lib.mkEnableOption "tmux" // {default = true;};
+{inputs, ...}: {
+  flake-file.inputs.hmm = {
+    url = "github:KGB33/hmm";
+  };
 
-  config = lib.mkIf config.apps.tmux.enable {
+  flake.modules.homeManager.tmux = {
+    config,
+    pkgs,
+    ...
+  }: {
+    home.packages = [
+      inputs.hmm.packages."${pkgs.system}".hmm
+    ];
+
     programs.tmux = {
       enable = true;
       escapeTime = 300;

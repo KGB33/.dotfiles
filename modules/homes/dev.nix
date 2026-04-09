@@ -1,5 +1,5 @@
 {self, ...}: {
   flake.modules.homeManager.home-dev = {...}: {
-    imports = with self.modules.homeManager; [nvim];
+    imports = with self.modules.homeManager; [nvim tmux television];
   };
 }
