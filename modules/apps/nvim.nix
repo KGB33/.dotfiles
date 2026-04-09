@@ -24,6 +24,7 @@
         typescript
 
         # Lsp
+        clojure-lsp
         elixir-ls
         gopls
         fennel-ls
