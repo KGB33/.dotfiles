@@ -2,9 +2,26 @@
   flake.modules.homeManager.nvim = {
     pkgs,
     lib,
-    config,
     ...
-  }: {
+  }: let
+    compileFennelStr = name: src: let
+      lua = builtins.readFile (pkgs.runCommand "${name}.lua" {inherit src;} ''
+        echo "$src" | ${pkgs.luajitPackages.fennel}/bin/fennel --compile - > $out
+      '');
+    in ";(function()\n${lua}\nend)()";
+
+    transpileFennelPlugins = map (
+      p:
+        if (p.type or null) == "fennel"
+        then
+          p
+          // {
+            type = "lua";
+            config = compileFennelStr (lib.getName p.plugin) p.config;
+          }
+        else p
+    );
+  in {
     home.file.tsQueries = {
       enable = true;
       recursive = true;
@@ -54,7 +71,7 @@
         mkFnlPlugin = p: fn: {
           plugin = p;
           type = "fennel";
-          runtime."fnl/${fn}Config.fnl".text = builtins.readFile ./nvim/fnl/${fn}.fnl;
+          config = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
         review-nvim = pkgs.vimUtils.buildVimPlugin {
           name = "review-nvim";
@@ -66,85 +83,71 @@
           };
           nvimSkipModules = ["review.picker"];
         };
-      in [
-        nui-nvim
-        codediff-nvim
-        (mkFnlPlugin review-nvim "review")
+      in
+        [
+          nui-nvim
+          codediff-nvim
+          (mkFnlPlugin review-nvim "review")
 
-        (mkFnlPlugin catppuccin-nvim "catppuccin")
-        vim-sexp
-        vim-sexp-mappings-for-regular-people
-        vim-repeat
-        vim-surround
-        conjure
+          (mkFnlPlugin catppuccin-nvim "catppuccin")
+          vim-sexp
+          vim-sexp-mappings-for-regular-people
+          vim-repeat
+          vim-surround
+          conjure
 
-        vim-jack-in
-        vim-dispatch
+          vim-jack-in
+          vim-dispatch
 
-        {
-          plugin = nvim-lspconfig;
-          config = builtins.readFile ./nvim/plugins/lspconfig.lua;
-          type = "lua";
-        }
-        {
-          plugin = blink-cmp;
-          config = builtins.readFile ./nvim/plugins/blink.lua;
-          type = "lua";
-        }
-        (mkFnlPlugin nvim-treesitter.withAllGrammars "treesitter")
-        (mkFnlPlugin telescope-nvim "telescope")
-        telescope-ui-select-nvim
+          {
+            plugin = nvim-lspconfig;
+            config = builtins.readFile ./nvim/plugins/lspconfig.lua;
+            type = "lua";
+          }
+          {
+            plugin = blink-cmp;
+            config = builtins.readFile ./nvim/plugins/blink.lua;
+            type = "lua";
+          }
+          (mkFnlPlugin nvim-treesitter.withAllGrammars "treesitter")
+          (mkFnlPlugin telescope-nvim "telescope")
+          telescope-ui-select-nvim
 
-        # DAP
-        (mkFnlPlugin nvim-dap "dap")
-        telescope-dap-nvim
-        nvim-dap-ui
-        nvim-nio
+          # DAP
+          (mkFnlPlugin nvim-dap "dap")
+          telescope-dap-nvim
+          nvim-dap-ui
+          nvim-nio
 
-        which-key-nvim
-        (mkFnlPlugin flash-nvim "flash")
-        {
-          plugin = glance-nvim;
-          type = "lua";
-          config = builtins.readFile ./nvim/plugins/glance.lua;
-        }
-        img-clip-nvim
-        {
-          plugin = nvim-dbee;
-          type = "lua";
-          config = ''
-            require("dbee").setup()
-          '';
-        }
-        {
-          plugin = render-markdown-nvim;
-          type = "lua";
-          config = ''
-            require('render-markdown').setup({
-              completions = { blink = { enabled = true } },
-            })
-          '';
-        }
-        {
-          plugin = hotpot-nvim;
-          runtime."fnl/options.fnl".text = builtins.readFile ./nvim/fnl/options.fnl;
-          config = let
-            requireables =
-              ["hotpot" "options"]
-              ++ (config.programs.neovim.plugins
-                |> builtins.filter (p: p.type == "fennel")
-                |> builtins.concatMap (p: builtins.attrNames p.runtime)
-                |> map (p':
-                  p'
-                  |> baseNameOf
-                  |> lib.removeSuffix ".fnl"));
-          in
-            lib.concatStrings (map (name: "require(\"${name}\")\n") requireables);
-          type = "lua";
-        }
-      ];
+          which-key-nvim
+          (mkFnlPlugin flash-nvim "flash")
+          {
+            plugin = glance-nvim;
+            type = "lua";
+            config = builtins.readFile ./nvim/plugins/glance.lua;
+          }
+          img-clip-nvim
+          {
+            plugin = nvim-dbee;
+            type = "lua";
+            config = ''
+              require("dbee").setup()
+            '';
+          }
+          {
+            plugin = render-markdown-nvim;
+            type = "lua";
+            config = ''
+              require('render-markdown').setup({
+                completions = { blink = { enabled = true } },
+              })
+            '';
+          }
+        ]
+        |> transpileFennelPlugins;
 
       initLua = ''
+        ${compileFennelStr "options" (builtins.readFile ./nvim/fnl/options.fnl)}
         vim.treesitter.language.add("nu", {
             path = "${pkgs.tree-sitter-grammars.tree-sitter-nu}/parser"
         })
@@ -154,8 +157,5 @@
     home.sessionVariables = {
       NVIM_FIREFOX_DEBUG_EXTENSION = "${pkgs.vscode-extensions.firefox-devtools.vscode-firefox-debug}";
     };
-    home.activation.hotpotSync = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      cd ~/.config/nvim && ${pkgs.neovim}/bin/nvim +"Hotpot sync force" +q
-    '';
   };
 }
