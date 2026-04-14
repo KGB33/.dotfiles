@@ -77,6 +77,10 @@
         vim-repeat
         vim-surround
         conjure
+
+        vim-jack-in
+        vim-dispatch
+
         {
           plugin = nvim-lspconfig;
           config = builtins.readFile ./nvim/plugins/lspconfig.lua;
