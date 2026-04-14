@@ -36,6 +36,10 @@
       vimAlias = true;
       vimdiffAlias = true;
 
+      withNodeJs = false;
+      withRuby = false;
+      withPython3 = false;
+
       extraPackages = with pkgs; [
         fzf
         typescript
