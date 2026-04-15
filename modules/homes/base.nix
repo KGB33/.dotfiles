@@ -1,6 +1,7 @@
 {...}: {
   flake-file.inputs.home-manager = {
-    url = "github:nix-community/home-manager";
+    # url = "github:nix-community/home-manager";
+    url = "github:KGB33/home-manager/feat/nvim-fennel";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 

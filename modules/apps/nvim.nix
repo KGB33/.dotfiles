@@ -9,18 +9,6 @@
         echo "$src" | ${pkgs.luajitPackages.fennel}/bin/fennel --compile - > $out
       '');
     in ";(function()\n${lua}\nend)()";
-
-    transpileFennelPlugins = map (
-      p:
-        if (p.type or null) == "fennel"
-        then
-          p
-          // {
-            type = "lua";
-            config = compileFennelStr (lib.getName p.plugin) p.config;
-          }
-        else p
-    );
   in {
     home.file.tsQueries = {
       enable = true;
@@ -87,68 +75,66 @@
           };
           nvimSkipModules = ["review.picker"];
         };
-      in
-        [
-          nui-nvim
-          codediff-nvim
-          (mkFnlPlugin review-nvim "review")
+      in [
+        nui-nvim
+        codediff-nvim
+        (mkFnlPlugin review-nvim "review")
 
-          (mkFnlPlugin catppuccin-nvim "catppuccin")
-          vim-sexp
-          vim-sexp-mappings-for-regular-people
-          vim-repeat
-          vim-surround
-          conjure
+        (mkFnlPlugin catppuccin-nvim "catppuccin")
+        vim-sexp
+        vim-sexp-mappings-for-regular-people
+        vim-repeat
+        vim-surround
+        conjure
 
-          vim-jack-in
-          vim-dispatch
+        vim-jack-in
+        vim-dispatch
 
-          {
-            plugin = nvim-lspconfig;
-            config = builtins.readFile ./nvim/plugins/lspconfig.lua;
-            type = "lua";
-          }
-          {
-            plugin = blink-cmp;
-            config = builtins.readFile ./nvim/plugins/blink.lua;
-            type = "lua";
-          }
-          (mkFnlPlugin nvim-treesitter.withAllGrammars "treesitter")
-          (mkFnlPlugin telescope-nvim "telescope")
-          telescope-ui-select-nvim
+        {
+          plugin = nvim-lspconfig;
+          config = builtins.readFile ./nvim/plugins/lspconfig.lua;
+          type = "lua";
+        }
+        {
+          plugin = blink-cmp;
+          config = builtins.readFile ./nvim/plugins/blink.lua;
+          type = "lua";
+        }
+        (mkFnlPlugin nvim-treesitter.withAllGrammars "treesitter")
+        (mkFnlPlugin telescope-nvim "telescope")
+        telescope-ui-select-nvim
 
-          # DAP
-          (mkFnlPlugin nvim-dap "dap")
-          telescope-dap-nvim
-          nvim-dap-ui
-          nvim-nio
+        # DAP
+        (mkFnlPlugin nvim-dap "dap")
+        telescope-dap-nvim
+        nvim-dap-ui
+        nvim-nio
 
-          which-key-nvim
-          (mkFnlPlugin flash-nvim "flash")
-          {
-            plugin = glance-nvim;
-            type = "lua";
-            config = builtins.readFile ./nvim/plugins/glance.lua;
-          }
-          img-clip-nvim
-          {
-            plugin = nvim-dbee;
-            type = "lua";
-            config = ''
-              require("dbee").setup()
-            '';
-          }
-          {
-            plugin = render-markdown-nvim;
-            type = "lua";
-            config = ''
-              require('render-markdown').setup({
-                completions = { blink = { enabled = true } },
-              })
-            '';
-          }
-        ]
-        |> transpileFennelPlugins;
+        which-key-nvim
+        (mkFnlPlugin flash-nvim "flash")
+        {
+          plugin = glance-nvim;
+          type = "lua";
+          config = builtins.readFile ./nvim/plugins/glance.lua;
+        }
+        img-clip-nvim
+        {
+          plugin = nvim-dbee;
+          type = "lua";
+          config = ''
+            require("dbee").setup()
+          '';
+        }
+        {
+          plugin = render-markdown-nvim;
+          type = "lua";
+          config = ''
+            require('render-markdown').setup({
+              completions = { blink = { enabled = true } },
+            })
+          '';
+        }
+      ];
 
       initLua = ''
         ${compileFennelStr "options" (builtins.readFile ./nvim/fnl/options.fnl)}
