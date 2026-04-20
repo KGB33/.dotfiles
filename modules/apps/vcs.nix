@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  ...
-}: {
-  options.apps.git.enable = lib.mkEnableOption "git" // {default = true;};
-
-  config = lib.mkIf config.apps.git.enable {
+{...}: {
+  flake.modules.homeManager.git = {lib, ...}: {
     programs.git = {
       enable = true;
       settings = {
@@ -48,6 +42,18 @@
         *.lock diff=nodiff
         package-lock.json diff=nodiff
       '';
+    };
+  };
+  flake.modules.homeManager.jujutsu = {lib, ...}: {
+    programs.jujutsu = {
+      enable = true;
+
+      settings = {
+        user = {
+          email = lib.mkDefault "keltonbassingthwaite@gmail.com";
+          name = "Kelton Bassingthwaite";
+        };
+      };
     };
   };
 }
