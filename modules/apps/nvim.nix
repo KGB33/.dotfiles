@@ -66,7 +66,8 @@
           config = builtins.readFile ./nvim/fnl/${fn}.fnl;
         };
         review-nvim = pkgs.vimUtils.buildVimPlugin {
-          name = "review-nvim";
+          pname = "review-nvim";
+          version = "v1.9.1";
           src = pkgs.fetchFromGitHub {
             owner = "georgeguimaraes";
             repo = "review.nvim";

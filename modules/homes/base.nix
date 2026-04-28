@@ -15,8 +15,6 @@
     imports = [
       ../../scripts/scripts.nix
       ../../apps
-      # ../../homes/darwin.nix
-      ../../homes/linux.nix
     ];
 
     nixpkgs.config.allowUnfreePredicate = pkg:
