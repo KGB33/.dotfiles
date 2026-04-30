@@ -1,6 +1,0 @@
-(defpoll running-services 
-  :interval "1s"
-  :initial "[]"
-  `echo -n "$(systemctl --user list-units "*.service" -o json)$(systemctl --system list-units "*.service" -o json)" \
-    | jq -s 'add | .[] | select(.sub == "running") | .unit' | sed "s/.service//" | jq --slurp 'unique | sort'`
-)
