@@ -1,10 +1,13 @@
 let
   installer = variant: {
-    nixos = {modulesPath, ...}: {
-      imports = [(modulesPath + "/installer/cd-dvd/installation-cd-${variant}.nix")];
-    };
+    nixos =
+      { modulesPath, ... }:
+      {
+        imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-${variant}.nix") ];
+      };
   };
-in {
+in
+{
   # make USB/VM installers.
   vm.bootable.provides = {
     tui = installer "minimal";
