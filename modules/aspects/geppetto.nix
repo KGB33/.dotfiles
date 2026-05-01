@@ -4,8 +4,10 @@
     homeManager.programs.direnv.enable = true;
 
     # NixOS configuration for geppetto.
-    nixos = {pkgs, ...}: {
-      environment.systemPackages = [pkgs.hello];
+    nixos =
+      { pkgs, ... }:
+      {
+        environment.systemPackages = [ pkgs.hello ];
         nix.settings = {
           experimental-features = [
             "nix-command"
@@ -18,11 +20,13 @@
           enable = true;
           configurationLimit = 16;
         };
-    };
+      };
 
     # <host>.provides.<user>, via den.provides.mutual-provider
-    provides.kgb33 = {user, ...}: {
-      homeManager.programs.tmux.enable = user.name == "kgb33";
-    };
+    provides.kgb33 =
+      { user, ... }:
+      {
+        homeManager.programs.tmux.enable = user.name == "kgb33";
+      };
   };
 }

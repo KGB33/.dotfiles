@@ -5,7 +5,8 @@
   inputs,
   vm,
   ...
-}: {
+}:
+{
   den.aspects.geppetto = {
     includes = [
       # vm.base.provides.gui
@@ -14,12 +15,14 @@
     nixos.users.users.kgb33.initialPassword = "password";
   };
 
-  perSystem = {pkgs, ...}: {
-    packages.vm = pkgs.writeShellApplication {
-      name = "vm";
-      text = ''
-        ${inputs.self.nixosConfigurations.geppetto.config.system.build.vm}/bin/run-geppetto-vm "$@"
-      '';
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.vm = pkgs.writeShellApplication {
+        name = "vm";
+        text = ''
+          ${inputs.self.nixosConfigurations.geppetto.config.system.build.vm}/bin/run-geppetto-vm "$@"
+        '';
+      };
     };
-  };
 }

@@ -2,7 +2,8 @@
   inputs,
   den,
   ...
-}: {
+}:
+{
   # create an `eg` (example!) namespace. (flake exposed)
   imports = [
     (inputs.den.namespace "vm" true)
