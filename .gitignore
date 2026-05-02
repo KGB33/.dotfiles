@@ -1,2 +1,6 @@
 *.bak
 *.qcow2
+result
+.clj-kondo
+.lsp
+.nrepl-port
