@@ -8,6 +8,7 @@
   imports = [
     (inputs.den.namespace "vm" true)
     (inputs.den.namespace "apps" true)
+    (inputs.den.namespace "components" true)
   ];
 
   # you can have more than one namespace (false = not flake exposed)
