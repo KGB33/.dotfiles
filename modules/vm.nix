@@ -10,7 +10,7 @@
   den.aspects.geppetto = {
     includes = [
       # vm.base.provides.gui
-      vm.base.provides.tui
+      # vm.base.provides.tui
     ];
     nixos.users.users.kgb33.initialPassword = "password";
   };
