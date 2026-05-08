@@ -18,6 +18,12 @@
           {
             programs.nh.enable = true;
           };
+
+        ssh-agent.homeManager =
+          { ... }:
+          {
+            services.ssh-agent.enable = true;
+          };
       in
       [
         den.aspects.setHost
@@ -28,6 +34,7 @@
         den.aspects.dev
 
         nh
+        ssh-agent
 
         <den/primary-user>
         (<den/user-shell> "fish")
