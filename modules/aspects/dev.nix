@@ -1,7 +1,10 @@
 { apps, ... }:
 {
   den.aspects.dev = {
-    includes = [ apps.tmux ];
+    includes = with apps; [
+      tmux
+      tv
+    ];
 
     homeManager =
       { pkgs, ... }:
