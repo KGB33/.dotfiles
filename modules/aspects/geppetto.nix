@@ -41,6 +41,8 @@
           };
         };
 
+        hardware.graphics.enable = true;
+
         # Hardware configuration
         imports = [
           (modulesPath + "/installer/scan/not-detected.nix")
