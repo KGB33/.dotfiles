@@ -24,12 +24,14 @@
           {
             services.ssh-agent.enable = true;
           };
+
       in
       [
         den.aspects.setHost
         apps.nvim
         apps.niri
         apps.vcs
+        apps.nushell-login
 
         den.aspects.dev
 
@@ -37,7 +39,6 @@
         ssh-agent
 
         <den/primary-user>
-        (<den/user-shell> "fish")
       ];
 
     # User configures NixOS hosts it lives on.
