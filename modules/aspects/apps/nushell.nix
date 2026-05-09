@@ -27,6 +27,9 @@
       };
   };
   apps.nushell = {
+    includes = [
+      apps.shell
+    ];
     homeManager =
       { pkgs, ... }:
       {
