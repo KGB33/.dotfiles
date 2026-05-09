@@ -19,6 +19,9 @@
         fonts.fontconfig.enable = true;
         home.packages = with pkgs.nerd-fonts; [
           fira-code
+          symbols-only
+          open-dyslexic
+          pkgs.noto-fonts-color-emoji
         ];
 
         stylix = {
@@ -31,7 +34,6 @@
             };
           };
         };
-
       };
   };
 }
