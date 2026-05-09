@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, apps, ... }:
 {
   flake-file.inputs.niri = {
     url = "github:sodiboo/niri-flake";
@@ -6,16 +6,7 @@
   };
 
   apps.niri = {
-    includes =
-      let
-        # TODO, refactor into its own module
-        wezterm.homeManager =
-          { ... }:
-          {
-            programs.wezterm.enable = true;
-          };
-      in
-      [ wezterm ];
+    includes = [ apps.wezterm ];
 
     homeManager =
       { lib, ... }:
