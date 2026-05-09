@@ -34,6 +34,7 @@
         apps.nushell-login
 
         den.aspects.dev
+        den.aspects.stylix
 
         nh
         ssh-agent
