@@ -8,8 +8,8 @@
       url = "github:saghen/blink.cmp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    den.url = "github:vic/den";
-    flake-file.url = "github:vic/flake-file";
+    den.url = "github:denful/den";
+    flake-file.url = "github:denful/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -27,6 +27,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     stylix = {
       url = "github:nix-community/stylix";
