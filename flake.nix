@@ -33,5 +33,6 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vicinae.url = "github:vicinaehq/vicinae";
   };
 }

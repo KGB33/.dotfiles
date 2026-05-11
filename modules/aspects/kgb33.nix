@@ -30,6 +30,7 @@
         den.aspects.setHost
         apps.nvim
         apps.niri
+        apps.vicinae
         apps.vcs
         apps.nushell-login
 
