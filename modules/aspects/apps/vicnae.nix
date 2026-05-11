@@ -12,7 +12,7 @@
 
   apps.vicinae = {
     homeManager =
-      { ... }:
+      { pkgs, ... }:
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];
 
@@ -21,8 +21,16 @@
           systemd = {
             enable = true;
             autoStart = true;
-
           };
+          extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+            bluetooth
+            niri
+            nix
+            podman
+            power-profile
+            pulseaudio
+
+          ];
         };
 
         programs.niri = {
@@ -35,8 +43,6 @@
               repeat = false;
             };
           };
-          # spawn-at-startup "vicinae" "server"
-          # Alt+Space repeat=false { spawn "vicinae" "toggle"; }
         };
       };
   };
