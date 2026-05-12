@@ -36,6 +36,25 @@
         home.shell.enableNushellIntegration = true;
         programs.nushell = {
           enable = true;
+          settings = {
+            edit_mode = "vi";
+            keybindings = [
+              {
+                name = "insert_last_command";
+                modifier = "alt";
+                keycode = "char_l";
+                mode = [
+                  "emacs"
+                  "vi_insert"
+                  "vi_normal"
+                ];
+                event = {
+                  send = "ExecuteHostCommand";
+                  cmd = "commandline edit --insert (history | last | get command)";
+                };
+              }
+            ];
+          };
           plugins =
             pkgs.nushellPlugins
             |> lib.filterAttrs (name: value: lib.isDerivation value)
