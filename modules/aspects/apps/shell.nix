@@ -36,5 +36,9 @@
 
     };
 
+    programs.carapace = {
+      enable = true;
+    };
+
   };
 }
