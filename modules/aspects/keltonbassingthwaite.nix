@@ -27,9 +27,6 @@
 
       in
       [
-        apps.nvim
-        apps.vcs
-
         den.aspects.dev
         den.aspects.stylix
 
