@@ -29,6 +29,7 @@
       [
         den.aspects.dev
         den.aspects.stylix
+        apps.aerospace
 
         nh
         ssh-agent
