@@ -1,15 +1,38 @@
-{ inputs, ... }:
+{ ... }:
 {
-  flake-file.inputs.hmm = {
-    url = "github:KGB33/hmm";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   apps.tmux.homeManager =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
+    let
+      # Vendored from https://github.com/Sohalt/write-babashka-application
+      writeBabashkaApplication =
+        {
+          name,
+          text,
+          runtimeInputs ? [ ],
+        }:
+        let
+          script = pkgs.writeText "script.clj" text;
+        in
+        pkgs.writeShellApplication {
+          inherit name runtimeInputs;
+          text = ''
+            exec ${pkgs.babashka}/bin/bb ${script} $@
+          '';
+          checkPhase = ''
+            ${pkgs.clj-kondo}/bin/clj-kondo --config '{:linters {:namespace-name-mismatch {:level :off}}}' --lint ${script}
+          '';
+        };
+    in
     {
       home.packages = [
-        inputs.hmm.packages."${pkgs.system}".hmm
+        (writeBabashkaApplication {
+          name = "bmm";
+          text = builtins.readFile ./tmux/bmm.clj;
+          runtimeInputs = with pkgs; [
+            git
+            tmux
+          ];
+        })
       ];
 
       programs.tmux = {
