@@ -2,6 +2,7 @@
 {
   den.aspects.dev = {
     includes = with apps; [
+      wezterm
       nvim
       vcs
       tmux
