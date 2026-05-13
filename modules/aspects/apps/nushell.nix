@@ -62,6 +62,7 @@
             |> lib.filterAttrs (
               name: value:
               !(lib.elem name [
+                "desktop_notifications"
                 "bson"
                 "highlight"
               ])
