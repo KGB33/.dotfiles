@@ -28,10 +28,9 @@
       in
       [
         den.aspects.setHost
-        apps.nvim
         apps.niri
+        apps.hyprland
         apps.vicinae
-        apps.vcs
         apps.nushell-login
 
         den.aspects.dev
