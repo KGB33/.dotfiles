@@ -42,7 +42,7 @@
         wayland.windowManager.hyprland = {
           package = hyprland;
           portalPackage = portal;
-          enable = true;
+          enable = false;
           extraConfig = ''
             require("my-cfg");
           '';
