@@ -39,7 +39,16 @@
     homeManager =
       { pkgs, ... }:
       {
+        programs.git.settings.user.email = "kelton@cdlpowersuite.com";
+        programs.jujutsu.settings.user.email = "kelton@cdlpowersuite.com";
         home.packages = with pkgs; [
+          colima
+          bun
+          nodejs-slim_latest
+          codex
+          php82
+          php82Packages.composer
+          docker-client
           btop
           firefox
         ];
