@@ -1,7 +1,8 @@
-{ apps, ... }:
+{ apps, den, ... }:
 {
   den.aspects.dev = {
     includes = with apps; [
+      den.aspects.unfree
       wezterm
       nvim
       vcs
@@ -12,9 +13,11 @@
     ];
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
+        den.unfree.predicates = [ "obsidian" ];
         home.packages = with pkgs; [
+          obsidian
           ripgrep
           fd
         ];
