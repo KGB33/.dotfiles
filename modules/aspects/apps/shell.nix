@@ -7,6 +7,11 @@
       daemon.enable = true;
     };
 
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     programs.nushell = {
       configFile.text =
         lib.mkBefore
