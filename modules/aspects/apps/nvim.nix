@@ -60,6 +60,8 @@
             mini-icons
             which-key-nvim
             conjure
+            vim-sexp
+            vim-sexp-mappings-for-regular-people
             {
               plugin = blink';
               type = "fennel";
