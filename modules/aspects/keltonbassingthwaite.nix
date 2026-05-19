@@ -30,6 +30,7 @@
         den.aspects.dev
         den.aspects.stylix
         apps.aerospace
+        apps.nushell-darwin
 
         nh
         ssh-agent
@@ -41,16 +42,20 @@
       {
         programs.git.settings.user.email = "kelton@cdlpowersuite.com";
         programs.jujutsu.settings.user.email = "kelton@cdlpowersuite.com";
+        den.unfree.predicates = [ "graphite-cli" ];
         home.packages = with pkgs; [
-          colima
+          btop
           bun
-          nodejs-slim_latest
           codex
+          codex
+          colima
+          docker-client
+          firefox
+          graphite-cli
+          nodejs-slim_latest
           php82
           php82Packages.composer
-          docker-client
-          btop
-          firefox
+          wireguard-tools
         ];
       };
 

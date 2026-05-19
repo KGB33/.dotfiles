@@ -26,6 +26,24 @@
         '';
       };
   };
+  apps.nushell-darwin.homeManager =
+    { ... }:
+    {
+      programs.zsh = {
+        enable = true;
+        initExtra = ''
+          if [[ ! $(ps -T -o "comm" | tail -n +2 | grep "nu$") && -z $ZSH_EXECUTION_STRING ]]; then
+            if [[ -o login ]]; then
+              LOGIN_OPTION='--login'
+            else
+              LOGIN_OPTION=""
+            fi
+            exec nu "$LOGIN_OPTION"
+          fi
+        '';
+      };
+    };
+
   apps.nushell = {
     includes = [
       apps.shell
