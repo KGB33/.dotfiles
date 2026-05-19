@@ -6,6 +6,7 @@
       wezterm
       nvim
       vcs
+      taskwarrior
       tmux
       tv
       nushell
@@ -13,13 +14,18 @@
     ];
 
     homeManager =
-      { pkgs, lib, ... }:
+      { pkgs, ... }:
       {
-        den.unfree.predicates = [ "obsidian" ];
+        den.unfree.predicates = [
+          "obsidian"
+          "claude-code"
+        ];
         home.packages = with pkgs; [
           obsidian
+          claude-code
           ripgrep
           fd
+          doggo
         ];
       };
   };
