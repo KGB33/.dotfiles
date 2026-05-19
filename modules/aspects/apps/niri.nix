@@ -8,10 +8,18 @@
   apps.niri = {
     includes = [ apps.wezterm ];
 
+    nixos =
+      { pkgs, ... }:
+      {
+        services.udev.packages = [ pkgs.brightnessctl ];
+      };
+
     homeManager =
-      { lib, ... }:
+      { lib, pkgs, ... }:
       {
         imports = [ inputs.niri.homeModules.niri ];
+
+        home.packages = [ pkgs.brightnessctl ];
 
         programs.niri = {
           enable = true;

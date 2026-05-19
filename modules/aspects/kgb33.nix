@@ -47,6 +47,7 @@
       { pkgs, ... }:
       {
         users.users.kgb33.packages = [ pkgs.vim ];
+        users.users.kgb33.extraGroups = [ "video" ];
       };
 
     homeManager =
