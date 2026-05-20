@@ -32,6 +32,8 @@
         apps.hyprland
         apps.vicinae
         apps.nushell-login
+        apps.steam
+        apps.ffxiv
 
         den.aspects.dev
         den.aspects.stylix
