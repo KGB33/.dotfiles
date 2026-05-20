@@ -1035,11 +1035,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1779233190,
-        "narHash": "sha256-urAwbWNOoK9+CV9djd3DPvRExftUp6FCisGM1DHxhAA=",
+        "lastModified": 1779241123,
+        "narHash": "sha256-pGy8fNrKWznl5gUlY5TsVaUfSunrb2SiEWIfXeQ96vg=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "16825edf55eea67c15d077ba397f3b76847fd24d",
+        "rev": "9c590570d89c8d977b9b06da89b2d99ff6c7a7b7",
         "type": "github"
       },
       "original": {
