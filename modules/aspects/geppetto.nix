@@ -4,6 +4,7 @@
     includes = [
       components.container
       components.framework
+      components.printing
     ];
     nixos =
       {
