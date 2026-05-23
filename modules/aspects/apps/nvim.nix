@@ -34,10 +34,9 @@
         extraPackages = with pkgs; [
           clojure-lsp
           fennel-ls
+          harper
           nixd
           rust-analyzer
-          nixd
-          fennel-ls
         ];
         enable = true;
         defaultEditor = true;
