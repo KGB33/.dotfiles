@@ -28,6 +28,7 @@
 
 (vim.keymap.set :n :<leader>do vim.diagnostic.open_float
                 {:desc "Open diagnostic"})
+(vim.keymap.set :n :<leader>ca vim.lsp.buf.code_action {:desc "Code Action"})
 
 (vim.cmd "colorscheme catppuccin")
 ;; treesitter highlighting has to be 

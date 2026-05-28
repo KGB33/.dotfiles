@@ -20,6 +20,16 @@
           ''
             ${pkgs.luaPackages.fennel}/bin/fennel --compile - <<< "$fnlSrc" > "$out"
           '';
+      review-nvim = pkgs.vimUtils.buildVimPlugin {
+        name = "review-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "georgeguimaraes";
+          repo = "review.nvim";
+          rev = "v1.9.1";
+          hash = "sha256-/iP4ALu1oGamZe34FvP32qrzmg6wCsa5mmDaVUhIt0c=";
+        };
+        nvimSkipModules = [ "review.picker" ];
+      };
 
     in
     {
@@ -58,9 +68,14 @@
           [
             mini-icons
             which-key-nvim
+
             conjure
             vim-sexp
             vim-sexp-mappings-for-regular-people
+
+            review-nvim
+            codediff-nvim
+            nui-nvim
             {
               plugin = blink';
               type = "fennel";

@@ -83,6 +83,8 @@
                 "desktop_notifications"
                 "bson"
                 "highlight"
+                "hcl"
+                "skim"
               ])
             )
             |> lib.attrValues;
