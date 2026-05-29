@@ -10,8 +10,7 @@
 {
   flake-file.inputs = {
     home-manager = {
-      # url = "github:nix-community/home-manager";
-      url = "github:khaneliman/home-manager/hyprland";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
