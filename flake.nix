@@ -19,7 +19,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:khaneliman/home-manager/hyprland";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
@@ -29,7 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.xz";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +37,10 @@
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    voxtype = {
+      url = "github:peteonrails/voxtype";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
