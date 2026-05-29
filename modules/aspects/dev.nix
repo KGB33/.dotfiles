@@ -22,6 +22,7 @@
       tv
       nushell
       shell
+      voxtype
     ];
 
     homeManager =
@@ -41,7 +42,9 @@
             fd
             doggo
           ]
-          ++ [ inputs.emux.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+          ++ [
+            inputs.emux.packages.${pkgs.stdenv.hostPlatform.system}.default
+          ];
       };
   };
 }
