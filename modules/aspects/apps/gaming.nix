@@ -20,8 +20,12 @@
       den.unfree.predicates = [
         "steam-unwrapped" # Via xivlauncher
         "fflogs"
+        "discord"
+        "spotify"
       ];
       home.packages = with pkgs; [
+        discord
+        spotify
         xivlauncher
         fflogs
         prismlauncher

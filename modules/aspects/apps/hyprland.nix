@@ -5,7 +5,7 @@
   };
 
   apps.hyprland = {
-    includes = [ apps.wezterm ];
+    includes = with apps; [ wezterm noctalia ];
 
     nixos =
       { ... }:
@@ -42,7 +42,7 @@
         wayland.windowManager.hyprland = {
           package = hyprland;
           portalPackage = portal;
-          enable = false;
+          enable = true;
           extraConfig = ''
             require("my-cfg");
           '';

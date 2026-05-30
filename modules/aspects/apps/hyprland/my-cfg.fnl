@@ -2,8 +2,4 @@
 (hl.bind "SUPER + B" (hl.dsp.exec_cmd "firefox"))
 (hl.bind "ALT + SPACE" (hl.dsp.exec_cmd "vicinae toggle"))
 
-(hl.gesture { :fingers 3 :direction :horizontal :action :workspace})
-
-(hl.config {
-  :general {:layout :scrolling}
-           })
+(hl.on :hyprland.start (fn [] (hl.exec_cmd :noctalia-shell)))
