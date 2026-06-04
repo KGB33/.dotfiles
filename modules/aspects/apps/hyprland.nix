@@ -34,7 +34,13 @@
             '';
       in
       {
-        home.packages = [ pkgs.kitty ];
+        home.packages = with pkgs; [
+          kitty
+          grim
+          slurp
+          wl-clipboard
+          playerctl
+        ];
 
         xdg.configFile."hypr/my-cfg.lua".source = compileFennel "hyprland-fnl" (
           builtins.readFile ./hyprland/my-cfg.fnl
