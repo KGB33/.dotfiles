@@ -10,6 +10,7 @@
   # These are global static settings.
   den.default = {
     nixos.system.stateVersion = "26.05";
+    nixos.time.timeZone = "America/Los_Angeles";
     homeManager.home.stateVersion = "26.05";
   };
 
