@@ -27,6 +27,7 @@
         stylix = {
           enable = true;
           targets.hyprland.enable = false;
+          targets.neovim.enable = false;
 
           base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
           fonts = {

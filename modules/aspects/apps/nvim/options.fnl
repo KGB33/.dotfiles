@@ -41,3 +41,7 @@
                                             (when (and ft
                                                        (vim.treesitter.language.add ft))
                                               (vim.treesitter.start ev.buf))))})
+
+(set vim.o.foldmethod :expr)
+(set vim.o.foldexpr "v:lua.vim.treesitter.foldexpr()")
+(set vim.opt.foldenable false)

@@ -67,6 +67,7 @@
           with pkgs.vimPlugins;
           [
             mini-icons
+            nvim-web-devicons
             which-key-nvim
 
             conjure
