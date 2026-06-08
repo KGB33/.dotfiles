@@ -4,7 +4,6 @@
     # Opt into v2 beta
     blink-cmp = {
       url = "github:saghen/blink.cmp";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

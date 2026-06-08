@@ -4,10 +4,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    blink-cmp = {
-      url = "github:saghen/blink.cmp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    blink-cmp.url = "github:saghen/blink.cmp";
     den.url = "github:denful/den";
     emux = {
       url = "github:kgb33/emux";
