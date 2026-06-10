@@ -11,7 +11,6 @@
       url = "github:kgb33/emux";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   den.aspects.dev = {
@@ -23,6 +22,7 @@
       taskwarrior
       tmux
       tv
+      claude
       nushell
       shell
     ];
@@ -32,7 +32,6 @@
       {
         den.unfree.predicates = [
           "obsidian"
-          "claude-code"
         ];
         home.packages =
           with pkgs;
@@ -45,10 +44,7 @@
           ]
           ++ [
             inputs.emux.packages.${pkgs.stdenv.hostPlatform.system}.default
-          ]
-          ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
-            claude-code
-          ]);
+          ];
       };
   };
 }
