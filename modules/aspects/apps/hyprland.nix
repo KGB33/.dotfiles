@@ -5,7 +5,10 @@
   };
 
   apps.hyprland = {
-    includes = with apps; [ wezterm noctalia ];
+    includes = with apps; [
+      wezterm
+      noctalia
+    ];
 
     nixos =
       { ... }:
