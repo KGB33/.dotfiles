@@ -21,6 +21,7 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     import-tree.url = "github:vic/import-tree";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,10 +39,6 @@
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    voxtype = {
-      url = "github:peteonrails/voxtype";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
