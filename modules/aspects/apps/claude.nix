@@ -44,7 +44,6 @@
         + builtins.readFile ./claude/tmux-status.sh;
 
         settings = {
-          tui = "fullscreen";
           theme = "light";
           remoteControlAtStartup = false;
           model = "claude-fable-5[1m]";
