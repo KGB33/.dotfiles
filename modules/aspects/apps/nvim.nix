@@ -42,11 +42,12 @@
       programs.neovim = {
         extraPackages = with pkgs; [
           biome
-          codebook
           clojure-lsp
+          codebook
           fennel-ls
           harper
           nixd
+          psysh
           rust-analyzer
           typescript-go
           # Conjure REPL for both JavaScript and TypeScript.
