@@ -42,6 +42,9 @@
         keyMode = "vi";
         extraConfig = ''
           bind C-g display-popup -E -w 85% -h 85% "${pkgs.lazygit}/bin/lazygit"
+
+          set -wg allow-rename on
+          set -wg automatic-rename off
         '';
       };
     };
