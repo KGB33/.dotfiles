@@ -3,7 +3,7 @@
   flake-file.inputs = {
     # Opt into v2 beta
     blink-cmp = {
-      url = "github:saghen/blink.cmp";
+      url = "github:saghen/blink.cmp?ref=b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6";
     };
   };
 
@@ -41,11 +41,20 @@
       };
       programs.neovim = {
         extraPackages = with pkgs; [
+          biome
+          codebook
           clojure-lsp
           fennel-ls
           harper
           nixd
           rust-analyzer
+          typescript-go
+          # Conjure REPL for both JavaScript and TypeScript.
+          (pkgs.writeShellScriptBin "conjure-ts-repl" ''
+            export TERM=dumb
+            export NO_COLOR=1
+            exec ${pkgs.deno}/bin/deno repl
+          '')
         ];
         enable = true;
         defaultEditor = true;
@@ -69,7 +78,11 @@
             nvim-web-devicons
             which-key-nvim
 
-            conjure
+            {
+              plugin = conjure;
+              type = "fennel";
+              config = builtins.readFile ./nvim/plugins/conjure.fnl;
+            }
             vim-sexp
             vim-sexp-mappings-for-regular-people
 
