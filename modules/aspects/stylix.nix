@@ -21,7 +21,7 @@
           fira-code
           symbols-only
           open-dyslexic
-          pkgs.noto-fonts-color-emoji
+          pkgs.noto-fonts
         ];
 
         stylix = {
