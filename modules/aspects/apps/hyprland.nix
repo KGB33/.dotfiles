@@ -11,7 +11,10 @@
     ];
 
     nixos =
-      { ... }:
+      { pkgs, ... }:
+      let
+        hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      in
       {
         nix.settings = {
           substituters = [ "https://hyprland.cachix.org" ];
@@ -19,6 +22,18 @@
           trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
 
         };
+
+        services.displayManager.sessionPackages = [
+          (pkgs.runCommand "hyprland-session" { passthru.providedSessions = [ "hyprland" ]; } ''
+            mkdir -p $out/share/wayland-sessions
+            cat > $out/share/wayland-sessions/hyprland.desktop <<EOF
+            [Desktop Entry]
+            Name=Hyprland
+            Exec=${hyprland}/bin/start-hyprland
+            Type=Application
+            EOF
+          '')
+        ];
       };
 
     homeManager =

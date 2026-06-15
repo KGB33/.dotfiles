@@ -30,6 +30,7 @@
         den.aspects.setHost
         apps.niri
         apps.hyprland
+        apps.lemurs
         apps.vicinae
         apps.nushell-login
         apps.steam
@@ -53,6 +54,7 @@
           "input"
           "video"
           "audio"
+          "seat"
         ];
       };
 

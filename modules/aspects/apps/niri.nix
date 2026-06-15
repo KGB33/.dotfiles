@@ -10,8 +10,23 @@
 
     nixos =
       { pkgs, ... }:
+      let
+        niri = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
+      in
       {
         services.udev.packages = [ pkgs.brightnessctl ];
+
+        services.displayManager.sessionPackages = [
+          (pkgs.runCommand "niri-session-desktop" { passthru.providedSessions = [ "niri" ]; } ''
+            mkdir -p $out/share/wayland-sessions
+            cat > $out/share/wayland-sessions/niri.desktop <<EOF
+            [Desktop Entry]
+            Name=Niri
+            Exec=${niri}/bin/niri-session
+            Type=Application
+            EOF
+          '')
+        ];
       };
 
     homeManager =
