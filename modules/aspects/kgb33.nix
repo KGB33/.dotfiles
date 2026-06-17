@@ -30,7 +30,7 @@
         den.aspects.setHost
         apps.niri
         apps.hyprland
-        apps.lemurs
+        apps.greetd
         apps.vicinae
         apps.nushell-login
         apps.steam

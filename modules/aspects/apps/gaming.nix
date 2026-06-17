@@ -2,7 +2,7 @@
 {
 
   apps.steam.nixos =
-    { ... }:
+    { pkgs, ... }:
     {
       den.unfree.predicates = [
         "steam"
@@ -10,6 +10,8 @@
       ];
       programs.steam = {
         enable = true;
+        extest.enable = true;
+        extraPackages = [pkgs.hidapi];
       };
       programs.gamemode.enable = true;
     };
