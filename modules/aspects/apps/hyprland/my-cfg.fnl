@@ -1,4 +1,5 @@
 (hl.monitor {:output :DP-1 :mode :highrr :position :0x0 :scale 1})
+(hl.monitor {:output :eDP-2 :mode :highrr :position :0x0 :scale 1})
 
 (hl.bind "SUPER + G" (hl.dsp.exec_cmd :wezterm))
 (hl.bind "SUPER + B" (hl.dsp.exec_cmd :firefox))
