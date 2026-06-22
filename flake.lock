@@ -200,6 +200,22 @@
         "type": "github"
       }
     },
+    "claude-plugins-official": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781913920,
+        "narHash": "sha256-NRt3V7qyjQpDIHzzs6nUITIz8rZBOksH9wlMHM+xt0w=",
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "rev": "73e22af437e0d09b6534854ac0f3d4884dd9d9a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1779130139,
@@ -1078,6 +1094,7 @@
     "root": {
       "inputs": {
         "blink-cmp": "blink-cmp",
+        "claude-plugins-official": "claude-plugins-official",
         "den": "den",
         "emux": "emux",
         "flake-file": "flake-file",
@@ -1091,6 +1108,7 @@
         "nixpkgs": "nixpkgs_5",
         "noctalia": "noctalia",
         "stylix": "stylix",
+        "superpowers": "superpowers",
         "vicinae": "vicinae",
         "vicinae-extensions": "vicinae-extensions"
       }
@@ -1125,6 +1143,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "superpowers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781822662,
+        "narHash": "sha256-+lT2a/qq0SF4k0PgnEDKiuidVlZX2p0vEso4d/5T1os=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "896224c4b1879920ab573417e68fd51d2ccc9072",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
         "type": "github"
       }
     },

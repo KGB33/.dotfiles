@@ -2,6 +2,14 @@
 {
   flake-file.inputs = {
     llm-agents.url = "github:numtide/llm-agents.nix";
+    claude-plugins-official = {
+      url = "github:anthropics/claude-plugins-official";
+      flake = false;
+    };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
   };
 
   apps.claude.homeManager =
@@ -24,9 +32,18 @@
     {
       den.unfree.predicates = [ "claude-code" ];
 
+      home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [ pi ];
+
       programs.claude-code = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
+
+        plugins = [
+          "${inputs.claude-plugins-official}/plugins/frontend-design"
+          "${inputs.claude-plugins-official}/plugins/playground"
+          # superpowers is a single plugin at the repo root, not a marketplace
+          "${inputs.superpowers}"
+        ];
 
         hooks.tmux-status = ''
           #!${pkgs.bash}/bin/bash

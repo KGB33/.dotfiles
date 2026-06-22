@@ -11,7 +11,7 @@
       programs.steam = {
         enable = true;
         extest.enable = true;
-        extraPackages = [pkgs.hidapi];
+        extraPackages = [ pkgs.hidapi ];
       };
       programs.gamemode.enable = true;
     };

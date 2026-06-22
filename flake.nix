@@ -5,6 +5,10 @@
 
   inputs = {
     blink-cmp.url = "github:saghen/blink.cmp?ref=b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6";
+    claude-plugins-official = {
+      url = "github:anthropics/claude-plugins-official";
+      flake = false;
+    };
     den.url = "github:denful/den";
     emux = {
       url = "github:kgb33/emux";
@@ -35,6 +39,10 @@
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
     };
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions = {
