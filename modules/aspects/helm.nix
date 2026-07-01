@@ -9,9 +9,17 @@
         lib,
         modulesPath,
         config,
+        pkgs,
         ...
       }:
       {
+        # Set the next reboot to boot into EFI entry 0000 (Windows, for gaming).
+        environment.systemPackages = [
+          (pkgs.writeShellScriptBin "gametime" ''
+            sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootnext 0000
+          '')
+        ];
+
         nix.settings = {
           experimental-features = [
             "nix-command"
