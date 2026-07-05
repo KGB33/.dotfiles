@@ -1,0 +1,10 @@
+{
+  "name": "workflow",
+  "description": "Personal fork of obra/superpowers: TDD, small commits, brainstorming/spec/planning. Specs and plans live outside the repo; the user manages all branches and worktrees; work ends with a report, not a merge.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kelton Bassingthwaite",
+    "email": "keltonbassingthwaite@gmail.com"
+  },
+  "license": "MIT"
+}

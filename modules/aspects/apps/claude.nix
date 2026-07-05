@@ -6,10 +6,6 @@
       url = "github:anthropics/claude-plugins-official";
       flake = false;
     };
-    superpowers = {
-      url = "github:obra/superpowers";
-      flake = false;
-    };
   };
 
   apps.claude.homeManager =
@@ -41,8 +37,9 @@
         plugins = [
           "${inputs.claude-plugins-official}/plugins/frontend-design"
           "${inputs.claude-plugins-official}/plugins/playground"
-          # superpowers is a single plugin at the repo root, not a marketplace
-          "${inputs.superpowers}"
+          # personal fork of obra/superpowers: no agent-created branches/worktrees,
+          # plans and specs stay out of the repo, work ends with a report not a merge
+          "${./claude/plugins/workflow}"
         ];
 
         hooks.tmux-status = ''
