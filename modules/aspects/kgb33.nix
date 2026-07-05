@@ -61,6 +61,9 @@
     homeManager =
       { pkgs, ... }:
       {
+        home.sessionVariables = {
+          EDITOR = "hx";
+        };
         home.packages = with pkgs; [
           btop
           firefox
