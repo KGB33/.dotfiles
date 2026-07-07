@@ -55,7 +55,7 @@
           colima
           docker-client
           firefox
-          inputs.nixpkgs-stable.${pkgs.stdenv.hostPlatform.system}.pkgs.graphite-cli
+          inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graphite-cli
           nodejs-slim_latest
           php82
           php82Packages.composer
