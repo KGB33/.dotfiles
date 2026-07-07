@@ -9,6 +9,7 @@
 # you are free to remove them if not being used by you.
 {
   flake-file.inputs = {
+    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

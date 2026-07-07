@@ -42,7 +42,10 @@
       {
         programs.git.settings.user.email = "kelton@cdlpowersuite.com";
         programs.jujutsu.settings.user.email = "kelton@cdlpowersuite.com";
-        den.unfree.predicates = [ "graphite-cli" ];
+        den.unfree.predicates = [
+          "graphite-cli"
+          "graphite-cli-unwrapped"
+        ];
         home.packages = with pkgs; [
           btop
           bun
@@ -51,7 +54,7 @@
           colima
           docker-client
           firefox
-          graphite-cli
+          inputs.nixpkgs-stable.${pkgs.stdenv.hostPlatform.system}.pkgs.graphite-cli
           nodejs-slim_latest
           php82
           php82Packages.composer
