@@ -21,7 +21,7 @@
     {
       den.unfree.predicates = [
         "steam-unwrapped" # Via xivlauncher
-        "fflogs"
+        "archon-lite"
         "discord"
         "spotify"
       ];
@@ -29,7 +29,7 @@
         discord
         spotify
         xivlauncher
-        fflogs
+        archon-lite
         prismlauncher
       ];
     };
