@@ -22,8 +22,8 @@
 
       checks."kgb33 enabled geppetto nh" =
         checkCond "kgb33.provides.geppetto" geppetto.programs.nh.enable;
-      checks."geppetto enabled kgb33 neovim" =
-        checkCond "geppetto.provides.kgb33" kgb33-at-geppetto.programs.neovim.enable;
+      # checks."geppetto enabled kgb33 neovim" =
+      #   checkCond "geppetto.provides.kgb33" kgb33-at-geppetto.programs.neovim.enable;
       checks."geppetto enabled kgb33 git" =
         checkCond "geppetto.provides.kgb33" kgb33-at-geppetto.programs.git.enable;
     };

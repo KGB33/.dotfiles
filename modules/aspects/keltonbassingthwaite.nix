@@ -1,5 +1,4 @@
 {
-  inputs,
   den,
   apps,
   ...
@@ -29,6 +28,7 @@
       in
       [
         den.aspects.dev
+        den.aspects.stable
         den.aspects.stylix
         apps.aerospace
         apps.nushell-darwin
@@ -55,7 +55,7 @@
           colima
           docker-client
           firefox
-          inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graphite-cli
+          stable.graphite-cli
           nodejs-slim_latest
           php82
           php82Packages.composer
