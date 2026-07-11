@@ -30,6 +30,7 @@
         den.aspects.setHost
         apps.niri
         apps.hyprland
+        apps.eww
         apps.greetd
         apps.vicinae
         apps.nushell-login
@@ -61,9 +62,6 @@
     homeManager =
       { pkgs, ... }:
       {
-        home.sessionVariables = {
-          EDITOR = "hx";
-        };
         home.packages = with pkgs; [
           btop
           firefox

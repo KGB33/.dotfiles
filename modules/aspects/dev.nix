@@ -17,8 +17,7 @@
     includes = with apps; [
       den.aspects.unfree
       wezterm
-      # nvim
-      helix
+      nvim
       vcs
       taskwarrior
       tmux
