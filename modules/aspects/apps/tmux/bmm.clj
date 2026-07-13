@@ -16,11 +16,12 @@
 ; Its easiest to revese the list before massing it to the fucntion and match 'backward'
 ; anchor \/ , repo \/
 ; i.e. [".git", "hmm", "Code", ...]
+; Returns {:repo r} for a standard repo, {:repo r :worktree wt} for a worktree.
 (defn parse-repo [parts]
   (match (vec parts)
-    [_ "worktrees" r & _] r
-    [".git" r & _] r
-    :else "unk"))
+    [wt "worktrees" r & _] {:repo r :worktree wt}
+    [".git" r & _] {:repo r}
+    :else {:repo "unk"}))
 
 (defn get-repo []
   (let [{:keys [out]} (shell {:out :string}
@@ -40,7 +41,8 @@
     (binding [*out* *err*]
       (println "bmm: already inside tmux"))
     (System/exit 1))
-  (let [session-name (normalize-session-name (str (get-repo) "/" (get-branch)))
+  (let [{:keys [repo worktree]} (get-repo)
+        session-name (normalize-session-name (str repo "/" (or worktree (get-branch))))
         current-sessions (:out @(process {:out :string} "tmux" "ls"))]
     (apply shell "tmux" (conj (if (str/includes? current-sessions session-name)
                                 ["attach-session" "-t"]
