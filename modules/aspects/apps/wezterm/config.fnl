@@ -7,6 +7,7 @@
   (doto cfg
     (tset :audible_bell :Disabled)
     (tset :enable_tab_bar false)
+    (tset :font_size 11)
     (tset :quick_select_alphabet :dvorak)
     (tset :quick_select_patterns extra_select_patterns)
     (tset :quick_select_remove_styling true)
