@@ -36,6 +36,10 @@
     (str/trim out)))
 
 (defn main []
+  (when (System/getenv "TMUX")
+    (binding [*out* *err*]
+      (println "bmm: already inside tmux"))
+    (System/exit 1))
   (let [session-name (normalize-session-name (str (get-repo) "/" (get-branch)))
         current-sessions (:out @(process {:out :string} "tmux" "ls"))]
     (apply shell "tmux" (conj (if (str/includes? current-sessions session-name)
