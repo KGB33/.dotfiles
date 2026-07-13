@@ -85,6 +85,7 @@
                 "highlight"
                 "hcl"
                 "skim"
+                "semver"
               ])
             )
             |> lib.attrValues;
