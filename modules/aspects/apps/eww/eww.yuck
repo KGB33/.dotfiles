@@ -1,0 +1,22 @@
+(defwidget bar []
+  (centerbox :orientation "v"
+    (box :class "segment-top")
+    (box :class "segment-mid")
+    (box :class "segment-bot"
+  "Some Content"
+      )
+    )
+)
+
+(defwindow sidebar
+  :monitor 0
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "40px"
+                      :height "90%"
+                      :anchor "center left")
+  :stacking "fg"
+  :exclusive true
+  :windowtype "dock"
+  :wm-ignore false
+(bar))
