@@ -29,6 +29,12 @@
               pull = {
                 rebase = true;
               };
+              push = {
+                useForceIfIncludes = true;
+              };
+              alias = {
+                pushf = "push --force-with-lease";
+              };
               init = {
                 defaultBranch = "main";
               };
