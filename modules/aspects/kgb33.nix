@@ -36,6 +36,7 @@
         apps.nushell-login
         apps.steam
         apps.ffxiv
+        apps.bottles
 
         den.aspects.dev
         den.aspects.stylix

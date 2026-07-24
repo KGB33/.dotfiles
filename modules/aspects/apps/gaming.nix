@@ -16,6 +16,12 @@
       programs.gamemode.enable = true;
     };
 
+  apps.bottles.homeManager =
+    { pkgs, ... }:
+    {
+      home.packages = [ pkgs.bottles ];
+    };
+
   apps.ffxiv.homeManager =
     { pkgs, ... }:
     {
