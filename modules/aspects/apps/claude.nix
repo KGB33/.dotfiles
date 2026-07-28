@@ -38,13 +38,13 @@
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
 
-        plugins = [
-          "${inputs.claude-plugins-official}/plugins/frontend-design"
-          "${inputs.claude-plugins-official}/plugins/playground"
+        plugins = {
+          frontend-design = "${inputs.claude-plugins-official}/plugins/frontend-design";
+          playground = "${inputs.claude-plugins-official}/plugins/playground";
           # personal fork of obra/superpowers: no agent-created branches/worktrees,
           # plans and specs stay out of the repo, work ends with a report not a merge
-          "${inputs.vibes}/plugins/workflow"
-        ];
+          workflow = "${inputs.vibes}/plugins/workflow";
+        };
 
         hooks.tmux-status = ''
           #!${pkgs.bash}/bin/bash
@@ -64,7 +64,7 @@
         settings = {
           theme = "light";
           remoteControlAtStartup = false;
-          model = "claude-fable-5[1m]";
+          model = "claude-opus-5[1m]";
           hooks = {
             PostToolUse = [
               (tmuxStatusHook // { matcher = "*"; })

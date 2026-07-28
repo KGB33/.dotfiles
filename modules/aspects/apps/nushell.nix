@@ -73,22 +73,6 @@
               }
             ];
           };
-          plugins =
-            pkgs.nushellPlugins
-            |> lib.filterAttrs (name: value: lib.isDerivation value)
-            |> lib.filterAttrs (name: value: !(value.meta.broken or false))
-            |> lib.filterAttrs (
-              name: value:
-              !(lib.elem name [
-                "desktop_notifications"
-                "bson"
-                "highlight"
-                "hcl"
-                "skim"
-                "semver"
-              ])
-            )
-            |> lib.attrValues;
         };
       };
   };
