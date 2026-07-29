@@ -4,5 +4,7 @@
 (vim.lsp.enable :fennel_ls)
 (vim.lsp.enable :harper_ls)
 (vim.lsp.enable :nixd)
+(vim.lsp.enable :ruff)
 (vim.lsp.enable :rust_analyzer)
 (vim.lsp.enable :tsgo)
+(vim.lsp.enable :ty)

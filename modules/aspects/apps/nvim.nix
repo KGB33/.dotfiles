@@ -48,8 +48,10 @@
           harper
           nixd
           psysh
+          ruff
           rust-analyzer
           typescript-go
+          ty
           # Conjure REPL for both JavaScript and TypeScript.
           (pkgs.writeShellScriptBin "conjure-ts-repl" ''
             export TERM=dumb
