@@ -26,10 +26,7 @@
 
         services.vicinae = {
           enable = true;
-          systemd = {
-            enable = true;
-            autoStart = true;
-          };
+          systemd.enable = false;
           extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
             niri
             nix
@@ -42,6 +39,15 @@
 
         programs.niri = {
           settings = {
+            spawn-at-startup = [
+              {
+                command = [
+                  "vicinae"
+                  "server"
+                ];
+              }
+            ];
+
             binds."alt+space" = {
               action.spawn = [
                 "vicinae"
