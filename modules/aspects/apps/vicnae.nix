@@ -24,7 +24,7 @@
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];
 
-        services.vicinae = {
+        programs.vicinae = {
           enable = true;
           systemd.enable = false;
           extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
