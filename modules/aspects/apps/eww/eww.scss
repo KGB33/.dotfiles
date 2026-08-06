@@ -1,1 +1,109 @@
+// $base00 - $base0F are prepended by eww.nix from the stylix palette.
 
+$bg: $base00;
+$edge: $base01;
+$muted: $base03;
+$dim: $base04;
+$fg: $base05;
+$accent: $base0D;
+$urgent: $base08;
+$ok: $base0B;
+$warn: $base09;
+$charge: $base0A;
+
+* {
+  all: unset;
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 11px;
+}
+
+.bar {
+  background-color: $bg;
+  color: $fg;
+  border-radius: 0 10px 10px 0;
+}
+
+.segment {
+  padding: 14px 0;
+}
+
+// ─── clock ──────────────────────────────────────────────────────────
+
+.clock-hour,
+.clock-min {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.clock-min {
+  color: $dim;
+}
+
+.clock-rule {
+  min-width: 14px;
+  min-height: 1px;
+  margin: 5px 0;
+  background-color: $edge;
+}
+
+.clock-day {
+  color: $dim;
+}
+
+.clock-month {
+  font-size: 10px;
+  color: $muted;
+}
+
+// ─── workspaces ─────────────────────────────────────────────────────
+
+.ws-slot {
+  padding: 4px 0;
+}
+
+.ws {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  background-color: $muted;
+  transition: 200ms ease-in-out;
+}
+
+// Occupied on another output.
+.ws-active {
+  background-color: $dim;
+}
+
+.ws-focused {
+  min-width: 12px;
+  min-height: 12px;
+  background-color: $accent;
+}
+
+.ws-urgent {
+  background-color: $urgent;
+}
+
+.ws-slot:hover .ws {
+  background-color: $fg;
+}
+
+// ─── battery ────────────────────────────────────────────────────────
+
+.battery-level {
+  &.battery-ok {
+    color: $ok;
+  }
+
+  &.battery-warn {
+    color: $warn;
+  }
+
+  &.battery-crit {
+    color: $urgent;
+  }
+
+  &.battery-charging {
+    color: $charge;
+  }
+}

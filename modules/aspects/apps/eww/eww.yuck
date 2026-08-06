@@ -1,12 +1,58 @@
+;; ─── clock ──────────────────────────────────────────────────────────
+
+(defwidget clock []
+  (box :class "clock" :orientation "vertical" :space-evenly false :spacing 2
+    (label :class "clock-hour"  :text {formattime(EWW_TIME, "%H")})
+    (label :class "clock-min"   :text {formattime(EWW_TIME, "%M")})
+    (box   :class "clock-rule")
+    (label :class "clock-day"   :text {formattime(EWW_TIME, "%d")})
+    (label :class "clock-month" :text {formattime(EWW_TIME, "%b")})))
+
+;; ─── workspaces ─────────────────────────────────────────────────────
+
+;; nix substitutes the placeholder below with the neighboring script
+(deflisten workspace-data
+  :initial "[]"
+  "@workspaces@")
+
+(defwidget workspace [ws]
+  (eventbox
+    :cursor "pointer"
+    :tooltip "Workspace ${ws.id}"
+    :onclick "niri msg action focus-workspace ${ws.id}"
+    (box :class "ws-slot" :halign "center" :valign "center"
+      (box :class "ws ${ws.class}"))))
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "center"
+    (for ws in workspace-data
+      (workspace :ws ws))))
+
+;; ─── battery ────────────────────────────────────────────────────────
+
+(defwidget battery-level [level charging]
+  (label
+    :class "battery-level ${charging ? "battery-charging" :
+                            level <= 10 ? "battery-crit" :
+                            level <= 30 ? "battery-warn" : "battery-ok"}"
+    :text "${level < 10 ? "0" : ""}${level}%"
+    :tooltip "Battery ${level}%${charging ? " (charging)" : ""}"))
+
+(defwidget battery []
+  (battery-level
+    :level {round(EWW_BATTERY.total_avg, 0)}
+    :charging {jq(EWW_BATTERY, '[.[] | objects | .status] | any(. == "Charging")')}))
+
+;; ─── bar ────────────────────────────────────────────────────────────
+
 (defwidget bar []
-  (centerbox :orientation "v"
-    (box :class "segment-top")
-    (box :class "segment-mid")
-    (box :class "segment-bot"
-  "Some Content"
-      )
-    )
-)
+  (centerbox :class "bar" :orientation "vertical"
+    (box :class "segment segment-top" :valign "start"  (clock))
+    (box :class "segment segment-mid" :valign "center" (workspaces))
+    (box :class "segment segment-bot" :valign "end"    (battery))))
 
 (defwindow sidebar
   :monitor 0
@@ -19,4 +65,4 @@
   :exclusive true
   :windowtype "dock"
   :wm-ignore false
-(bar))
+  (bar))
