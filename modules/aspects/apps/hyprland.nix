@@ -7,7 +7,6 @@
   apps.hyprland = {
     includes = with apps; [
       wezterm
-      noctalia
     ];
 
     nixos =

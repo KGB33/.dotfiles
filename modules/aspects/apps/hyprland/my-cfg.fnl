@@ -28,5 +28,3 @@
 (hl.bind :XF86AudioStop (hl.dsp.exec_cmd "playerctl stop") {:locked true})
 
 (hl.bind "SUPER + SHIFT + S" (hl.dsp.exec_cmd "grim -g \"$(slurp)\" - | wl-copy"))
-
-(hl.on :hyprland.start (fn [] (hl.exec_cmd :noctalia-shell)))
