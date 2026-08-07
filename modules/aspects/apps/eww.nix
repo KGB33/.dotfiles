@@ -38,5 +38,15 @@
           builtins.readFile ./eww/eww.yuck
         );
       };
+
+      programs.niri.settings.spawn-at-startup = [
+        {
+          command = [
+            "eww"
+            "open"
+            "sidebar"
+          ];
+        }
+      ];
     };
 }
