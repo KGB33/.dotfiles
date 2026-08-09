@@ -25,6 +25,7 @@
       claude
       nushell
       shell
+      microsandbox
     ];
 
     homeManager =
