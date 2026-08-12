@@ -11,6 +11,16 @@
       homeManager =
         { ... }:
         {
+
+          programs.difftastic = {
+            enable = true;
+            jujutsu.enable = true;
+            git = {
+              mode = "external";
+              enable = true;
+            };
+          };
+
           programs.git = {
             enable = true;
             lfs.enable = true;

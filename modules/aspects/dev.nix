@@ -16,16 +16,16 @@
   den.aspects.dev = {
     includes = with apps; [
       den.aspects.unfree
-      wezterm
+      claude
+      microsandbox
+      nushell
       nvim
-      vcs
+      shell
       taskwarrior
       tmux
       tv
-      claude
-      nushell
-      shell
-      microsandbox
+      vcs
+      wezterm
     ];
 
     homeManager =
@@ -38,10 +38,11 @@
           with pkgs;
           [
             bat
+            doggo
+            fd
             obsidian
             ripgrep
-            fd
-            doggo
+            tuicr
           ]
           ++ [
             inputs.emux.packages.${pkgs.stdenv.hostPlatform.system}.default
