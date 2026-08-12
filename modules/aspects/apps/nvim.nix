@@ -3,7 +3,7 @@
   flake-file.inputs = {
     # Opt into v2 beta
     blink-cmp = {
-      url = "github:saghen/blink.cmp?ref=b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6";
+      url = "github:saghen/blink.cmp";
     };
   };
 
