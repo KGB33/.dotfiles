@@ -29,6 +29,7 @@
         "steam-unwrapped" # Via xivlauncher
         "archon-lite"
         "discord"
+        "discord-unwrapped"
         "spotify"
       ];
       home.packages = with pkgs; [

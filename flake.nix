@@ -4,7 +4,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    blink-cmp.url = "github:saghen/blink.cmp?ref=b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6";
+    blink-cmp.url = "github:saghen/blink.cmp";
     claude-plugins-official = {
       url = "github:anthropics/claude-plugins-official";
       flake = false;
@@ -27,7 +27,7 @@
     import-tree.url = "github:vic/import-tree";
     llm-agents.url = "github:numtide/llm-agents.nix";
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
