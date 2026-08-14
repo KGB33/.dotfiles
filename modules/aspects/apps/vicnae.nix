@@ -24,6 +24,8 @@
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];
 
+        home.packages = with pkgs; [ pulseaudio ];
+
         programs.vicinae = {
           enable = true;
           systemd.enable = false;
@@ -33,7 +35,6 @@
             podman
             power-profile
             pulseaudio
-
           ];
         };
 
