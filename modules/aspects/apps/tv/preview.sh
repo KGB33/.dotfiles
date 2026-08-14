@@ -12,7 +12,7 @@ reset=$'\e[0m'
 now=$(date +%s)
 found=0
 
-echo "${bold}Claude Code${reset}"
+echo "${bold}Agents${reset}"
 if [ -d "$dir" ]; then
 	for f in "$dir"/*.json; do
 		[ -e "$f" ] || continue
@@ -25,6 +25,7 @@ if [ -d "$dir" ]; then
 		[ "$pane_session" = "$session" ] || continue
 		found=1
 
+		agent=$(jq -r '.agent // "Claude Code"' "$f")
 		state=$(jq -r '.state' "$f")
 		msg=$(jq -r '.msg' "$f")
 		cwd=$(jq -r '.cwd' "$f")
@@ -45,8 +46,8 @@ if [ -d "$dir" ]; then
 		else
 			badge="${green}● busy${reset}   "
 		fi
-		printf '%s  %s:%s  %s%s%s ago%s\n' \
-			"$badge" "$(basename "$cwd")" "$loc" \
+		printf '%s  %-11s  %s:%s  %s%s%s ago%s\n' \
+			"$badge" "$agent" "$(basename "$cwd")" "$loc" \
 			"$dim" "${msg:+$msg — }" "$age_s" "$reset"
 	done
 fi

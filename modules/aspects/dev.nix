@@ -20,6 +20,7 @@
       microsandbox
       nushell
       nvim
+      pi
       shell
       taskwarrior
       tmux

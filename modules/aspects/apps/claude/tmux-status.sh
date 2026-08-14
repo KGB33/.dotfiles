@@ -40,10 +40,11 @@ esac
 
 tmp=$(mktemp "$dir/.tmp.XXXXXX")
 jq -n \
+	--arg agent "Claude Code" \
 	--arg pane "$TMUX_PANE" \
 	--arg cwd "$(jq -r '.cwd // ""' <<<"$input")" \
 	--arg state "$state" \
 	--arg msg "$msg" \
 	--argjson ts "$(date +%s)" \
-	'{pane: $pane, cwd: $cwd, state: $state, msg: $msg, ts: $ts}' >"$tmp"
+	'{agent: $agent, pane: $pane, cwd: $cwd, state: $state, msg: $msg, ts: $ts}' >"$tmp"
 mv "$tmp" "$file"

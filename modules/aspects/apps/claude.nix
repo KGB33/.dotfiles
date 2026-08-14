@@ -32,8 +32,6 @@
     {
       den.unfree.predicates = [ "claude-code" ];
 
-      home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [ pi ];
-
       programs.claude-code = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
