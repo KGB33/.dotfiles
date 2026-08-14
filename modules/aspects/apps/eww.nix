@@ -35,6 +35,11 @@
           builtins.readFile ./eww/workspaces-hyprland.nu
         )}
       '';
+
+      hyprlandWorkspaceScroll = pkgs.writeScript "eww-hyprland-workspace-scroll.nu" ''
+        #!${pkgs.nushell}/bin/nu
+        ${builtins.readFile ./eww/scroll-workspace-hyprland.nu}
+      '';
     in
     {
       programs.eww = {
@@ -46,10 +51,12 @@
             [
               "@niri-workspaces@"
               "@hyprland-workspaces@"
+              "@hyprland-workspace-scroll@"
             ]
             [
               "${niriWorkspaces}"
               "${hyprlandWorkspaces}"
+              "${hyprlandWorkspaceScroll}"
             ]
             (builtins.readFile ./eww/eww.yuck);
       };

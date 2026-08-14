@@ -33,21 +33,30 @@
   :initial "[]"
   "@hyprland-workspaces@")
 
-(defwidget workspace [ws]
+(defvar niri-workspace-scroll
+  "sh -c 'case \"$1\" in up) niri msg action focus-workspace-up ;; down) niri msg action focus-workspace-down ;; esac' -- {}")
+
+(defvar hyprland-workspace-scroll
+  "@hyprland-workspace-scroll@ {}")
+
+(defwidget workspace [ws onscroll]
   (eventbox
     :cursor "pointer"
     :tooltip "Workspace ${ws.id}"
     :onclick {ws.onclick}
+    :onscroll {onscroll}
     (box :class "ws-slot" :halign "center" :valign "center"
       (box :class "ws ${ws.class}"))))
 
-(defwidget workspaces [data orientation]
-  (box :class "workspaces"
-       :orientation {orientation}
-       :space-evenly false
-       :valign "center"
-    (for ws in data
-      (workspace :ws ws))))
+(defwidget workspaces [data orientation onscroll]
+  (eventbox
+    :onscroll {onscroll}
+    (box :class "workspaces"
+         :orientation {orientation}
+         :space-evenly false
+         :valign "center"
+      (for ws in data
+        (workspace :ws ws :onscroll onscroll)))))
 
 ;; ─── battery ────────────────────────────────────────────────────────
 
@@ -69,16 +78,20 @@
 ;; ─── bars ───────────────────────────────────────────────────────────
 
 (defwidget sidebar-bar []
-  (centerbox :class "bar sidebar" :orientation "vertical"
-    (box :class "segment segment-top" :valign "start"  (clock))
-    (box :class "segment segment-mid" :valign "center" (workspaces :data niri-workspace-data :orientation "vertical"))
-    (box :class "segment segment-bot" :valign "end"    (battery))))
+  (eventbox
+    :onscroll niri-workspace-scroll
+    (centerbox :class "bar sidebar" :orientation "vertical"
+      (box :class "segment segment-top" :valign "start"  (clock))
+      (box :class "segment segment-mid" :valign "center" (workspaces :data niri-workspace-data :orientation "vertical" :onscroll niri-workspace-scroll))
+      (box :class "segment segment-bot" :valign "end"    (battery)))))
 
 (defwidget topbar-bar []
-  (centerbox :class "bar topbar" :orientation "horizontal"
-    (box :class "segment segment-left"  :halign "start"  (battery))
-    (box :class "segment segment-mid"   :halign "center" (workspaces :data hyprland-workspace-data :orientation "horizontal"))
-    (box :class "segment segment-right" :halign "end"    (topbar-clock))))
+  (eventbox
+    :onscroll hyprland-workspace-scroll
+    (centerbox :class "bar topbar" :orientation "horizontal"
+      (box :class "segment segment-left"  :halign "start"  (battery))
+      (box :class "segment segment-mid"   :halign "center" (workspaces :data hyprland-workspace-data :orientation "horizontal" :onscroll hyprland-workspace-scroll))
+      (box :class "segment segment-right" :halign "end"    (topbar-clock)))))
 
 (defwindow sidebar
   :monitor 0
