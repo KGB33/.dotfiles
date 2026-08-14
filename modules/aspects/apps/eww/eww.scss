@@ -20,11 +20,22 @@ $charge: $base0A;
 .bar {
   background-color: $bg;
   color: $fg;
-  border-radius: 0 10px 10px 0;
 }
 
-.segment {
-  padding: 14px 0;
+.sidebar {
+  border-radius: 0 10px 10px 0;
+
+  .segment {
+    padding: 14px 0;
+  }
+}
+
+.topbar {
+  border-radius: 0 0 10px 10px;
+
+  .segment {
+    padding: 3px 10px 0;
+  }
 }
 
 // ─── clock ──────────────────────────────────────────────────────────
@@ -46,6 +57,21 @@ $charge: $base0A;
   background-color: $edge;
 }
 
+.topbar {
+  .clock-rule {
+    min-width: 1px;
+    min-height: 18px;
+    margin: 0;
+  }
+
+  .clock-hour,
+  .clock-min,
+  .clock-day,
+  .clock-month {
+    font-size: 10px;
+  }
+}
+
 .clock-day {
   color: $dim;
 }
@@ -59,6 +85,10 @@ $charge: $base0A;
 
 .ws-slot {
   padding: 4px 0;
+}
+
+.topbar .ws-slot {
+  padding: 0 4px;
 }
 
 .ws {

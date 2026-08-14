@@ -24,9 +24,16 @@
         $base0F: ${colors.base0F};
       '';
 
-      workspaces = pkgs.writeScript "eww-workspaces.nu" ''
+      niriWorkspaces = pkgs.writeScript "eww-niri-workspaces.nu" ''
         #!${pkgs.nushell}/bin/nu
         ${builtins.readFile ./eww/workspaces.nu}
+      '';
+
+      hyprlandWorkspaces = pkgs.writeScript "eww-hyprland-workspaces.nu" ''
+        #!${pkgs.nushell}/bin/nu
+        ${builtins.replaceStrings [ "@socat@" ] [ "${pkgs.socat}/bin/socat" ] (
+          builtins.readFile ./eww/workspaces-hyprland.nu
+        )}
       '';
     in
     {
@@ -34,9 +41,17 @@
         enable = true;
         systemd.enable = true;
         scssConfig = palette + builtins.readFile ./eww/eww.scss;
-        yuckConfig = builtins.replaceStrings [ "@workspaces@" ] [ "${workspaces}" ] (
-          builtins.readFile ./eww/eww.yuck
-        );
+        yuckConfig =
+          builtins.replaceStrings
+            [
+              "@niri-workspaces@"
+              "@hyprland-workspaces@"
+            ]
+            [
+              "${niriWorkspaces}"
+              "${hyprlandWorkspaces}"
+            ]
+            (builtins.readFile ./eww/eww.yuck);
       };
 
       programs.niri.settings.spawn-at-startup = [

@@ -5,6 +5,7 @@ def workspaces [] {
     | each {|ws|
       {
         id: $ws.idx
+        onclick: $"niri msg action focus-workspace ($ws.idx)"
         class: ([
           (if $ws.is_urgent { "ws-urgent" })
           (if $ws.is_active { "ws-active" })
@@ -14,6 +15,12 @@ def workspaces [] {
     }
     | to json --raw
 }
+
+if ($env.NIRI_SOCKET? == null) {
+  loop { sleep 1hr }
+}
+
+print (workspaces)
 
 niri msg --json event-stream
   | lines

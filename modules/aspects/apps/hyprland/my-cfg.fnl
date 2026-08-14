@@ -1,7 +1,9 @@
 (hl.monitor {:output :DP-1 :mode :highrr :position :0x0 :scale 1})
 (hl.monitor {:output :eDP-2 :mode :highrr :position :0x0 :scale 1})
 
-(hl.on "hyprland.start" (fn [] (hl.exec_cmd "vicinae server")))
+(hl.on "hyprland.start" (fn []
+  (hl.exec_cmd "vicinae server")
+  (hl.exec_cmd "eww open topbar")))
 
 (hl.bind "SUPER + G" (hl.dsp.exec_cmd :wezterm))
 (hl.bind "SUPER + B" (hl.dsp.exec_cmd :firefox))

@@ -1,34 +1,52 @@
 ;; ─── clock ──────────────────────────────────────────────────────────
 
-(defwidget clock []
-  (box :class "clock" :orientation "vertical" :space-evenly false :spacing 2
-    (label :class "clock-hour"  :text {formattime(EWW_TIME, "%H")})
-    (label :class "clock-min"   :text {formattime(EWW_TIME, "%M")})
-    (box   :class "clock-rule")
+(defwidget clock-time []
+  (box :class "clock-time" :orientation "vertical" :space-evenly false :spacing 0
+    (label :class "clock-hour" :text {formattime(EWW_TIME, "%H")})
+    (label :class "clock-min"  :text {formattime(EWW_TIME, "%M")})))
+
+(defwidget clock-date []
+  (box :class "clock-date" :orientation "vertical" :space-evenly false :spacing 0
     (label :class "clock-day"   :text {formattime(EWW_TIME, "%d")})
     (label :class "clock-month" :text {formattime(EWW_TIME, "%b")})))
 
+(defwidget clock []
+  (box :class "clock" :orientation "vertical" :space-evenly false :spacing 2
+    (clock-time)
+    (box :class "clock-rule")
+    (clock-date)))
+
+(defwidget topbar-clock []
+  (box :class "topbar-clock" :orientation "horizontal" :space-evenly false :spacing 6
+    (clock-date)
+    (box :class "clock-rule")
+    (clock-time)))
+
 ;; ─── workspaces ─────────────────────────────────────────────────────
 
-;; nix substitutes the placeholder below with the neighboring script
-(deflisten workspace-data
+;; nix substitutes the placeholders below with the neighboring scripts
+(deflisten niri-workspace-data
   :initial "[]"
-  "@workspaces@")
+  "@niri-workspaces@")
+
+(deflisten hyprland-workspace-data
+  :initial "[]"
+  "@hyprland-workspaces@")
 
 (defwidget workspace [ws]
   (eventbox
     :cursor "pointer"
     :tooltip "Workspace ${ws.id}"
-    :onclick "niri msg action focus-workspace ${ws.id}"
+    :onclick {ws.onclick}
     (box :class "ws-slot" :halign "center" :valign "center"
       (box :class "ws ${ws.class}"))))
 
-(defwidget workspaces []
+(defwidget workspaces [data orientation]
   (box :class "workspaces"
-       :orientation "vertical"
+       :orientation {orientation}
        :space-evenly false
        :valign "center"
-    (for ws in workspace-data
+    (for ws in data
       (workspace :ws ws))))
 
 ;; ─── battery ────────────────────────────────────────────────────────
@@ -42,17 +60,25 @@
     :tooltip "Battery ${level}%${charging ? " (charging)" : ""}"))
 
 (defwidget battery []
-  (battery-level
-    :level {round(EWW_BATTERY.total_avg, 0)}
-    :charging {jq(EWW_BATTERY, '[.[] | objects | .status] | any(. == "Charging")')}))
+  (box :class "battery"
+       :visible {EWW_BATTERY != ""}
+    (battery-level
+      :level {EWW_BATTERY == "" ? 0 : round(jq(EWW_BATTERY, '.total_avg // 0'), 0)}
+      :charging {EWW_BATTERY == "" ? false : jq(EWW_BATTERY, '[.[] | objects | .status] | any(. == "Charging")')})))
 
-;; ─── bar ────────────────────────────────────────────────────────────
+;; ─── bars ───────────────────────────────────────────────────────────
 
-(defwidget bar []
-  (centerbox :class "bar" :orientation "vertical"
+(defwidget sidebar-bar []
+  (centerbox :class "bar sidebar" :orientation "vertical"
     (box :class "segment segment-top" :valign "start"  (clock))
-    (box :class "segment segment-mid" :valign "center" (workspaces))
+    (box :class "segment segment-mid" :valign "center" (workspaces :data niri-workspace-data :orientation "vertical"))
     (box :class "segment segment-bot" :valign "end"    (battery))))
+
+(defwidget topbar-bar []
+  (centerbox :class "bar topbar" :orientation "horizontal"
+    (box :class "segment segment-left"  :halign "start"  (battery))
+    (box :class "segment segment-mid"   :halign "center" (workspaces :data hyprland-workspace-data :orientation "horizontal"))
+    (box :class "segment segment-right" :halign "end"    (topbar-clock))))
 
 (defwindow sidebar
   :monitor 0
@@ -65,4 +91,17 @@
   :exclusive true
   :windowtype "dock"
   :wm-ignore false
-  (bar))
+  (sidebar-bar))
+
+(defwindow topbar
+  :monitor 0
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "100%"
+                      :height "32px"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :windowtype "dock"
+  :wm-ignore false
+  (topbar-bar))
