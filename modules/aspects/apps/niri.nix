@@ -31,15 +31,33 @@
 
     homeManager =
       { lib, pkgs, ... }:
+      let
+        xwaylandSatellite =
+          inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-stable;
+      in
       {
         imports = [ inputs.niri.homeModules.niri ];
 
-        home.packages = [ pkgs.brightnessctl ];
+        home.packages = [
+          pkgs.brightnessctl
+          xwaylandSatellite
+        ];
 
         programs.niri = {
           enable = true;
           package = pkgs.niri;
           settings = {
+            environment.DISPLAY = ":0";
+
+            spawn-at-startup = [
+              {
+                argv = [
+                  (lib.getExe xwaylandSatellite)
+                  ":0"
+                ];
+              }
+            ];
+
             binds =
               let
                 binds =
