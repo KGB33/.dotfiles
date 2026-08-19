@@ -32,6 +32,7 @@
     homeManager =
       { lib, pkgs, ... }:
       let
+        termfilechooser = pkgs.xdg-desktop-portal-termfilechooser;
         xwaylandSatellite =
           inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-stable;
       in
@@ -40,8 +41,43 @@
 
         home.packages = [
           pkgs.brightnessctl
+          pkgs.yazi
           xwaylandSatellite
         ];
+
+        xdg = {
+          portal = {
+            extraPortals = [ termfilechooser ];
+            config.niri = {
+              default = [
+                "gnome"
+                "gtk"
+              ];
+              "org.freedesktop.impl.portal.Access" = "gtk";
+              "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+              "org.freedesktop.impl.portal.Notification" = "gtk";
+              "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+            };
+          };
+
+          configFile."xdg-desktop-portal-termfilechooser/niri".text = ''
+            [filechooser]
+            cmd=${termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+            default_dir=$HOME
+            env=PATH=${
+              lib.makeBinPath [
+                pkgs.bash
+                pkgs.coreutils
+                pkgs.gnused
+                pkgs.wezterm
+                pkgs.yazi
+              ]
+            }
+            env=TERMCMD=${lib.getExe pkgs.wezterm} start --always-new-process --class termfilechooser
+            open_mode=suggested
+            save_mode=suggested
+          '';
+        };
 
         programs.niri = {
           enable = true;
