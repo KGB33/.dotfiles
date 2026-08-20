@@ -11,35 +11,24 @@
     let
       piPackage = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi;
 
-      cherryVersion = "0.6.38";
-      cherryArchive = pkgs.fetchurl {
-        url = "https://registry.npmjs.org/cherry-cljs/-/cherry-cljs-${cherryVersion}.tgz";
-        hash = "sha512-IgTWS+e1tA1YcqPOzG65AZJ/Plonz5aXiVSLuvgntlbar4atz3W6klHDnV8u7mi96HJCumoAQg1VutXkMABQdg==";
-      };
-      cherrySource = pkgs.runCommand "cherry-cljs-${cherryVersion}-source" { } ''
-        mkdir "$out"
-        tar -xzf ${cherryArchive} --strip-components=1 -C "$out"
-        ${pkgs.jq}/bin/jq 'del(.devDependencies)' "$out/package.json" > package.json
-        mv package.json "$out/package.json"
-        cp ${./pi/package-lock.json} "$out/package-lock.json"
-      '';
-      cherry = pkgs.buildNpmPackage {
-        pname = "cherry-cljs";
-        version = cherryVersion;
-        src = cherrySource;
-        npmDepsHash = "sha256-b0fKOcw/r6ave9It5m+zZAPpOrxecEgqeLuTtYb9fgk=";
+      piExtensionRuntime = pkgs.buildNpmPackage {
+        pname = "pi-extension-runtime";
+        version = "1.0.0";
+        src = ./pi;
+        npmDepsHash = "sha256-/k99d5g91KZxDxdH5mf/v9xKRDnHz1Fk193octN2PjI=";
+        npmInstallFlags = [ "--ignore-scripts" ];
         dontNpmBuild = true;
         nativeBuildInputs = [ pkgs.makeWrapper ];
         installPhase = ''
           runHook preInstall
-          mkdir -p "$out/bin" "$out/lib/node_modules"
-          cp -r . "$out/lib/node_modules/cherry-cljs"
+          mkdir -p "$out/bin" "$out/lib"
+          cp -r node_modules "$out/lib/node_modules"
           makeWrapper ${pkgs.nodejs}/bin/node "$out/bin/cherry" \
             --add-flags "$out/lib/node_modules/cherry-cljs/node_cli.js"
           runHook postInstall
         '';
       };
-      cherryPackage = "${cherry}/lib/node_modules/cherry-cljs";
+      cherryPackage = "${piExtensionRuntime}/lib/node_modules/cherry-cljs";
       cherryCompiler = pkgs.writeText "compile-cherry-extension.mjs" ''
         import { readFile, writeFile } from "node:fs/promises";
         import { compileString } from "${cherryPackage}/lib/compiler.node.js";
@@ -154,7 +143,7 @@
       piConfigDir = config.programs.pi-coding-agent.configDir;
     in
     {
-      home.packages = [ cherry ];
+      home.packages = [ piExtensionRuntime ];
 
       programs.pi-coding-agent = {
         enable = true;
@@ -182,14 +171,25 @@
           force = true;
           source = compileClojureScript "pi-atuin-extension" ./pi/atuin.cljs;
         };
+        "${piConfigDir}/extensions/ask-user.js" = {
+          force = true;
+          source = compileClojureScript "pi-ask-user-extension" ./pi/ask-user.cljs;
+        };
+        "${piConfigDir}/extensions/otel.js" = {
+          force = true;
+          source = compileClojureScript "pi-otel-extension" ./pi/otel.cljs;
+        };
         "${piConfigDir}/extensions/tmux-status.js" = {
           force = true;
           source = compileClojureScript "pi-tmux-status-extension" ./pi/tmux-status.cljs;
         };
 
-        # Resolve the compiled extensions' normal cherry-cljs runtime imports
-        # from the same complete Cherry installation used by the compiler.
-        "${piConfigDir}/extensions/node_modules/cherry-cljs".source = cherryPackage;
+        # Resolve compiled extensions' normal npm imports from the same locked
+        # runtime used by the compiler.
+        "${piConfigDir}/extensions/node_modules" = {
+          force = true;
+          source = "${piExtensionRuntime}/lib/node_modules";
+        };
       };
     };
 }
