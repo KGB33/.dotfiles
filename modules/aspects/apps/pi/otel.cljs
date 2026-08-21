@@ -23,13 +23,128 @@
 
 (defn make-lifecycle [adapter]
   {:adapter adapter
-   :state (atom {:conversation nil :turn nil :tools {}})})
+   :state (atom {:conversation nil
+                 :turn nil
+                 :tools {}
+                 :pending-skills {}
+                 :active-skills {}
+                 :skill-paths {}})})
 
 (defn adapter-call! [lifecycle operation & args]
   (try
     (apply (get (:adapter lifecycle) operation) args)
     (catch :default _
       nil)))
+
+(defn skill-attributes [lifecycle]
+  (let [active-skills (:active-skills @(:state lifecycle))
+        names (vec (sort (keys active-skills)))
+        triggers (set (vals active-skills))]
+    (if (seq names)
+      {"pi.skill.active" true
+       "pi.skill.names" names
+       "pi.skill.trigger" (if (> (count triggers) 1)
+                            "mixed"
+                            (first triggers))}
+      {})))
+
+(defn apply-skill-attributes! [lifecycle]
+  (let [{:keys [turn tools]} @(:state lifecycle)
+        attributes (skill-attributes lifecycle)
+        handles (concat [(:root turn)
+                         (:prepare turn)
+                         (:request turn)
+                         (:headers turn)
+                         (:stream turn)]
+                        (vals tools))]
+    (when (seq attributes)
+      (doseq [handle handles]
+        (when handle
+          (adapter-call! lifecycle :set-attributes! handle attributes))))))
+
+(defn activate-skill! [lifecycle skill-name trigger]
+  (when skill-name
+    (swap! (:state lifecycle)
+           update
+           :active-skills
+           (fn [active-skills]
+             (if (contains? active-skills skill-name)
+               active-skills
+               (assoc active-skills skill-name trigger))))
+    (apply-skill-attributes! lifecycle)))
+
+(defn explicit-skill-name [text]
+  (when (string? text)
+    (when-let [match (re-find #"^/skill:([a-z0-9-]+)(?:\s|$)" text)]
+      (nth match 1))))
+
+(defn capture-input-skill! [lifecycle text]
+  (let [skill-name (explicit-skill-name text)]
+    (swap! (:state lifecycle)
+           assoc
+           :pending-skills
+           (if skill-name {skill-name "explicit"} {}))))
+
+(defn canonical-path [cwd value]
+  (when (string? value)
+    (let [value (if (.startsWith value "@") (.slice value 1) value)]
+      (.normalize path (.resolve path cwd value)))))
+
+(defn begin-agent-run! [lifecycle event ctx commands]
+  (let [options (.-systemPromptOptions event)
+        skills (if-let [loaded-skills (when options (.-skills options))]
+                 (array-seq loaded-skills)
+                 [])
+        commands (if commands (array-seq commands) [])
+        skill-records
+        (concat
+          (map (fn [skill]
+                 (let [source-info (.-sourceInfo skill)]
+                   {:name (.-name skill)
+                    :path (or (.-filePath skill)
+                              (when source-info (.-path source-info)))}))
+               skills)
+          (keep (fn [command]
+                  (let [command-name (.-name command)
+                        source-info (.-sourceInfo command)]
+                    (when (and (= "skill" (.-source command))
+                               (string? command-name)
+                               (.startsWith command-name "skill:"))
+                      {:name (.slice command-name 6)
+                       :path (when source-info (.-path source-info))})))
+                commands))
+        cwd (.-cwd ctx)
+        skill-paths
+        (reduce (fn [result skill]
+                  (let [canonical (canonical-path cwd (:path skill))
+                        skill-name (:name skill)]
+                    (if (and canonical skill-name)
+                      (assoc result canonical skill-name)
+                      result)))
+                {}
+                skill-records)
+        skill-names (set (vals skill-paths))
+        pending-skills (:pending-skills @(:state lifecycle))
+        active-skills (select-keys pending-skills skill-names)]
+    (swap! (:state lifecycle)
+           assoc
+           :pending-skills {}
+           :active-skills active-skills
+           :skill-paths skill-paths)
+    (apply-skill-attributes! lifecycle)))
+
+(defn activate-read-skill! [lifecycle cwd tool-name args]
+  (when (= "read" tool-name)
+    (let [read-path (when args (aget args "path"))
+          canonical (canonical-path cwd read-path)
+          skill-name (get-in @(:state lifecycle) [:skill-paths canonical])]
+      (activate-skill! lifecycle skill-name "automatic"))))
+
+(defn clear-agent-skills! [lifecycle]
+  (swap! (:state lifecycle)
+         assoc
+         :pending-skills {}
+         :active-skills {}))
 
 (defn start-span! [lifecycle name attributes parent]
   (adapter-call! lifecycle
@@ -75,9 +190,12 @@
   (when-let [conversation (:conversation @(:state lifecycle))]
     (when-let [root (start-span! lifecycle
                                  "pi.turn"
-                                 attributes
+                                 (merge attributes (skill-attributes lifecycle))
                                  conversation)]
-      (let [prepare (start-span! lifecycle "pi.prepare" {} root)]
+      (let [prepare (start-span! lifecycle
+                                 "pi.prepare"
+                                 (skill-attributes lifecycle)
+                                 root)]
         (swap! (:state lifecycle)
                assoc
                :turn
@@ -97,11 +215,12 @@
         (swap! (:state lifecycle) assoc :turn turn)
         (when-let [request (start-span! lifecycle
                                         "gen_ai.request"
-                                        attributes
+                                        (merge attributes
+                                               (skill-attributes lifecycle))
                                         (:root turn))]
           (let [headers (start-span! lifecycle
                                      "pi.provider.wait_headers"
-                                     {}
+                                     (skill-attributes lifecycle)
                                      request)]
             (swap! (:state lifecycle)
                    assoc
@@ -132,7 +251,7 @@
         (let [stream (or (:stream turn)
                          (start-span! lifecycle
                                       "pi.provider.stream"
-                                      {}
+                                      (skill-attributes lifecycle)
                                       request))]
           (swap! (:state lifecycle)
                  assoc
@@ -205,10 +324,12 @@
       (when-let [handle (start-span!
                           lifecycle
                           (str "pi.tool " tool-name)
-                          {"gen_ai.tool.name" tool-name
-                           "gen_ai.tool.call.id" tool-call-id
-                           "gen_ai.tool.call.arguments"
-                           (serialize-tool-arguments args)}
+                          (merge
+                            {"gen_ai.tool.name" tool-name
+                             "gen_ai.tool.call.id" tool-call-id
+                             "gen_ai.tool.call.arguments"
+                             (serialize-tool-arguments args)}
+                            (skill-attributes lifecycle))
                           (:root turn))]
         (swap! (:state lifecycle)
                assoc-in
@@ -370,6 +491,18 @@
                                "OTEL tracing disabled: initialization failed"
                                "warning"))))))))
      (.on pi
+          "input"
+          (guarded
+            (fn [event _ctx]
+              (when-let [active @lifecycle]
+                (capture-input-skill! active (.-text event))))))
+     (.on pi
+          "before_agent_start"
+          (guarded
+            (fn [event ctx]
+              (when-let [active @lifecycle]
+                (begin-agent-run! active event ctx (.getCommands pi))))))
+     (.on pi
           "turn_start"
           (guarded
             (fn [event ctx]
@@ -404,8 +537,12 @@
      (.on pi
           "tool_execution_start"
           (guarded
-            (fn [event _ctx]
+            (fn [event ctx]
               (when-let [active @lifecycle]
+                (activate-read-skill! active
+                                      (.-cwd ctx)
+                                      (.-toolName event)
+                                      (.-args event))
                 (tool-start! active
                              (.-toolCallId event)
                              (.-toolName event)
@@ -424,6 +561,12 @@
             (fn [event _ctx]
               (when-let [active @lifecycle]
                 (turn-end! active (.-message event))))))
+     (.on pi
+          "agent_settled"
+          (guarded
+            (fn [_event _ctx]
+              (when-let [active @lifecycle]
+                (clear-agent-skills! active)))))
      (.on pi
           "session_shutdown"
           ^:async (fn [_event _ctx]
