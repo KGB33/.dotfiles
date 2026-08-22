@@ -23,8 +23,7 @@
 
 (defn make-lifecycle [adapter]
   {:adapter adapter
-   :state (atom {:conversation nil
-                 :turn nil
+   :state (atom {:turn nil
                  :tools {}
                  :pending-skills {}
                  :active-skills {}
@@ -153,14 +152,6 @@
                  (compact-attributes attributes)
                  parent))
 
-(defn start-conversation! [lifecycle attributes]
-  (when-not (:conversation @(:state lifecycle))
-    (when-let [conversation (start-span! lifecycle
-                                         "pi.conversation"
-                                         attributes
-                                         nil)]
-      (swap! (:state lifecycle) assoc :conversation conversation))))
-
 (defn finish-span! [lifecycle handle reason]
   (when handle
     (adapter-call! lifecycle
@@ -187,25 +178,24 @@
 (defn start-turn! [lifecycle attributes]
   (when (:turn @(:state lifecycle))
     (close-active-turn! lifecycle "superseded"))
-  (when-let [conversation (:conversation @(:state lifecycle))]
-    (when-let [root (start-span! lifecycle
-                                 "pi.turn"
-                                 (merge attributes (skill-attributes lifecycle))
-                                 conversation)]
-      (let [prepare (start-span! lifecycle
-                                 "pi.prepare"
-                                 (skill-attributes lifecycle)
-                                 root)]
-        (swap! (:state lifecycle)
-               assoc
-               :turn
-               {:root root
-                :prepare prepare
-                :request nil
-                :headers nil
-                :stream nil
-                :first-update? false}
-               :tools {})))))
+  (when-let [root (start-span! lifecycle
+                               "pi.turn"
+                               (merge attributes (skill-attributes lifecycle))
+                               nil)]
+    (let [prepare (start-span! lifecycle
+                               "pi.prepare"
+                               (skill-attributes lifecycle)
+                               root)]
+      (swap! (:state lifecycle)
+             assoc
+             :turn
+             {:root root
+              :prepare prepare
+              :request nil
+              :headers nil
+              :stream nil
+              :first-update? false}
+             :tools {}))))
 
 (defn provider-request! [lifecycle attributes]
   (when-let [turn (:turn @(:state lifecycle))]
@@ -363,10 +353,7 @@
     (swap! (:state lifecycle) assoc :turn nil :tools {})))
 
 (defn shutdown-lifecycle! [lifecycle]
-  (close-active-turn! lifecycle "session_shutdown")
-  (when-let [conversation (:conversation @(:state lifecycle))]
-    (finish-span! lifecycle conversation nil)
-    (swap! (:state lifecycle) assoc :conversation nil)))
+  (close-active-turn! lifecycle "session_shutdown"))
 
 (def instrumentation-name "pi.otel")
 (def instrumentation-version "1.0.0")
@@ -481,9 +468,7 @@
                   (let [created (runtime-factory)
                         active (make-lifecycle (:adapter created))]
                     (reset! runtime created)
-                    (reset! lifecycle active)
-                    (start-conversation! active
-                                         (conversation-attributes ctx)))
+                    (reset! lifecycle active))
                   (catch :default _
                     (when (and (.-hasUI ctx)
                                (compare-and-set! warned? false true))
