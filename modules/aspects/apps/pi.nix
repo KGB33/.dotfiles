@@ -145,6 +145,10 @@
     {
       home.packages = [ piExtensionRuntime ];
 
+      # Vibes is a Claude plugin, so its portable skills refer to this root
+      # when invoking bundled helper scripts from Pi.
+      home.sessionVariables.CLAUDE_PLUGIN_ROOT = "${inputs.vibes}/plugins/workflow";
+
       programs.pi-coding-agent = {
         enable = true;
         package = piPackage;

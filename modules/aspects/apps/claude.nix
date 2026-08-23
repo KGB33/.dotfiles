@@ -32,6 +32,8 @@
     {
       den.unfree.predicates = [ "claude-code" ];
 
+      home.sessionVariables.OBSIDIAN_VAULT_PATH = "${config.home.homeDirectory}/Notes";
+
       programs.claude-code = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
@@ -39,8 +41,7 @@
         plugins = {
           frontend-design = "${inputs.claude-plugins-official}/plugins/frontend-design";
           playground = "${inputs.claude-plugins-official}/plugins/playground";
-          # personal fork of obra/superpowers: no agent-created branches/worktrees,
-          # plans and specs stay out of the repo, work ends with a report not a merge
+          # Manual Cartographer/Scout workflow backed by durable Obsidian maps.
           workflow = "${inputs.vibes}/plugins/workflow";
         };
 
