@@ -168,7 +168,10 @@
           defaultModel = "gpt-5.6-sol";
           defaultThinkingLevel = "high";
           theme = "stylix";
-          packages = [ "${piWorkflowPackage}" ];
+          packages = [
+            "${piWorkflowPackage}"
+            "npm:pi-subagents"
+          ];
           lastChangelogVersion = piPackage.version;
         };
       };
