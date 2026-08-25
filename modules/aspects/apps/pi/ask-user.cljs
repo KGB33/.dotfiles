@@ -139,8 +139,9 @@
           (.push lines (str (if (zero? index) prefix continuation) line)))))))
 
 (defn open-questionnaire [ctx questions]
-  (.custom
-    (.-ui ctx)
+  (let [overlay-handle (atom nil)]
+    (.custom
+      (.-ui ctx)
     (fn [tui theme keybindings done]
       (let [question-count (.-length questions)
             multi-question? (> question-count 1)
@@ -156,7 +157,15 @@
               (into {}
                     (map (fn [question] [(.-id question) (empty-answer)])
                          (array-seq questions))))
-            editor (CustomEditor. tui theme keybindings)]
+            editor-theme
+            #js {:borderColor (fn [text] (.fg theme "accent" text))
+                 :selectList
+                 #js {:selectedPrefix (fn [text] (.fg theme "accent" text))
+                      :selectedText (fn [text] (.fg theme "accent" text))
+                      :description (fn [text] (.fg theme "muted" text))
+                      :scrollInfo (fn [text] (.fg theme "dim" text))
+                      :noMatch (fn [text] (.fg theme "warning" text))}}
+            editor (CustomEditor. tui editor-theme keybindings)]
         (letfn [(current-question []
                   (when (< @current-tab question-count)
                     (aget questions @current-tab)))
@@ -182,8 +191,22 @@
                 (open-custom! [question]
                   (reset! input-mode true)
                   (reset! input-question-id (.-id question))
-                  (.setText editor (or (:custom (answer-for question)) ""))
-                  (refresh!))
+                  (when-let [handle @overlay-handle]
+                    (.setHidden handle true))
+                  (let [prefill (or (:custom (answer-for question)) "")]
+                    (.then
+                      (.editor (.-ui ctx) "Your answer:" prefill)
+                      (fn [text]
+                        (when-let [handle @overlay-handle]
+                          (.setHidden handle false)
+                          (.focus handle))
+                        (if (nil? text)
+                          (do
+                            (reset! input-mode false)
+                            (reset! input-question-id nil)
+                            (.setText editor "")
+                            (refresh!))
+                          (submit-custom! text))))))
                 (submit-custom! [text]
                   (when-let [question-id @input-question-id]
                     (let [question
@@ -434,7 +457,9 @@
               #js {:configurable true
                    :get (fn [] (.-focused editor))
                    :set (fn [value] (set! (.-focused editor) value))})
-            component))))))
+            component))))
+      #js {:overlay true
+           :onHandle (fn [handle] (reset! overlay-handle handle))})))
 
 (defn result-text [details]
   (.join

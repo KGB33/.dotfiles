@@ -1324,11 +1324,11 @@
     "vibes": {
       "flake": false,
       "locked": {
-        "lastModified": 1787432721,
-        "narHash": "sha256-uDoDmfFk0yG8UlZr5EGF2JdBN8FQ4NIki5TfvW/EY/g=",
+        "lastModified": 1787668253,
+        "narHash": "sha256-TiYgeMi99af24ujj3MJFu31ujnT62nETSi/X8dZ+q4Y=",
         "owner": "KGB33",
         "repo": "vibes",
-        "rev": "704556f774fb55d58c8d326f00419ad8a82a3198",
+        "rev": "67bd486a06344834a41e1bb5cc1e4aae489f789b",
         "type": "github"
       },
       "original": {
