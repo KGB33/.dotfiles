@@ -48,6 +48,13 @@
         pkgs.runCommand name { nativeBuildInputs = [ pkgs.nodejs ]; } ''
           node ${cherryCompiler} ${source} "$out"
         '';
+      workflowContextExtension = compileClojureScript "pi-workflow-context-extension" ./pi/workflow-context.cljs;
+      piWorkflowPackage = pkgs.runCommand "pi-workflow-package" { } ''
+        mkdir -p "$out/extensions"
+        cp -r ${inputs.vibes}/plugins/workflow/skills "$out/skills"
+        cp ${workflowContextExtension} "$out/extensions/workflow-context.js"
+        ln -s ${piExtensionRuntime}/lib/node_modules "$out/node_modules"
+      '';
 
       colors = config.lib.stylix.colors.withHashtag;
       piTheme = {
@@ -147,7 +154,10 @@
 
       # Vibes is a Claude plugin, so its portable skills refer to this root
       # when invoking bundled helper scripts from Pi.
-      home.sessionVariables.CLAUDE_PLUGIN_ROOT = "${inputs.vibes}/plugins/workflow";
+      home.sessionVariables = {
+        CLAUDE_PLUGIN_ROOT = "${inputs.vibes}/plugins/workflow";
+        NEORG_WORKSPACE_PATH = "~/Notes/";
+      };
 
       programs.pi-coding-agent = {
         enable = true;
@@ -158,7 +168,7 @@
           defaultModel = "gpt-5.6-sol";
           defaultThinkingLevel = "high";
           theme = "stylix";
-          skills = [ "${inputs.vibes}/plugins/workflow/skills" ];
+          packages = [ "${piWorkflowPackage}" ];
           lastChangelogVersion = piPackage.version;
         };
       };
