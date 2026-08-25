@@ -171,6 +171,8 @@
           packages = [
             "${piWorkflowPackage}"
             "npm:pi-subagents"
+            "npm:pi-web-access"
+            "npm:pi-mcp-adapter"
           ];
           lastChangelogVersion = piPackage.version;
         };
