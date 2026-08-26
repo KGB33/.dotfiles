@@ -5,10 +5,6 @@
 
   inputs = {
     blink-cmp.url = "github:saghen/blink.cmp";
-    claude-plugins-official = {
-      url = "github:anthropics/claude-plugins-official";
-      flake = false;
-    };
     den.url = "github:denful/den";
     emux = {
       url = "github:kgb33/emux";

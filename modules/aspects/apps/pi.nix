@@ -1,6 +1,12 @@
 { inputs, ... }:
 {
-  flake-file.inputs.llm-agents.url = "github:numtide/llm-agents.nix";
+  flake-file.inputs = {
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    vibes = {
+      url = "github:KGB33/vibes";
+      flake = false;
+    };
+  };
 
   apps.pi.homeManager =
     {

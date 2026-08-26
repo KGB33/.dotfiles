@@ -16,7 +16,6 @@
   den.aspects.dev = {
     includes = with apps; [
       den.aspects.unfree
-      claude
       microsandbox
       nushell
       nvim
