@@ -1,4 +1,25 @@
 { inputs, ... }:
+let
+  mkPiExtensionRuntime =
+    pkgs:
+    pkgs.buildNpmPackage {
+      pname = "pi-extension-runtime";
+      version = "1.0.0";
+      src = ./pi;
+      npmDepsHash = "sha256-/k99d5g91KZxDxdH5mf/v9xKRDnHz1Fk193octN2PjI=";
+      npmInstallFlags = [ "--ignore-scripts" ];
+      dontNpmBuild = true;
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      installPhase = ''
+        runHook preInstall
+        mkdir -p "$out/bin" "$out/lib"
+        cp -r node_modules "$out/lib/node_modules"
+        makeWrapper ${pkgs.nodejs}/bin/node "$out/bin/cherry" \
+          --add-flags "$out/lib/node_modules/cherry-cljs/node_cli.js"
+        runHook postInstall
+      '';
+    };
+in
 {
   flake-file.inputs = {
     llm-agents.url = "github:numtide/llm-agents.nix";
@@ -7,6 +28,26 @@
       flake = false;
     };
   };
+
+  perSystem =
+    { pkgs, ... }:
+    let
+      piExtensionRuntime = mkPiExtensionRuntime pkgs;
+    in
+    {
+      checks.pi-agent-status-tests = pkgs.runCommand "pi-agent-status-tests" {
+        nativeBuildInputs = [ piExtensionRuntime pkgs.nodejs ];
+      } ''
+        mkdir -p pi/extensions
+        cp ${./pi/agent-status-test.cljs} pi/extensions/agent_status_test.cljs
+        cp ${./pi/agent-status.cljs} pi/extensions/agent_status.cljs
+        ln -s ${piExtensionRuntime}/lib/node_modules node_modules
+        printf '{:paths ["."]}\n' > cherry.edn
+        cherry compile pi/extensions/agent_status.cljs pi/extensions/agent_status_test.cljs
+        node pi/extensions/agent_status_test.mjs
+        touch "$out"
+      '';
+    };
 
   apps.pi.homeManager =
     {
@@ -17,23 +58,7 @@
     let
       piPackage = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi;
 
-      piExtensionRuntime = pkgs.buildNpmPackage {
-        pname = "pi-extension-runtime";
-        version = "1.0.0";
-        src = ./pi;
-        npmDepsHash = "sha256-/k99d5g91KZxDxdH5mf/v9xKRDnHz1Fk193octN2PjI=";
-        npmInstallFlags = [ "--ignore-scripts" ];
-        dontNpmBuild = true;
-        nativeBuildInputs = [ pkgs.makeWrapper ];
-        installPhase = ''
-          runHook preInstall
-          mkdir -p "$out/bin" "$out/lib"
-          cp -r node_modules "$out/lib/node_modules"
-          makeWrapper ${pkgs.nodejs}/bin/node "$out/bin/cherry" \
-            --add-flags "$out/lib/node_modules/cherry-cljs/node_cli.js"
-          runHook postInstall
-        '';
-      };
+      piExtensionRuntime = mkPiExtensionRuntime pkgs;
       cherryPackage = "${piExtensionRuntime}/lib/node_modules/cherry-cljs";
       cherryCompiler = pkgs.writeText "compile-cherry-extension.mjs" ''
         import { readFile, writeFile } from "node:fs/promises";
@@ -204,9 +229,9 @@
           force = true;
           source = compileClojureScript "pi-otel-extension" ./pi/otel.cljs;
         };
-        "${piConfigDir}/extensions/tmux-status.js" = {
+        "${piConfigDir}/extensions/agent-status.js" = {
           force = true;
-          source = compileClojureScript "pi-tmux-status-extension" ./pi/tmux-status.cljs;
+          source = compileClojureScript "pi-agent-status-extension" ./pi/agent-status.cljs;
         };
 
         # Resolve compiled extensions' normal npm imports from the same locked
