@@ -1071,7 +1071,6 @@
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "stylix": "stylix",
-        "vibes": "vibes",
         "vicinae": "vicinae",
         "vicinae-extensions": "vicinae-extensions"
       }
@@ -1301,22 +1300,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "vibes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1787668253,
-        "narHash": "sha256-TiYgeMi99af24ujj3MJFu31ujnT62nETSi/X8dZ+q4Y=",
-        "owner": "KGB33",
-        "repo": "vibes",
-        "rev": "67bd486a06344834a41e1bb5cc1e4aae489f789b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "KGB33",
-        "repo": "vibes",
         "type": "github"
       }
     },
