@@ -20,11 +20,7 @@ specification. Cartographer owns map persistence.
 
 - Never edit product code, create a branch/worktree, or begin a DAG node.
 - Set `workspace_root` from the `Host-resolved workflow context` supplied with the
-  invocation. That path is authoritative and already validated; use it directly
-  without inspecting `NEORG_WORKSPACE_PATH`.
-- If no host-resolved workspace was supplied, fall back to `NEORG_WORKSPACE_PATH`.
-  If it is unset or inaccessible, stop with:
-  `Set NEORG_WORKSPACE_PATH to a readable Neorg workspace directory.`
+  invocation. That path is authoritative and already validated; use it directly.
 - Ask one question per message, including ticket and feature naming questions.
 - A node is one independently reviewable behavior with one coherent TDD cycle.
 

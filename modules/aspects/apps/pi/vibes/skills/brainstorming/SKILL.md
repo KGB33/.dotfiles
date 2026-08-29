@@ -16,7 +16,7 @@ Do not hand off to another workflow unless the caller explicitly instructs you t
 ## Process
 
 1. Explore project context: relevant files, documentation, and recent commits.
-2. Ask one clarifying question per message. Establish intent, constraints, and success.
+2. Ask one clarifying question per message, use the `ask_user` tool. Establish intent, constraints, and success.
 3. Propose two or three approaches with trade-offs and a recommendation. Apply YAGNI.
 4. Present the design in sections sized to their complexity. Cover architecture,
    components, data flow, errors, and testing; obtain approval after each section.

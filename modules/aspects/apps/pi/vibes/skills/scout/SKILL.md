@@ -19,8 +19,7 @@ selects a second node.
 
 ## Select One Node
 
-1. Use the host-resolved Neorg workspace. If none was supplied, use
-   `NEORG_WORKSPACE_PATH`; if it is missing or unreadable, stop with a direct
+1. Use the host-resolved Neorg workspace, if it is missing or unreadable, stop with a direct
    diagnostic.
 2. Find `maps/*/plan.norg`, ask which active feature to use, and read its step
    summary. Read only each candidate's `step`, `status`, and `depends_on` metadata
@@ -28,8 +27,9 @@ selects a second node.
    validate the whole map again.
 3. If metadata needed during selection is missing or unreadable, name that file and
    field and stop. Do not turn the error into a map-wide validation pass.
-4. Require a branch other than `main` or `master` and a clean worktree. Never
-   create, switch, reset, stash, or clean a branch for the user.
+4. Never create, switch, reset, stash, or clean a branch for the user. If the
+   current branch is `main` or `master`, confirm with the user before
+   continuing.
 5. Resume any `in-progress` or `blocked` node with retained changes before offering
    new work, preserving its original base. Otherwise offer pending nodes whose
    dependencies are complete and ask the user to choose one.
@@ -76,8 +76,8 @@ The parent session owns this gate:
    and final timestamp to the Scout Log. Put cross-node discoveries in `plan.norg`.
 5. Set the node to `complete` only after the gate passes and refresh the summary.
    Otherwise set it to `blocked` with evidence while preserving its original base.
-6. Report the node, commits, checks, review, and Minor findings. Stop without reading
-   or selecting another node.
+6. Report the node, commits, checks, review, and Minor findings. Mention what
+   nodes are still pending, but stop without reading or selecting another node.
 
 ## Ownership
 

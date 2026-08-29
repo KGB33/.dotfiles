@@ -16,6 +16,7 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 1. NEVER test mock behavior
 2. NEVER add test-only methods to production classes
 3. NEVER mock without understanding dependencies
+4. AVOID mocks at all costs
 ```
 
 ## Anti-Pattern 1: Testing Mock Behavior
@@ -248,9 +249,101 @@ TDD cycle:
 4. THEN claim complete
 ```
 
+## Anti-Pattern 6: Tautological Tests
+
+**The violation**
+```rust
+// ❌ Bad: Testing that a constant has the value assigned directly above
+
+const FOO: &str = "frombulator";
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn test_foo_is_frombulator() {
+    assert_eq!(FOO, "frombulator");
+  }
+}
+```
+
+```csharp
+// ❌ Bad: Building the expected output from the same logic as the function under test
+[Test]
+public void ProcessedMessageContainsTheRequestTime()
+{
+  var requestTime = new DateTime(2025, 1, 2, 3, 4, 5, DateTimeKind.Utc);
+  var input = BuildTestMessage(requestTime);
+  var expectedTime = Processor.FormatTime(requestTime);
+
+  var output = Processor.Process(input);
+
+  Assert.That(output.RequestTime,
+              Is.EqualTo(expectedTime));
+}
+```
+
+A tautological test is one whose assertion is guaranteed by its setup or whose expected and actual values come from the same logic. It can pass even when the required behavior is wrong.
+
+**The iron rule:** The expected result and actual result must come from independent sources.
+
+- Actual results come from the system under test.
+- Expected results come from the specification: a literal value, fixture, invariant, property, or independent reference implementation.
+- Never compute the expected result by calling the system under test or a production helper used by it.
+- Never copy the production algorithm into the test to calculate the expected result.
+- Never assert a fact guaranteed solely by the test's setup.
+
+### Gate Function
+
+```
+BEFORE writing an assertion:
+
+  1. State the requirement the assertion protects.
+  2. Identify where the expected result comes from.
+  3. Trace how the actual and expected results are produced.
+
+  IF both depend on the same production function, helper, or algorithm:
+    STOP - Derive the expected result independently
+
+  IF the assertion merely repeats a value assigned during setup:
+    STOP - Assert an observable consequence instead
+
+  Finally, introduce a plausible defect or observe the TDD red phase:
+    The test must fail for the expected behavioral reason
+```
+
+## Anti-Pattern 7: Test Theater
+
+Excessive tests that don't add real value.
+
+**The violation:**
+```python
+# ❌ Bad: Testing the foundational language or framework
+class Foo:
+  def __init__(self):
+    self.bar = "barbalaor"
+
+def test_foo_initialization():
+  f = Foo()
+  assert isinstance(f, Foo)
+  assert f.bar == "barbalaor"
+```
+
+**Why this is wrong:**
+
+Every test has a review and runtime cost. Don't write tests that don't provide
+value for our software. Tests that assert that a library, framework, or language
+meets its documented contract don't add value for our software.
+
+**The fix:**
+
+Don't write the test.
+
 ## When Mocks Become Too Complex
 
 **Warning signs:**
+- Mock mocks 1st party code
 - Mock setup longer than test logic
 - Mocking everything to make test pass
 - Mocks missing methods real components have
