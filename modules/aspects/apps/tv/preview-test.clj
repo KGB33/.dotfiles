@@ -1,5 +1,6 @@
 (ns preview-test
-  (:require [clojure.java.io :as io]
+  (:require [babashka.process :as process]
+            [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.test :refer [deftest is run-tests testing]]
             [cheshire.core :as json]
@@ -37,6 +38,20 @@
       (= (last args) "#I.#P") {:exit 0 :out "2.3\n"}
       (= (first args) "list-windows") {:exit 0 :out "* 2: editor (2 panes)\n  3: logs (1 panes)\n"}
       :else {:exit 1 :out ""})))
+
+(deftest macos-temporary-directory-fallback
+  (let [tmp-root (temp-dir)
+        env (-> (into {} (System/getenv))
+                (dissoc "XDG_RUNTIME_DIR" "TMP" "TEMP")
+                (assoc "TMPDIR" (.getPath tmp-root)))
+        result (process/shell {:out :string :err :string :env env}
+                              "bb" "-cp" "." "-e"
+                              "(require '[preview]) (print (preview/status-dir))")]
+    (try
+      (is (= (str (io/file tmp-root (str "pi-agent-status-" (preview/user-id))))
+             (:out result)))
+      (finally
+        (doseq [file (reverse (file-seq tmp-root))] (io/delete-file file true))))))
 
 (deftest rendering-and-filtering
   (let [dir (temp-dir)]

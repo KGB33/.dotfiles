@@ -15,7 +15,9 @@
 (defn status-dir []
   (if-let [runtime-dir (not-empty (System/getenv "XDG_RUNTIME_DIR"))]
     (str (io/file runtime-dir status-dir-name))
-    (str (io/file "/tmp" (str status-dir-name "-" (user-id))))))
+    (let [tmp-dir (or (some #(not-empty (System/getenv %)) ["TMPDIR" "TMP" "TEMP"])
+                      "/tmp")]
+      (str (io/file tmp-dir (str status-dir-name "-" (user-id)))))))
 
 (defn default-tmux [& args]
   (let [result (apply process/shell {:out :string :err :string :continue true}
