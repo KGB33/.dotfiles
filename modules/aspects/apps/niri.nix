@@ -64,15 +64,6 @@
             [filechooser]
             cmd=${termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
             default_dir=$HOME
-            env=PATH=${
-              lib.makeBinPath [
-                pkgs.bash
-                pkgs.coreutils
-                pkgs.gnused
-                pkgs.wezterm
-                pkgs.yazi
-              ]
-            }
             env=TERMCMD=${lib.getExe pkgs.wezterm} start --always-new-process --class termfilechooser
             open_mode=suggested
             save_mode=suggested
