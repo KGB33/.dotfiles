@@ -70,6 +70,12 @@
       };
 
     # <user>.provides.<host>, via den.provides.mutual-provider
+    provides.blue =
+      { host, ... }:
+      {
+        nixos.programs.nh.enable = true;
+      };
+
     provides.geppetto =
       { host, ... }:
       {

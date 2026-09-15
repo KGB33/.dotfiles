@@ -11,6 +11,11 @@
   den.default = {
     nixos.system.stateVersion = "26.05";
     nixos.time.timeZone = "America/Los_Angeles";
+    nixos.nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+      "pipe-operators"
+    ];
     homeManager.home.stateVersion = "26.05";
   };
 

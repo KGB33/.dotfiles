@@ -20,14 +20,6 @@
           '')
         ];
 
-        nix.settings = {
-          experimental-features = [
-            "nix-command"
-            "flakes"
-            "pipe-operators"
-          ];
-        };
-
         boot.loader.systemd-boot = {
           enable = true;
           configurationLimit = 16;

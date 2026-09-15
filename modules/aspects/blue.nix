@@ -1,9 +1,9 @@
 { components, ... }:
 {
-  den.aspects.geppetto = {
+  den.aspects.blue = {
     includes = [
       components.container
-      components.framework
+      components.framework-13
       components.printing
     ];
     nixos =
@@ -22,7 +22,7 @@
         networking = {
           useNetworkd = true;
           networkmanager.enable = false;
-          hostName = "geppetto";
+          hostName = "blue";
           wireless.iwd.enable = true;
         };
 
@@ -55,23 +55,23 @@
           "sd_mod"
         ];
         boot.initrd.kernelModules = [ ];
-        boot.kernelModules = [ "kvm-amd" ];
+        boot.kernelModules = [ "kvm-intel" ];
         boot.extraModulePackages = [ ];
 
         fileSystems."/" = {
-          device = "/dev/disk/by-uuid/5eccc2a8-24c1-44d7-b4d2-16fc8081986d";
+          device = "/dev/disk/by-uuid/b9e4caf8-018f-498d-8cd5-967fccdf2f92";
           fsType = "ext4";
         };
 
         fileSystems."/boot" = {
-          device = "/dev/disk/by-uuid/AB01-D778";
+          device = "/dev/disk/by-uuid/1E8D-2ED9";
           fsType = "vfat";
         };
 
         swapDevices = [ ];
 
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-        hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+        hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
       };
   };
 }

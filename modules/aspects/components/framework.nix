@@ -22,4 +22,18 @@
       hardware.inputmodule.enable = true;
 
     };
+
+  components.framework-13.nixos =
+    { pkgs, ... }:
+    {
+      imports = [ inputs.nixos-hardware.nixosModules.framework-11th-gen-intel ];
+      services.fwupd.enable = true;
+
+      services.fprintd.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        framework-tool
+        framework-tool-tui
+      ];
+    };
 }

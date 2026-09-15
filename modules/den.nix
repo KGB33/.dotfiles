@@ -1,5 +1,6 @@
 { lib, ... }:
 {
+  den.hosts.x86_64-linux.blue.users.kgb33 = { };
   den.hosts.x86_64-linux.geppetto.users.kgb33 = { };
   den.hosts.x86_64-linux.helm.users.kgb33 = { };
   den.homes.x86_64-linux.kgb33 = { };
