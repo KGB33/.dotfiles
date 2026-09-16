@@ -38,24 +38,22 @@
           ];
         };
 
-        programs.niri = {
-          settings = {
-            spawn-at-startup = [
-              {
-                command = [
-                  "vicinae"
-                  "server"
-                ];
-              }
-            ];
-
-            binds."alt+space" = {
-              action.spawn = [
+        wayland.windowManager.niri.settings = {
+          _children = [
+            {
+              spawn-at-startup = [
                 "vicinae"
-                "toggle"
+                "server"
               ];
-              repeat = false;
-            };
+            }
+          ];
+
+          binds."alt+space" = {
+            _props.repeat = false;
+            spawn = [
+              "vicinae"
+              "toggle"
+            ];
           };
         };
       };

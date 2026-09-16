@@ -1,18 +1,10 @@
-{ inputs, apps, ... }:
+{ apps, ... }:
 {
-  flake-file.inputs.niri = {
-    url = "github:epireyn/niri-flake";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   apps.niri = {
     includes = [ apps.wezterm ];
 
     nixos =
       { pkgs, ... }:
-      let
-        niri = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
-      in
       {
         services.udev.packages = [ pkgs.brightnessctl ];
 
@@ -22,7 +14,7 @@
             cat > $out/share/wayland-sessions/niri.desktop <<EOF
             [Desktop Entry]
             Name=Niri
-            Exec=${niri}/bin/niri-session
+            Exec=${pkgs.niri}/bin/niri-session
             Type=Application
             EOF
           '')
@@ -33,12 +25,9 @@
       { lib, pkgs, ... }:
       let
         termfilechooser = pkgs.xdg-desktop-portal-termfilechooser;
-        xwaylandSatellite =
-          inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-stable;
+        xwaylandSatellite = pkgs.xwayland-satellite;
       in
       {
-        imports = [ inputs.niri.homeModules.niri ];
-
         home.packages = [
           pkgs.brightnessctl
           pkgs.yazi
@@ -70,20 +59,20 @@
           '';
         };
 
-        programs.niri = {
+        wayland.windowManager.niri = {
           enable = true;
           package = pkgs.niri;
+          xwaylandSatellitePackage = null;
           settings = {
-            environment.DISPLAY = ":0";
-
-            spawn-at-startup = [
+            _children = [
               {
-                argv = [
+                spawn-at-startup = [
                   (lib.getExe xwaylandSatellite)
                   ":0"
                 ];
               }
             ];
+            environment.DISPLAY = ":0";
 
             binds =
               let
@@ -114,7 +103,7 @@
                       in
                       {
                         name = "${prefix.key}+${suffix.key}";
-                        value.action.${action} = actual-suffix.args;
+                        value.${action} = if actual-suffix.args == [ ] then { } else actual-suffix.args;
                       };
                     pairs =
                       attrs: fn:
@@ -130,25 +119,25 @@
               in
               lib.attrsets.mergeAttrsList [
                 {
-                  "Mod+G".action.spawn = "wezterm";
-                  "Mod+B".action.spawn = "firefox";
+                  "Mod+G".spawn = [ "wezterm" ];
+                  "Mod+B".spawn = [ "firefox" ];
 
-                  "XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
-                  "XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
-                  "XF86AudioMute".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+                  "XF86AudioRaiseVolume".spawn-sh = [ "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+" ];
+                  "XF86AudioLowerVolume".spawn-sh = [ "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-" ];
+                  "XF86AudioMute".spawn-sh = [ "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" ];
 
-                  "XF86MonBrightnessUp".action.spawn-sh = "brightnessctl set 10%+";
-                  "XF86MonBrightnessDown".action.spawn-sh = "brightnessctl set 10%-";
+                  "XF86MonBrightnessUp".spawn-sh = [ "brightnessctl set 10%+" ];
+                  "XF86MonBrightnessDown".spawn-sh = [ "brightnessctl set 10%-" ];
 
-                  "Mod+Q".action.close-window = [ ];
+                  "Mod+Q".close-window = { };
 
-                  "Mod+Space".action.toggle-column-tabbed-display = [ ];
+                  "Mod+Space".toggle-column-tabbed-display = { };
 
-                  "XF86AudioNext".action.focus-column-right = [ ];
-                  "XF86AudioPrev".action.focus-column-left = [ ];
+                  "XF86AudioNext".focus-column-right = { };
+                  "XF86AudioPrev".focus-column-left = { };
 
-                  "Mod+Tab".action.focus-window-down-or-column-right = [ ];
-                  "Mod+Shift+Tab".action.focus-window-up-or-column-left = [ ];
+                  "Mod+Tab".focus-window-down-or-column-right = { };
+                  "Mod+Shift+Tab".focus-window-up-or-column-left = { };
                 }
                 (binds {
                   suffixes."U" = "workspace-down";
@@ -158,24 +147,24 @@
                   prefixes."Mod+Shift" = "move";
                 })
                 {
-                  "Mod+Comma".action.consume-window-into-column = [ ];
-                  "Mod+Period".action.expel-window-from-column = [ ];
+                  "Mod+Comma".consume-window-into-column = { };
+                  "Mod+Period".expel-window-from-column = { };
 
-                  "Mod+R".action.switch-preset-column-width = [ ];
-                  "Mod+F".action.maximize-column = [ ];
-                  "Mod+Shift+F".action.fullscreen-window = [ ];
-                  "Mod+C".action.center-column = [ ];
+                  "Mod+R".switch-preset-column-width = { };
+                  "Mod+F".maximize-column = { };
+                  "Mod+Shift+F".fullscreen-window = { };
+                  "Mod+C".center-column = { };
 
-                  "Mod+Minus".action.set-column-width = "-10%";
-                  "Mod+Plus".action.set-column-width = "+10%";
-                  "Mod+Shift+Minus".action.set-window-height = "-10%";
-                  "Mod+Shift+Plus".action.set-window-height = "+10%";
+                  "Mod+Minus".set-column-width = [ "-10%" ];
+                  "Mod+Plus".set-column-width = [ "+10%" ];
+                  "Mod+Shift+Minus".set-window-height = [ "-10%" ];
+                  "Mod+Shift+Plus".set-window-height = [ "+10%" ];
 
-                  "Mod+Shift+Escape".action.toggle-keyboard-shortcuts-inhibit = [ ];
-                  "Mod+Shift+E".action.quit = [ ];
-                  "Mod+Shift+P".action.power-off-monitors = [ ];
+                  "Mod+Shift+Escape".toggle-keyboard-shortcuts-inhibit = { };
+                  "Mod+Shift+E".quit = { };
+                  "Mod+Shift+P".power-off-monitors = { };
 
-                  "Mod+Shift+Ctrl+T".action.toggle-debug-tint = [ ];
+                  "Mod+Shift+Ctrl+T".toggle-debug-tint = { };
                 }
                 (binds {
                   suffixes."h" = "column-left";

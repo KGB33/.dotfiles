@@ -61,9 +61,9 @@
             (builtins.readFile ./eww/eww.yuck);
       };
 
-      programs.niri.settings.spawn-at-startup = [
+      wayland.windowManager.niri.settings._children = [
         {
-          command = [
+          spawn-at-startup = [
             "eww"
             "open"
             "sidebar"
