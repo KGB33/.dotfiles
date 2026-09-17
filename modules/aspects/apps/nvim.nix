@@ -40,7 +40,7 @@
           psysh
           ruff
           rust-analyzer
-          typescript-go
+          typescript
           ty
           # Conjure REPL for both JavaScript and TypeScript.
           (pkgs.writeShellScriptBin "conjure-ts-repl" ''
