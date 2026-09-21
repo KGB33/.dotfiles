@@ -34,6 +34,24 @@
           };
         };
 
+        networking.wireguard.interfaces.wg0 = {
+          ips = [ "10.0.4.4/32" ];
+          privateKeyFile = "/home/kgb33/.config/wireguard/blue-private.key";
+          peers = [
+            {
+              # tower
+              publicKey = "coWFYrpcI/JoHrvo41yJizU+PoE7zqQCf0lfrQDSwnA=";
+              presharedKeyFile = "/home/kgb33/.config/wireguard/blue-preshared.key";
+              allowedIPs = [
+                "10.0.4.1/32"
+                "10.0.9.100/32"
+              ];
+              endpoint = "kgb33.dev:51823";
+              persistentKeepalive = 25;
+            }
+          ];
+        };
+
         hardware.graphics.enable = true;
         services.pipewire = {
           enable = true;
