@@ -29,18 +29,24 @@ in
       piExtensionRuntime = mkPiExtensionRuntime pkgs;
     in
     {
-      checks.pi-agent-status-tests = pkgs.runCommand "pi-agent-status-tests" {
-        nativeBuildInputs = [ piExtensionRuntime pkgs.nodejs ];
-      } ''
-        mkdir -p pi/extensions
-        cp ${./pi/agent-status-test.cljs} pi/extensions/agent_status_test.cljs
-        cp ${./pi/agent-status.cljs} pi/extensions/agent_status.cljs
-        ln -s ${piExtensionRuntime}/lib/node_modules node_modules
-        printf '{:paths ["."]}\n' > cherry.edn
-        cherry compile pi/extensions/agent_status.cljs pi/extensions/agent_status_test.cljs
-        node pi/extensions/agent_status_test.mjs
-        touch "$out"
-      '';
+      checks.pi-agent-status-tests =
+        pkgs.runCommand "pi-agent-status-tests"
+          {
+            nativeBuildInputs = [
+              piExtensionRuntime
+              pkgs.nodejs
+            ];
+          }
+          ''
+            mkdir -p pi/extensions
+            cp ${./pi/agent-status-test.cljs} pi/extensions/agent_status_test.cljs
+            cp ${./pi/agent-status.cljs} pi/extensions/agent_status.cljs
+            ln -s ${piExtensionRuntime}/lib/node_modules node_modules
+            printf '{:paths ["."]}\n' > cherry.edn
+            cherry compile pi/extensions/agent_status.cljs pi/extensions/agent_status_test.cljs
+            node pi/extensions/agent_status_test.mjs
+            touch "$out"
+          '';
     };
 
   apps.pi.homeManager =

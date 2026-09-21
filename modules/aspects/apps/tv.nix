@@ -24,15 +24,21 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      checks.tv-preview-tests = pkgs.runCommand "tv-preview-tests" {
-        nativeBuildInputs = with pkgs; [ babashka clj-kondo ];
-      } ''
-        cp ${./tv/preview.clj} preview.clj
-        cp ${./tv/preview-test.clj} preview_test.clj
-        clj-kondo --lint preview.clj preview_test.clj
-        bb -cp . preview_test.clj
-        touch "$out"
-      '';
+      checks.tv-preview-tests =
+        pkgs.runCommand "tv-preview-tests"
+          {
+            nativeBuildInputs = with pkgs; [
+              babashka
+              clj-kondo
+            ];
+          }
+          ''
+            cp ${./tv/preview.clj} preview.clj
+            cp ${./tv/preview-test.clj} preview_test.clj
+            clj-kondo --lint preview.clj preview_test.clj
+            bb -cp . preview_test.clj
+            touch "$out"
+          '';
     };
 
   apps.tv.homeManager =
@@ -41,7 +47,10 @@ in
       home.packages = [
         (writeBabashkaApplication pkgs {
           name = "tss-preview";
-          runtimeInputs = with pkgs; [ coreutils tmux ];
+          runtimeInputs = with pkgs; [
+            coreutils
+            tmux
+          ];
           text = builtins.readFile ./tv/preview.clj;
         })
       ];
