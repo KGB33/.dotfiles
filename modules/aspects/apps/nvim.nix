@@ -96,9 +96,9 @@
               config = builtins.readFile ./nvim/plugins/telescope.fnl;
             }
             {
-              plugin = neorg;
+              plugin = orgmode;
               type = "fennel";
-              config = builtins.readFile ./nvim/plugins/neorg.fnl;
+              config = builtins.readFile ./nvim/plugins/orgmode.fnl;
             }
           ]
           ++ ts-queries

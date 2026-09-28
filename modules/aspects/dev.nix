@@ -40,7 +40,9 @@
             bat
             doggo
             fd
+            fnlfmt
             obsidian
+            python3
             ripgrep
             tuicr
           ]
