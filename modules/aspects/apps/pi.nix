@@ -234,6 +234,7 @@ in
         enable = true;
         package = piPackage;
         extraPackages = [ pkgs.atuin ];
+        context = ./pi/AGENTS.md;
         settings = {
           defaultProvider = "openai-codex";
           defaultModel = "gpt-5.6-sol";
