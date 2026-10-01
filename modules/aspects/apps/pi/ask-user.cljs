@@ -139,9 +139,8 @@
           (.push lines (str (if (zero? index) prefix continuation) line)))))))
 
 (defn open-questionnaire [ctx questions]
-  (let [overlay-handle (atom nil)]
-    (.custom
-      (.-ui ctx)
+  (.custom
+    (.-ui ctx)
     (fn [tui theme keybindings done]
       (let [question-count (.-length questions)
             multi-question? (> question-count 1)
@@ -191,15 +190,10 @@
                 (open-custom! [question]
                   (reset! input-mode true)
                   (reset! input-question-id (.-id question))
-                  (when-let [handle @overlay-handle]
-                    (.setHidden handle true))
                   (let [prefill (or (:custom (answer-for question)) "")]
                     (.then
                       (.editor (.-ui ctx) "Your answer:" prefill)
                       (fn [text]
-                        (when-let [handle @overlay-handle]
-                          (.setHidden handle false)
-                          (.focus handle))
                         (if (nil? text)
                           (do
                             (reset! input-mode false)
@@ -458,8 +452,7 @@
                    :get (fn [] (.-focused editor))
                    :set (fn [value] (set! (.-focused editor) value))})
             component))))
-      #js {:overlay true
-           :onHandle (fn [handle] (reset! overlay-handle handle))})))
+    #js {:overlay false}))
 
 (defn result-text [details]
   (.join

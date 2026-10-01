@@ -47,6 +47,51 @@ in
             node pi/extensions/agent_status_test.mjs
             touch "$out"
           '';
+
+      checks.pi-ask-user-tests =
+        pkgs.runCommand "pi-ask-user-tests"
+          {
+            nativeBuildInputs = [
+              piExtensionRuntime
+              pkgs.nodejs
+            ];
+          }
+          ''
+            mkdir -p pi node_modules/@earendil-works node_modules/typebox
+            cp ${./pi/ask-user.cljs} pi/ask_user.cljs
+            cp ${./pi/ask-user-test.cljs} pi/ask_user_test.cljs
+            ln -s ${piExtensionRuntime}/lib/node_modules/cherry-cljs node_modules/cherry-cljs
+
+            for package in pi-ai pi-coding-agent pi-tui; do
+              mkdir -p "node_modules/@earendil-works/$package"
+              printf '{"type":"module","exports":"./index.js"}\n' \
+                > "node_modules/@earendil-works/$package/package.json"
+            done
+            printf '%s\n' \
+              'export const StringEnum = (values) => values;' \
+              > node_modules/@earendil-works/pi-ai/index.js
+            printf '%s\n' \
+              'export class CustomEditor {}' \
+              'export const keyHint = () => "";' \
+              > node_modules/@earendil-works/pi-coding-agent/index.js
+            printf '%s\n' \
+              'export class Text {}' \
+              'export const matchesKey = () => false;' \
+              'export const visibleWidth = (text) => text.length;' \
+              'export const wrapTextWithAnsi = (text) => [text];' \
+              > node_modules/@earendil-works/pi-tui/index.js
+            printf '{"type":"module","exports":"./index.js"}\n' \
+              > node_modules/typebox/package.json
+            printf '%s\n' \
+              'const passthrough = (...args) => args[0] ?? {};' \
+              'export const Type = { Object: passthrough, String: passthrough, Optional: passthrough, Array: passthrough, Boolean: passthrough };' \
+              > node_modules/typebox/index.js
+
+            printf '{:paths ["."]}\n' > cherry.edn
+            cherry compile pi/ask_user.cljs pi/ask_user_test.cljs
+            node pi/ask_user_test.mjs
+            touch "$out"
+          '';
     };
 
   apps.pi.homeManager =
