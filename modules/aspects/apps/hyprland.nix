@@ -12,7 +12,7 @@
     nixos =
       { pkgs, ... }:
       let
-        hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        hyprland = pkgs.hyprland;
       in
       {
         nix.settings = {
@@ -38,8 +38,8 @@
     homeManager =
       { pkgs, lib, ... }:
       let
-        hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portal = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        hyprland = pkgs.hyprland;
+        portal = pkgs.xdg-desktop-portal-hyprland;
         compileFennel =
           name: src:
           pkgs.runCommand name
