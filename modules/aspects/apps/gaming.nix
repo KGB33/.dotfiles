@@ -20,6 +20,9 @@
     { pkgs, ... }:
     {
       home.packages = [ pkgs.bottles ];
+      den.unfree.predicates = [
+        "lsfg-vk"
+      ];
     };
 
   apps.ffxiv.homeManager =
