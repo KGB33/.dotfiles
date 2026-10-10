@@ -1,6 +1,7 @@
 (ns pi.ask-user
   (:require ["@earendil-works/pi-ai" :refer [StringEnum]]
-            ["@earendil-works/pi-coding-agent" :refer [CustomEditor keyHint]]
+            ["@earendil-works/pi-coding-agent"
+             :refer [ExtensionEditorComponent keyHint]]
             ["@earendil-works/pi-tui"
              :refer [Text matchesKey visibleWidth wrapTextWithAnsi]]
             ["typebox" :refer [Type]]))
@@ -138,33 +139,29 @@
         (doseq [[index line] (map-indexed vector (array-seq wrapped))]
           (.push lines (str (if (zero? index) prefix continuation) line)))))))
 
-(defn open-questionnaire [ctx questions]
-  (.custom
-    (.-ui ctx)
-    (fn [tui theme keybindings done]
-      (let [question-count (.-length questions)
-            multi-question? (> question-count 1)
-            total-tabs (inc question-count)
-            current-tab (atom 0)
-            option-index (atom 0)
-            input-mode (atom false)
-            input-question-id (atom nil)
-            cached-width (atom nil)
-            cached-lines (atom nil)
-            answers
-            (atom
-              (into {}
-                    (map (fn [question] [(.-id question) (empty-answer)])
-                         (array-seq questions))))
-            editor-theme
-            #js {:borderColor (fn [text] (.fg theme "accent" text))
-                 :selectList
-                 #js {:selectedPrefix (fn [text] (.fg theme "accent" text))
-                      :selectedText (fn [text] (.fg theme "accent" text))
-                      :description (fn [text] (.fg theme "muted" text))
-                      :scrollInfo (fn [text] (.fg theme "dim" text))
-                      :noMatch (fn [text] (.fg theme "warning" text))}}
-            editor (CustomEditor. tui editor-theme keybindings)]
+(defn open-questionnaire
+  ([ctx questions]
+   (open-questionnaire ctx questions nil))
+  ([ctx questions external-editor-command]
+   (.custom
+     (.-ui ctx)
+     (fn [tui theme keybindings done]
+       (let [question-count (.-length questions)
+             multi-question? (> question-count 1)
+             total-tabs (inc question-count)
+             current-tab (atom 0)
+             option-index (atom 0)
+             input-mode (atom false)
+             input-question-id (atom nil)
+             focused (atom false)
+             editor (atom nil)
+             cached-width (atom nil)
+             cached-lines (atom nil)
+             answers
+             (atom
+               (into {}
+                     (map (fn [question] [(.-id question) (empty-answer)])
+                          (array-seq questions))))]
         (letfn [(current-question []
                   (when (< @current-tab question-count)
                     (aget questions @current-tab)))
@@ -187,20 +184,28 @@
                       (swap! current-tab #(min question-count (inc %)))
                       (reset! option-index 0)
                       (refresh!))))
+                (close-custom! []
+                  (reset! input-mode false)
+                  (reset! input-question-id nil)
+                  (reset! editor nil)
+                  (refresh!))
                 (open-custom! [question]
                   (reset! input-mode true)
                   (reset! input-question-id (.-id question))
-                  (let [prefill (or (:custom (answer-for question)) "")]
-                    (.then
-                      (.editor (.-ui ctx) "Your answer:" prefill)
-                      (fn [text]
-                        (if (nil? text)
-                          (do
-                            (reset! input-mode false)
-                            (reset! input-question-id nil)
-                            (.setText editor "")
-                            (refresh!))
-                          (submit-custom! text))))))
+                  (let [prefill (or (:custom (answer-for question)) "")
+                        next-editor
+                        (ExtensionEditorComponent.
+                          tui
+                          keybindings
+                          "Your answer:"
+                          prefill
+                          submit-custom!
+                          close-custom!
+                          nil
+                          external-editor-command)]
+                    (set! (.-focused next-editor) @focused)
+                    (reset! editor next-editor)
+                    (refresh!)))
                 (submit-custom! [text]
                   (when-let [question-id @input-question-id]
                     (let [question
@@ -216,7 +221,7 @@
                               (assoc :selected [])))))
                       (reset! input-mode false)
                       (reset! input-question-id nil)
-                      (.setText editor "")
+                      (reset! editor nil)
                       (cond
                         (and question trimmed (= "single" (.-mode question)))
                         (advance!)
@@ -245,13 +250,10 @@
                 (handle-input! [data]
                   (if @input-mode
                     (if (matchesKey data "escape")
+                      (close-custom!)
                       (do
-                        (reset! input-mode false)
-                        (reset! input-question-id nil)
-                        (.setText editor "")
-                        (refresh!))
-                      (do
-                        (.handleInput editor data)
+                        (when-let [active-editor @editor]
+                          (.handleInput active-editor data))
                         (refresh!)))
                     (let [question (current-question)]
                       (cond
@@ -414,11 +416,10 @@
                           (add-wrapped! lines render-width " " (.fg theme "text" (.-prompt question)))
                           (.push lines "")
                           (render-options! lines render-width question)
-                          (when @input-mode
+                          (when-let [active-editor (and @input-mode @editor)]
                             (.push lines "")
-                            (add-wrapped! lines render-width " " (.fg theme "muted" "Your answer:"))
-                            (doseq [line (array-seq (.render editor (max 1 (- render-width 2))))]
-                              (add-wrapped! lines render-width " " line)))))
+                            (doseq [line (array-seq (.render active-editor render-width))]
+                              (.push lines line)))))
                       (.push lines "")
                       (let [help
                             (cond
@@ -439,20 +440,23 @@
                 (invalidate! []
                   (reset! cached-width nil)
                   (reset! cached-lines nil)
-                  (.invalidate editor))]
-          (set! (.-onSubmit editor) submit-custom!)
-          (let [component #js {:render render!
-                               :handleInput handle-input!
-                               :invalidate invalidate!}]
-            (.defineProperty
-              js/Object
-              component
-              "focused"
-              #js {:configurable true
-                   :get (fn [] (.-focused editor))
-                   :set (fn [value] (set! (.-focused editor) value))})
-            component))))
-    #js {:overlay false}))
+                  (when-let [active-editor @editor]
+                    (.invalidate active-editor)))]
+           (let [component #js {:render render!
+                                :handleInput handle-input!
+                                :invalidate invalidate!}]
+             (.defineProperty
+               js/Object
+               component
+               "focused"
+               #js {:configurable true
+                    :get (fn [] @focused)
+                    :set (fn [value]
+                           (reset! focused value)
+                           (when-let [active-editor @editor]
+                             (set! (.-focused active-editor) value)))})
+             component))))
+     #js {:overlay false})))
 
 (defn result-text [details]
   (.join
@@ -533,7 +537,10 @@
 
                :else
                (.then
-                 (open-questionnaire ctx questions)
+                 (open-questionnaire
+                   ctx
+                   questions
+                   (.-externalEditor (.getSettings pi)))
                  (fn [details]
                    (if (.-cancelled details)
                      #js {:content

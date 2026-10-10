@@ -72,11 +72,25 @@ in
               > node_modules/@earendil-works/pi-ai/index.js
             printf '%s\n' \
               'export class CustomEditor {}' \
+              'export class ExtensionEditorComponent {' \
+              '  static externalEditorCalls = 0;' \
+              '  constructor(_tui, _keybindings, _title, prefill, onSubmit, onCancel) {' \
+              '    this.text = prefill ?? ""; this.onSubmit = onSubmit; this.onCancel = onCancel;' \
+              '  }' \
+              '  handleInput(data) {' \
+              '    if (data === "ctrl+g") ExtensionEditorComponent.externalEditorCalls++;' \
+              '    else if (data === "enter") this.onSubmit(this.text);' \
+              '    else if (data === "escape") this.onCancel();' \
+              '    else this.text += data;' \
+              '  }' \
+              '  render() { return [this.text]; }' \
+              '  invalidate() {}' \
+              '}' \
               'export const keyHint = () => "";' \
               > node_modules/@earendil-works/pi-coding-agent/index.js
             printf '%s\n' \
               'export class Text {}' \
-              'export const matchesKey = () => false;' \
+              'export const matchesKey = (data, key) => data === key;' \
               'export const visibleWidth = (text) => text.length;' \
               'export const wrapTextWithAnsi = (text) => [text];' \
               > node_modules/@earendil-works/pi-tui/index.js
