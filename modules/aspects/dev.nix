@@ -37,10 +37,12 @@
         home.packages =
           with pkgs;
           [
+            awscli2
             bat
             doggo
             fd
             fnlfmt
+            gh
             obsidian
             python3
             ripgrep
