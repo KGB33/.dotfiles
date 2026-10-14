@@ -25,6 +25,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-26.05";
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";

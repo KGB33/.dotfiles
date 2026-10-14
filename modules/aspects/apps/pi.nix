@@ -21,7 +21,13 @@ let
     };
 in
 {
-  flake-file.inputs.llm-agents.url = "github:numtide/llm-agents.nix";
+  flake-file.inputs = {
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
+  };
 
   perSystem =
     { pkgs, ... }:
@@ -254,6 +260,7 @@ in
           defaultModel = "gpt-6.1-sol";
           defaultThinkingLevel = "high";
           theme = "stylix";
+          skills = [ "${inputs.ponytail}/skills" ];
           packages = [
             "${piWorkflowPackage}"
             "npm:pi-subagents"
