@@ -250,8 +250,8 @@ in
         extraPackages = [ pkgs.atuin ];
         context = ./pi/AGENTS.md;
         settings = {
-          defaultProvider = "openai-codex";
-          defaultModel = "gpt-5.6-sol";
+          defaultProvider = "openai";
+          defaultModel = "gpt-6.1-sol";
           defaultThinkingLevel = "high";
           theme = "stylix";
           packages = [
