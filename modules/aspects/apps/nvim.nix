@@ -79,6 +79,8 @@
             vim-sexp
             vim-sexp-mappings-for-regular-people
 
+            hotpot-nvim
+
             nui-nvim
             {
               plugin = blink';
