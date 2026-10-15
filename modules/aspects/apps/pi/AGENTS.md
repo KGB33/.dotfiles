@@ -12,7 +12,7 @@ Do not guess about project intent.
 - Prefer a functional programming style.
 - Use strong types; avoid weakly typed constructs such as `any` or `interface{}`.
 - Avoid side effects where practical, and isolate unavoidable side effects.
-- I use NuShell. Write scripts and command examples in NuShell.
+- I use NuShell, please write scripts and command examples for me in NuShell. You may use whatever tool you'd like for your scripts.
 
 ## Communication
 
