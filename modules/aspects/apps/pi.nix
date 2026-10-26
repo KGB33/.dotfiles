@@ -260,7 +260,10 @@ in
           defaultModel = "gpt-6.1-sol";
           defaultThinkingLevel = "high";
           theme = "stylix";
-          skills = [ "${inputs.ponytail}/skills" ];
+          skills = [
+            "${inputs.ponytail}/skills"
+            "${inputs.hunk}/.agents/skills/hunk-review"
+          ];
           packages = [
             "${piWorkflowPackage}"
             "npm:pi-subagents"

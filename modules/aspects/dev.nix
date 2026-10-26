@@ -1,17 +1,9 @@
 {
   apps,
   den,
-  inputs,
   ...
 }:
 {
-
-  flake-file.inputs = {
-    emux = {
-      url = "github:kgb33/emux";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
 
   den.aspects.dev = {
     includes = with apps; [
@@ -47,9 +39,6 @@
             python3
             ripgrep
             tuicr
-          ]
-          ++ [
-            inputs.emux.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];
       };
   };

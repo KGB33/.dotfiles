@@ -1,5 +1,10 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 {
+  flake-file.inputs.hunk = {
+    url = "github:modem-dev/hunk";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   apps.vcs =
     let
       user' = {
@@ -11,6 +16,15 @@
       homeManager =
         { ... }:
         {
+          imports = [ inputs.hunk.homeManagerModules.default ];
+
+          programs.hunk = {
+            enable = true;
+            settings = {
+              theme = "terminal";
+              agent_notes = true;
+            };
+          };
 
           programs.difftastic = {
             enable = true;

@@ -43,22 +43,15 @@
       {
         programs.git.settings.user.email = "kelton@cdlpowersuite.com";
         programs.jujutsu.settings.user.email = "kelton@cdlpowersuite.com";
-        den.unfree.predicates = [
-          "graphite-cli"
-          "graphite-cli-unwrapped"
-        ];
         home.packages = with pkgs; [
           btop
           bun
-          codex
-          codex
           colima
           docker-client
           firefox
-          stable.graphite-cli
           nodejs-slim_latest
-          php82
-          php82Packages.composer
+          php85
+          php85Packages.composer
           wireguard-tools
         ];
       };
